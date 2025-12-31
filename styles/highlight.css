@@ -1,0 +1,194 @@
+/* Base highlight style with animation */
+.highlight-base {
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+/* Animation keyframes */
+@keyframes animatedBackground {
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+/* Neutrals */
+.slate-highlight {
+  background-image: linear-gradient(transparent 60%, #64748b44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.gray-highlight {
+  background-image: linear-gradient(transparent 60%, #6b728044 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.zinc-highlight {
+  background-image: linear-gradient(transparent 60%, #71717a44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.neutral-highlight {
+  background-image: linear-gradient(transparent 60%, #73737344 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.stone-highlight {
+  background-image: linear-gradient(transparent 60%, #78716c44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+/* Reds & Warm Colors */
+.red-highlight {
+  background-image: linear-gradient(transparent 60%, #ef444444 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.orange-highlight {
+  background-image: linear-gradient(transparent 60%, #f9731644 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.amber-highlight {
+  background-image: linear-gradient(transparent 60%, #f59e0b44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.yellow-highlight {
+  background-image: linear-gradient(transparent 60%, #eab30844 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.lime-highlight {
+  background-image: linear-gradient(transparent 60%, #84cc1644 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+/* Greens */
+.green-highlight {
+  background-image: linear-gradient(transparent 60%, #22c55e44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.emerald-highlight {
+  background-image: linear-gradient(transparent 60%, #10b98144 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.teal-highlight {
+  background-image: linear-gradient(transparent 60%, #14b8a644 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.cyan-highlight {
+  background-image: linear-gradient(transparent 60%, #06b6d444 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+/* Blues */
+.sky-highlight {
+  background-image: linear-gradient(transparent 60%, #0ea5e944 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.blue-highlight {
+  background-image: linear-gradient(transparent 60%, #3b82f644 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.indigo-highlight {
+  background-image: linear-gradient(transparent 60%, #6366f144 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.violet-highlight {
+  background-image: linear-gradient(transparent 60%, #8b5cf644 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.purple-highlight {
+  background-image: linear-gradient(transparent 60%, #a855f744 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.fuchsia-highlight {
+  background-image: linear-gradient(transparent 60%, #d946ef44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.pink-highlight {
+  background-image: linear-gradient(transparent 60%, #ec489944 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
+
+.rose-highlight {
+  background-image: linear-gradient(transparent 60%, #f43f5e44 60%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  animation: animatedBackground 1s cubic-bezier(0.645, 0.045, 0.355, 1) 0.5s
+    forwards;
+}
