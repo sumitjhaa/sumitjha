@@ -7,6 +7,7 @@
 
 /* SECTION */
 .work-in-progress {
+  position: relative;
   min-height: 350px;
   width: 100%;
   overflow: hidden;
@@ -14,16 +15,31 @@
   display: grid;
   place-items: center;
 
+  font-family: "Sigmar", sans-serif;
+}
+
+.work-in-progress::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
   background: url("../img/backgrounds/caution tapes.webp") bottom / cover
     no-repeat;
+  opacity: 0.2;
 
-  font-family: "Sigmar", sans-serif;
+  z-index: 0;
+}
+
+.work-in-progress > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* VIEWPORT */
 .ticker {
   width: 100%;
   overflow: hidden;
+  opacity: 0.7;
   transform: rotate(10deg);
   width: 110%;
 }

@@ -99,3 +99,14 @@ header img {
 .action-buttons img:hover {
   filter: grayscale(0%);
 }
+
+.hero {
+  position: relative;
+}
+.hero-background {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0.2;
+  height: 8em;
+}
