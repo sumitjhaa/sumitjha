@@ -10,6 +10,7 @@ import {
     KeyboardShortcuts,
     ThemeToggle,
 } from '@/features/portfolio/ui'
+import { SkillsSection, SKILL_CATEGORIES } from '@/features/portfolio/ui/skills'
 import { VisuallyHidden } from '@/shared/components/ui'
 
 export default function Home() {
@@ -24,14 +25,41 @@ export default function Home() {
             <AboutMe />
 
             <Section id="section-3">
-                <FadeInSection>
-                    <h2>3</h2>
-                </FadeInSection>
+                <SkillsSection
+                    categories={SKILL_CATEGORIES}
+                    hideGrid
+                    subtitle={
+                        <>
+                            <p>
+                                A long time ago in a codebase far, far away, I built a stack that abides only on caffeine.
+                                <img src="/img/inline-images/sweaty-speedrunner-epic-gamer.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                Each framework made me an offer I couldn&apos;t refuse.
+                                And they&apos;re still around haunting my terminal.
+                                <img src="/img/inline-images/cat-banging-keyboard.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                Unfortunately, no kung fu montage required to debug them.
+                                <img src="/img/inline-images/Shrug emoji.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                            </p>
+                            <p>
+                                I hide bodies in the git history.
+                                <img src="/img/inline-images/Side-eye chloe.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                I catch it sipping tea while my join fails.
+                                <img src="/img/inline-images/kermit-the-frog-sip.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                Still haven&apos;t found a framework that doesn&apos;t demand a pound of soul.
+                                Production goes live and I stare into the flames.
+                                <img src="/img/inline-images/Disaster girl.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                This is fine, everything is fine.
+                                <img src="/img/inline-images/dog in burning room.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                Maybe I&apos;ll look at the error tomorrow.
+                                <img src="/img/inline-images/Monkey covering eyes.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                                But tonight, the code works somehow.
+                                <img src="/img/inline-images/Dancing Patrick Star.gif" style={{ height: '1.5em', borderRadius: '5px', verticalAlign: 'middle', margin: '0 0.15em' }} alt="" />
+                            </p>
+                        </>
+                    }
+                />
             </Section>
             <Section id="section-4">
-                <FadeInSection>
-                    <h2>4</h2>
-                </FadeInSection>
+                <SkillsSection categories={SKILL_CATEGORIES} iconSize={88} hideSubtitle title="Runtime Armoury" titleGap="1.8em" />
             </Section>
             <Section id="section-5">
                 <FadeInSection>

@@ -21,6 +21,15 @@
     --error: #f87272;
     --background: #1e1e1e;
     --progress-bar: #569cd680;
+
+    --heading-size: 3rem;
+    --heading-weight: 400;
+    --body-size: 1.5em;
+    --body-weight: 400;
+    --body-line-height: 1.5em;
+    --body-color: var(--base-300);
+    --section-width: 720px;
+    --section-padding: 0 20px;
 }
 
 [data-theme='light'] {

@@ -1,10 +1,10 @@
 .about {
     position: relative;
-    width: 720px;
+    width: var(--section-width);
     margin: auto;
     display: flex;
     flex-direction: column;
-    padding: 0 20px;
+    padding: var(--section-padding);
     justify-content: center;
     line-height: 1.6em;
     min-height: 100vh;
@@ -13,18 +13,20 @@
 }
 
 .heading {
-    font-size: 3rem;
+    font-size: var(--heading-size);
+    font-weight: var(--heading-weight);
     width: max-content;
-    margin: 0 0 0.6em 0;
+    margin: 0 0 1.2em;
 }
 
 .descriptions {
     display: flex;
     flex-direction: column;
     gap: 1em;
-    font-size: 1.5em;
-    line-height: 1.5em;
-    color: var(--base-300);
+    font-size: var(--body-size);
+    font-weight: var(--body-weight);
+    line-height: var(--body-line-height);
+    color: var(--body-color);
 }
 
 .descriptions p img {
