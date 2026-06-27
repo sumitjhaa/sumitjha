@@ -1,0 +1,30 @@
+.tooltip {
+    position: fixed;
+    left: var(--tooltip-x);
+    top: var(--tooltip-y);
+    pointer-events: none;
+    z-index: 9999;
+    max-width: 270px;
+    padding: 6px 14px;
+    background: color-mix(in srgb, var(--base-100) 6%, transparent);
+    border-radius: 10px;
+    border: 1px solid var(--tooltip-border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    line-height: 1.4;
+    background: linear-gradient(transparent 65%, var(--tooltip-highlight) 65%);
+}
+
+.platform {
+    font-size: 0.7em;
+    font-weight: 400;
+    color: var(--base-300);
+    display: block;
+    line-height: 1.4;
+}

@@ -1,0 +1,32 @@
+.button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--base-100) 6%, transparent);
+    color: var(--base-100);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    backdrop-filter: blur(4px);
+    transition:
+        background 0.2s,
+        color 0.2s,
+        transform 0.2s;
+    font-family: inherit;
+    padding: 0;
+}
+
+.button:hover {
+    background: color-mix(in srgb, var(--base-100) 12%, transparent);
+    transform: scale(1.1);
+}
+
+.button svg {
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.button:hover svg {
+    opacity: 1;
+}

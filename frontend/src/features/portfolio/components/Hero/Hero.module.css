@@ -1,0 +1,151 @@
+.hero {
+    position: relative;
+    width: 720px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    justify-content: center;
+    line-height: 1.6em;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.header h1 {
+    font-size: 3rem;
+    width: max-content;
+    margin: 20px 0;
+}
+
+.header p {
+    color: var(--base-300);
+    line-height: 1.5em;
+    font-size: 1.6em;
+}
+
+.smallInlineImages {
+    height: 1.5em;
+    width: auto;
+    vertical-align: middle;
+    margin: 0 0.15em;
+    border-radius: 4px;
+}
+
+.actionButtons {
+    margin: 2em 0 2em -0.8em;
+    display: flex;
+    gap: 0.6em;
+    align-items: flex-end;
+}
+
+.actionButtons img {
+    padding: 10px;
+    height: 3em;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.actionButtons img:hover {
+    filter: grayscale(0%);
+}
+
+.cta {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cta button {
+    width: 130px;
+    height: 50px;
+    position: relative;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Patron', 'GT Standard', sans-serif;
+    font-weight: 600;
+    color: var(--base-100);
+}
+
+.ctaTop {
+    width: 100%;
+    height: 100%;
+    background: var(--secondary);
+    font-size: 1.5em;
+    color: var(--base-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7mm;
+    outline: 2px solid var(--neutral);
+    transition: 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.ctaTop::before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transform: skewX(30deg);
+    left: -20px;
+    transition: 0.25s;
+}
+
+.cta button:active .ctaTop::before {
+    left: calc(100% + 20px);
+}
+
+.cta button:active .ctaTop {
+    transform: translateY(10px);
+}
+
+.ctaBottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--secondary-focus);
+    top: 10px;
+    left: 0;
+    border-radius: 7mm;
+    outline: 2px solid var(--neutral);
+    z-index: -1;
+}
+
+.ctaBottom::before {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 9px;
+    background: var(--neutral);
+    bottom: 0;
+    left: 15%;
+}
+
+.ctaBottom::after {
+    position: absolute;
+    content: '';
+    width: 2px;
+    height: 9px;
+    background: var(--neutral);
+    bottom: 0;
+    left: 85%;
+}
+
+.cta button::before {
+    position: absolute;
+    content: '';
+    width: calc(100% + 2px);
+    height: 100%;
+    background: var(--secondary-focus);
+    top: 14px;
+    left: -1px;
+    border-radius: 7mm;
+    outline: 2px solid var(--neutral);
+    z-index: -1;
+}
