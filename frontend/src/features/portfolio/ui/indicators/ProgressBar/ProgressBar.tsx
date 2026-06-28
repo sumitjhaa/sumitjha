@@ -1,6 +1,6 @@
 'use client'
 
-import { useScrollProgress } from '@/shared/hooks/scroll/useScrollProgress'
+import { useScrollProgress } from '@/shared/hooks'
 import styles from './ProgressBar.module.css'
 
 export default function ProgressBar() {

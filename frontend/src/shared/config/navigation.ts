@@ -2,15 +2,20 @@ import type { SectionConfig } from '@/shared/types'
 import { PROJECTS } from '@/features/portfolio/ui/projects/data'
 
 const STATIC_SECTIONS: SectionConfig[] = [
-    { id: 'hero', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'section-3', label: 'Expertise' },
-    { id: 'section-4', label: 'Toolchain' },
+    { id: 'hero', label: 'Home', level: 0 },
+    { id: 'about', label: 'About', level: 0 },
+    { id: 'section-3', label: 'Expertise', level: 0 },
+    { id: 'experience-intro', label: 'The Logs', level: 0 },
+    { id: 'experience', label: 'Taxspanner', level: 1 },
+    { id: 'experience-propel', label: 'Propel', level: 1 },
+    { id: 'section-4', label: 'Toolchain', level: 0 },
+    { id: 'projects-intro', label: 'Projects', level: 0 },
 ]
 
 const PROJECT_SECTIONS: SectionConfig[] = PROJECTS.toReversed().filter((p) => p.slug !== 'ziggle').map((p) => ({
     id: `project-${p.slug}`,
     label: p.title,
+    level: 1 as const,
 }))
 
 export const SECTIONS: SectionConfig[] = [

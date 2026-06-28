@@ -13,9 +13,19 @@
 }
 
 .header h1 {
-    font-size: 3rem;
+    font-size: var(--heading-size);
+    line-height: var(--heading-line-height);
+    -webkit-text-stroke-width: var(--heading-stroke-width);
+    -webkit-text-stroke-color: currentColor;
+    -webkit-text-fill-color: transparent;
     width: max-content;
-    margin: 20px 0 0.4em;
+    margin: 20px 0 var(--heading-margin);
+}
+
+@media (max-width: 640px) {
+    .header h1 {
+        font-size: calc(var(--heading-size) * 0.75);
+    }
 }
 
 .header p {

@@ -14,6 +14,8 @@ export { useAvatarStick } from './scroll/useAvatarStick'
 // observer
 export { useIntersectionObserver } from './observer/useIntersectionObserver'
 export { useActiveSection } from './observer/useActiveSection'
+export { useSections } from './observer/useSections'
+export type { SectionState } from './observer/useSections'
 
 // media
 export { useMediaQuery } from './media/useMediaQuery'

@@ -9,9 +9,7 @@ import {
     useRef,
     type ReactNode,
 } from 'react'
-import { useLocalStorage } from '@/shared/hooks/state/useLocalStorage'
-import { STORAGE_KEYS } from '@/shared/services/storage'
-import { THEMES } from '@/shared/config/themes'
+import { useLocalStorage, STORAGE_KEYS, THEMES } from '@/shared'
 import type { Theme } from '@/shared/types'
 
 interface ThemeContextValue {

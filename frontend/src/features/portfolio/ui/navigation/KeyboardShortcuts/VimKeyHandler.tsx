@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, memo } from 'react'
 import { scrollToElement } from '@/shared/utils'
-import { SECTIONS } from '@/shared/config/navigation'
+import { SECTIONS } from '@/shared/config'
 
 function getSectionEl(index: number): HTMLElement | null {
     return document.getElementById(SECTIONS[index]?.id) ?? null

@@ -1,7 +1,7 @@
 'use client'
 
 import { memo } from 'react'
-import { PALETTE_COLORS } from '@/shared/config/themes'
+import { PALETTE_COLORS } from '@/shared/config'
 import type { Theme } from '@/shared/types'
 import styles from './ThemeToggle.module.css'
 

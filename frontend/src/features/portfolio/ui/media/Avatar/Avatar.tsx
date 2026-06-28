@@ -3,7 +3,7 @@
 import { memo, useCallback, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { cn } from '@/shared/utils'
-import { SITE_CONFIG } from '@/shared/config/site'
+import { SITE_CONFIG } from '@/shared/config'
 import styles from './Avatar.module.css'
 
 interface AvatarProps {

@@ -1,26 +1,23 @@
 'use client'
 
 import { useCallback, useRef } from 'react'
-import { SECTIONS } from '@/shared/config/navigation'
-import { useReducedMotion, useActiveSection } from '@/shared/hooks'
+import { useSections, useReducedMotion } from '@/shared/hooks'
 import { cn } from '@/shared/utils'
 import styles from './DotNavigation.module.css'
 
-const SECTION_IDS = SECTIONS.map((s) => s.id)
-
 export function DotNavigation() {
-    const active = useActiveSection(SECTION_IDS)
+    const sections = useSections()
     const prefersReducedMotion = useReducedMotion()
     const navRef = useRef<HTMLDivElement>(null)
 
     const scrollTo = useCallback(
         (index: number) => {
-            const el = document.getElementById(SECTION_IDS[index])
+            const el = document.getElementById(sections[index].id)
             if (el) {
                 el.scrollIntoView({ behavior: prefersReducedMotion ? 'instant' : 'smooth' })
             }
         },
-        [prefersReducedMotion],
+        [sections, prefersReducedMotion],
     )
 
     const handleKeyDown = useCallback(
@@ -33,12 +30,13 @@ export function DotNavigation() {
                       : 0
             if (dir === 0) return
             e.preventDefault()
-            const next = Math.max(0, Math.min(active + dir, SECTIONS.length - 1))
+            const active = sections.findIndex((s) => s.isActive)
+            const next = Math.max(0, Math.min(active + dir, sections.length - 1))
             scrollTo(next)
             const btn = navRef.current?.querySelector<HTMLButtonElement>(`[data-index="${next}"]`)
             btn?.focus()
         },
-        [active, scrollTo],
+        [sections, scrollTo],
     )
 
     return (
@@ -49,18 +47,24 @@ export function DotNavigation() {
             onKeyDown={handleKeyDown}
             role="tablist"
         >
-            {SECTIONS.map((section, i) => (
+            {sections.map((section, i) => (
                 <button
                     key={section.id}
                     data-index={i}
-                    className={cn(styles.dot, i === active && styles.active)}
+                    className={cn(
+                        styles.dot,
+                        section.isActive && styles.active,
+                        section.level === 1 && styles.sub,
+                    )}
                     onClick={() => scrollTo(i)}
                     aria-label={`Go to ${section.label}`}
-                    aria-selected={i === active}
+                    aria-selected={section.isActive}
                     role="tab"
                     type="button"
                 >
-                    <span className={styles.tooltip}>{section.label}</span>
+                    <span className={cn(styles.label, section.isActive && styles.labelActive)}>
+                        {section.label}
+                    </span>
                 </button>
             ))}
         </nav>

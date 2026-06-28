@@ -1,4 +1,4 @@
-.about {
+.section {
     position: relative;
     width: var(--section-width);
     margin: auto;
@@ -23,12 +23,6 @@
     margin: 0 0 var(--heading-margin);
 }
 
-@media (max-width: 640px) {
-    .heading {
-        font-size: calc(var(--heading-size) * 0.75);
-    }
-}
-
 .descriptions {
     display: flex;
     flex-direction: column;
@@ -39,29 +33,18 @@
     color: var(--body-color);
 }
 
-.descriptions p img {
-    height: 1.5em;
-    border-radius: 5px;
+.code {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.85em;
+    padding: 1px 4px;
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--base-100) 8%, transparent);
+    color: var(--primary);
     vertical-align: middle;
-    margin: 0 0.15em;
 }
 
-.nepaliFlag {
-    position: relative;
-    top: -5px;
-    transform: rotate(-15deg);
-}
-
-.archImage {
-    transform: rotate(-10deg);
-}
-
-.background {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    opacity: 0.4;
-    height: 10em;
-    width: auto;
-    pointer-events: none;
+@media (max-width: 640px) {
+    .heading {
+        font-size: calc(var(--heading-size) * 0.75);
+    }
 }

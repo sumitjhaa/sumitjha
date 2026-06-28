@@ -85,6 +85,12 @@
     font-size: 36px;
     font-weight: 600;
     margin: 0 0 20px;
+    letter-spacing: 1px;
+    line-height: var(--heading-line-height);
+    -webkit-text-stroke-width: 1.2px;
+    -webkit-text-stroke-color: currentColor;
+    -webkit-text-fill-color: transparent;
+    color: var(--base-100);
 }
 
 .description {

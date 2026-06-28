@@ -2,7 +2,7 @@
 
 import { useRef, useCallback } from 'react'
 import { scrollToElement } from '@/shared/utils'
-import { SECTIONS } from '@/shared/config/navigation'
+import { SECTIONS } from '@/shared/config'
 
 interface SectionNavigationReturn {
     activeRef: React.MutableRefObject<number>

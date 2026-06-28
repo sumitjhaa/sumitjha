@@ -1,7 +1,7 @@
 'use client'
 
 import { memo, useCallback } from 'react'
-import { useScrollProgress } from '@/shared/hooks/scroll/useScrollProgress'
+import { useScrollProgress } from '@/shared/hooks'
 import ArrowIcon from '@/features/portfolio/ui/common/ArrowIcon/ArrowIcon'
 import styles from './ScrollToTop.module.css'
 

@@ -3,8 +3,7 @@
 import { useCallback } from 'react'
 import { useAvatarStick, useTooltip } from '@/shared/hooks'
 import { Avatar, ScrollIndicator, Tooltip, SoundButton } from '@/features/portfolio/ui'
-import { SITE_CONFIG } from '@/shared/config/site'
-import { SOCIAL_LINKS } from '@/shared/config/social'
+import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
 import styles from './Hero.module.css'
 
 export default function Hero() {

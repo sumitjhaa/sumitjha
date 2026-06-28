@@ -1,8 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { useIntersectionObserver } from '@/shared/hooks/observer/useIntersectionObserver'
-import { useReducedMotion } from '@/shared/hooks/media/useReducedMotion'
+import { useIntersectionObserver, useReducedMotion } from '@/shared/hooks'
 import { cn } from '@/shared/utils'
 import styles from './FadeInSection.module.css'
 
