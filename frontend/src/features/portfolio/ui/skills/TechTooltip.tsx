@@ -8,13 +8,16 @@ import styles from './TechTooltip.module.css'
 interface TechTooltipProps {
     data: TooltipState | null
     pos: Position
+    offsetX?: number
+    offsetY?: number
+    fontSize?: string
+    padding?: string
+    gap?: string
 }
 
-function TechTooltip({ data, pos }: TechTooltipProps) {
+function TechTooltip({ data, pos, offsetX = 8, offsetY = 16, fontSize, padding, gap }: TechTooltipProps) {
     if (!data || !isBrowser()) return null
 
-    const offsetX = 8
-    const offsetY = 16
     let left = pos.x + offsetX
     let top = pos.y + offsetY
 
@@ -30,12 +33,14 @@ function TechTooltip({ data, pos }: TechTooltipProps) {
                     '--tooltip-y': `${top}px`,
                     '--tooltip-border': data.color,
                     '--tooltip-highlight': hexToRgba(data.color),
+                    ...(padding ? { '--tooltip-padding': padding } : {}),
+                    ...(gap ? { '--tooltip-gap': gap } : {}),
                 } as React.CSSProperties
             }
         >
             <div className={styles.header}>
-                <span className={styles.name}><span className={styles.nameInner}>{data.username}</span></span>
-                <span className={styles.badge}>{data.platform}</span>
+                <span className={styles.name} style={fontSize ? { fontSize } : undefined}><span className={styles.nameInner}>{data.username}</span></span>
+                {data.platform && <span className={styles.badge}>{data.platform}</span>}
             </div>
             {data.description && <span className={styles.description}>{data.description}</span>}
         </div>

@@ -1,0 +1,182 @@
+.section {
+    position: relative;
+    width: var(--section-width);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    justify-content: center;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    line-height: 1.6em;
+}
+
+.image {
+    width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    will-change: transform;
+}
+
+.imageWrapper {
+    position: relative;
+    margin-bottom: 28px;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.depthParallax {
+    position: relative;
+}
+
+.techBar {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    justify-content: center;
+}
+
+.techItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.techIcon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    display: block;
+    pointer-events: none;
+}
+
+.badge {
+    position: absolute;
+    top: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.65);
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.75rem;
+    color: #e0e0e0;
+    line-height: 1.4;
+    will-change: transform;
+}
+
+.badgeDate {
+    left: 12px;
+}
+
+.badgeStatus {
+    right: 12px;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 600;
+    margin: 0 0 20px;
+}
+
+.description {
+    color: var(--body-color);
+    font-size: 1.1rem;
+    line-height: 1.5em;
+    margin: 0 0 24px;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 12px;
+}
+
+.linkBtn {
+    position: relative;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'Patron', 'GT Standard', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.linkTop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: var(--primary-content);
+    font-size: 0.9rem;
+    border-radius: 7mm;
+    outline: 2px solid var(--neutral);
+    transition: 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.linkTop::before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transform: skewX(30deg);
+    left: -20px;
+    transition: 0.25s;
+}
+
+.linkBtn:active .linkTop::before {
+    left: calc(100% + 20px);
+}
+
+.linkBtn:active .linkTop {
+    transform: translateY(10px);
+}
+
+.linkBottom {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-focus);
+    top: 10px;
+    left: 0;
+    border-radius: 7mm;
+    outline: 2px solid var(--neutral);
+    z-index: -1;
+}
+
+.linkBtn::before {
+    position: absolute;
+    content: '';
+    width: calc(100% + 2px);
+    height: 100%;
+    background: var(--primary-focus);
+    top: 14px;
+    left: -1px;
+    border-radius: 7mm;
+    outline: 2px solid var(--neutral);
+    z-index: -1;
+}
+
+.linkIcon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+}
