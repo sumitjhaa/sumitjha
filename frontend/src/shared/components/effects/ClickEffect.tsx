@@ -2,7 +2,7 @@
 
 import { useClickEffect } from '@/shared/hooks'
 
-export function ClickHandler() {
+export function ClickEffect() {
     useClickEffect()
     return null
 }

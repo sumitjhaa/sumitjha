@@ -1,4 +1,4 @@
-import { ClickHandler } from './ClickHandler'
+import { ClickEffect } from '@/shared/components/effects/ClickEffect'
 import { Hero } from '@/features/portfolio/components/Hero'
 import { AboutMe } from '@/features/portfolio/components/AboutMe'
 import { ProjectsIntro } from '@/features/portfolio/components/ProjectsIntro'
@@ -23,7 +23,7 @@ import { VisuallyHidden } from '@/shared/components/ui'
 export default function Home() {
     return (
         <main>
-            <ClickHandler />
+            <ClickEffect />
             <VisuallyHidden>
                 <h1>Sumit Jha - Portfolio</h1>
             </VisuallyHidden>
