@@ -1,0 +1,18 @@
+.container {
+    display: grid;
+    place-items: center;
+    height: 100dvh;
+    padding: 2rem;
+}
+
+.skeletonGroup {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.spacer {
+    height: 2rem;
+}

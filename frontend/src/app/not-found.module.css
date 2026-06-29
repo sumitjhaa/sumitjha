@@ -1,0 +1,12 @@
+.container {
+    display: grid;
+    place-items: center;
+    height: 100dvh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.message {
+    color: var(--base-400);
+    margin-top: 0.5rem;
+}

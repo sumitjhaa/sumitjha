@@ -1,5 +1,7 @@
 'use client'
 
+import styles from './error.module.css'
+
 export default function GlobalError({
     error,
     reset,
@@ -10,24 +12,11 @@ export default function GlobalError({
     return (
         <html>
             <body>
-                <main
-                    style={{
-                        display: 'grid',
-                        placeItems: 'center',
-                        height: '100dvh',
-                        textAlign: 'center',
-                        padding: '2rem',
-                    }}
-                >
+                <main className={styles.container}>
                     <div>
                         <h1>Something went wrong</h1>
-                        <p style={{ color: 'var(--base-400)', margin: '1rem 0' }}>
-                            {error.message}
-                        </p>
-                        <button
-                            onClick={() => reset()}
-                            style={{ padding: '0.5rem 1.5rem', cursor: 'pointer' }}
-                        >
+                        <p className={styles.message}>{error.message}</p>
+                        <button onClick={() => reset()} className={styles.resetButton}>
                             Try again
                         </button>
                     </div>

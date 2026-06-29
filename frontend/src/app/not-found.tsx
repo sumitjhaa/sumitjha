@@ -1,19 +1,11 @@
+import styles from './not-found.module.css'
+
 export default function NotFound() {
     return (
-        <main
-            style={{
-                display: 'grid',
-                placeItems: 'center',
-                height: '100dvh',
-                textAlign: 'center',
-                padding: '2rem',
-            }}
-        >
+        <main className={styles.container}>
             <div>
                 <h1>404</h1>
-                <p style={{ color: 'var(--base-400)', marginTop: '0.5rem' }}>
-                    This page does not exist.
-                </p>
+                <p className={styles.message}>This page does not exist.</p>
             </div>
         </main>
     )
