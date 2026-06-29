@@ -1,0 +1,113 @@
+.page {
+    position: relative;
+    width: var(--section-width);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: var(--section-padding);
+    justify-content: center;
+    line-height: 1.6em;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.heading {
+    font-size: var(--heading-size);
+    line-height: var(--heading-line-height);
+    -webkit-text-stroke-width: var(--heading-stroke-width);
+    -webkit-text-stroke-color: currentColor;
+    -webkit-text-fill-color: transparent;
+    font-weight: var(--heading-weight);
+    width: max-content;
+    margin: 0 0 var(--heading-margin);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1em;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1em;
+    border: 1px solid var(--base-300);
+    border-radius: 10px;
+    text-decoration: none;
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        transform 0.2s;
+    color: var(--body-color);
+}
+
+.link:hover {
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.platform {
+    font-weight: 600;
+    color: var(--base-100);
+    font-size: 1em;
+}
+
+.username {
+    margin-left: auto;
+    font-size: 0.85em;
+    color: var(--base-300);
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 2em;
+    color: var(--base-200);
+    font-size: 0.9rem;
+}
+
+.sep {
+    opacity: 0.3;
+}
+
+.email {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.email:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .heading {
+        font-size: calc(var(--heading-size) * 0.75);
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6em;
+    }
+
+    .link {
+        padding: 0.7em;
+    }
+
+    .username {
+        display: none;
+    }
+}

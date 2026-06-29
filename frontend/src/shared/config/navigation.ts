@@ -18,9 +18,16 @@ const PROJECT_SECTIONS: SectionConfig[] = PROJECTS.toReversed().filter((p) => p.
     level: 1 as const,
 }))
 
+const END_SECTIONS: SectionConfig[] = [
+    { id: 'education', label: 'Education', level: 0 },
+    { id: 'last-page', label: 'Epilogue', level: 0 },
+    { id: 'footer', label: 'Connect', level: 0 },
+]
+
 export const SECTIONS: SectionConfig[] = [
     ...STATIC_SECTIONS,
     ...PROJECT_SECTIONS,
+    ...END_SECTIONS,
 ]
 
 export const SCROLL_DEBOUNCE_MS = 100

@@ -4,6 +4,9 @@ import { AboutMe } from '@/features/portfolio/components/AboutMe'
 import { ProjectsIntro } from '@/features/portfolio/components/ProjectsIntro'
 import { ExperienceIntro } from '@/features/portfolio/components/ExperienceIntro'
 import { Experience } from '@/features/portfolio/components/Experience'
+import { LastPage } from '@/features/portfolio/components/LastPage'
+import { FooterPage } from '@/features/portfolio/components/FooterPage'
+import { EducationPage } from '@/features/portfolio/components/EducationPage'
 import {
     Section,
     ProgressBar,
@@ -116,6 +119,9 @@ export default function Home() {
                     </Section>
                 ))}
 
+            <EducationPage />
+            <LastPage />
+            <FooterPage />
             <ProgressBar />
             <ScrollToTop />
             <DotNavigation />

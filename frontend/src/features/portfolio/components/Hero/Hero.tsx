@@ -45,7 +45,7 @@ export default function Hero() {
             <header className={styles.header}>
                 <h1>{SITE_CONFIG.name}</h1>
                 <p>
-                    I&apos;m a software developer from{' '}
+                    I&apos;m a Detail-obsessed *software Developer* from{' '}
                     <span className="amber-highlight">NIT Allahabad</span>
                     <img
                         src="/img/inline-images/mnnit.jpg"
