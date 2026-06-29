@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { SOCIAL_LINKS, SITE_CONFIG } from '@/shared/config'
-import styles from './FooterPage.module.css'
+import styles from './FooterSection.module.css'
 
-function FooterPage() {
+function FooterSection() {
     return (
         <section id="footer" className={styles.page}>
             <h1 className={styles.heading}>Let&apos;s Connect</h1>
@@ -34,4 +34,4 @@ function FooterPage() {
     )
 }
 
-export default memo(FooterPage)
+export default memo(FooterSection)

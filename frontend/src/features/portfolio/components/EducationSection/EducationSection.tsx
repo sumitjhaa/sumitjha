@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import Image from 'next/image'
-import styles from './EducationPage.module.css'
+import styles from './EducationSection.module.css'
 
 const educationData = [
     {
@@ -48,7 +48,7 @@ const educationData = [
     },
 ]
 
-function EducationPage() {
+function EducationSection() {
     return (
         <section id="education" className={styles.page}>
             <h1 className={styles.heading}>Education</h1>
@@ -96,4 +96,4 @@ function EducationPage() {
     )
 }
 
-export default memo(EducationPage)
+export default memo(EducationSection)

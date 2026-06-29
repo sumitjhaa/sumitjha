@@ -1,7 +1,7 @@
 import { memo } from 'react'
-import styles from './LastPage.module.css'
+import styles from './LastSection.module.css'
 
-function LastPage() {
+function LastSection() {
     return (
         <section id="last-page" className={styles.page}>
             <h1 className={styles.heading}>That&apos;s All Folks</h1>
@@ -46,4 +46,4 @@ function LastPage() {
     )
 }
 
-export default memo(LastPage)
+export default memo(LastSection)
