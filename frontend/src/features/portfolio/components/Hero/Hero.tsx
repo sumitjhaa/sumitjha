@@ -3,6 +3,7 @@
 import { useCallback } from 'react'
 import { useAvatarStick, useTooltip } from '@/shared/hooks'
 import { Avatar, ScrollIndicator, Tooltip, SoundButton } from '@/features/portfolio/ui'
+import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
 import styles from './Hero.module.css'
 
@@ -46,14 +47,19 @@ export default function Hero() {
                 <h1>{SITE_CONFIG.name}</h1>
                 <p>
                     I&apos;m a Detail-obsessed *software Developer* from{' '}
-                    <span className="amber-highlight">NIT Allahabad</span>
+                    <LinkHighlight
+                        href="https://www.mnnit.ac.in/index.php/department/engineering/csed"
+                        color="#0AC3F545"
+                    >
+                        NIT Allahabad
+                    </LinkHighlight>
                     <img
                         src="/img/inline-images/mnnit.jpg"
                         className={styles.smallInlineImages}
                         alt=""
                     />
-                    focused on building reliable AI-driven products and machine learning systems{' '}
-                    <span className="purple-highlight">-no vibe coding</span>
+                    focused on building reliable AI-driven products and machine learning systems -no
+                    vibe coding
                     <img
                         src="/img/inline-images/vibe-coding.png"
                         className={styles.smallInlineImages}

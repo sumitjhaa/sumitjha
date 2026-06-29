@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import styles from './AboutMe.module.css'
+import { LinkHighlight } from '@/shared/components/ui'
 
 function AboutMe() {
     return (
@@ -18,8 +19,15 @@ function AboutMe() {
                         className={styles.nepaliFlag}
                         alt=""
                     />
-                    Nepali by roots, I grew up in Parej, balancing my time between my nana&apos;s
-                    stories and school homework that somehow always followed me home.
+                    Nepali by roots, I grew up in{' '}
+                    <LinkHighlight
+                        href="https://www.mnnit.ac.in/index.php/department/engineering/csed"
+                        color="#610AF545"
+                    >
+                        Parej
+                    </LinkHighlight>
+                    , balancing my time between my nana&apos;s stories and school homework that
+                    somehow always followed me home.
                 </p>
 
                 <p>

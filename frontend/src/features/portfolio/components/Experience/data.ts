@@ -10,11 +10,13 @@ export const experience: {
         location: 'Noida, UP, India',
         role: 'Software Developer',
         period: 'Jan – Oct 2025',
+        href: 'https://prismberry.com',
     },
     projects: [
         {
             title: 'Taxspanner',
-            highlight: 'sky-highlight',
+            href: 'https://taxspanner.com',
+            highlightColor: '#0ea5e944',
             description:
                 'Tax compliance platform for digital filing of TDS, GST, and income tax returns.',
             points: [
@@ -29,7 +31,8 @@ export const experience: {
         },
         {
             title: 'Propel',
-            highlight: 'red-highlight',
+            href: 'https://app.zagglepropel.com/features/login',
+            highlightColor: '#ef444444',
             description:
                 'Business management platform for operations, finance, and team collaboration.',
             points: [

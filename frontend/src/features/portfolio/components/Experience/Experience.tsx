@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { memo, useRef, useMemo } from 'react'
 import { experience } from './data'
+import { LinkHighlight } from '@/shared/components/ui'
 import { useTimelineLine } from './hooks/useTimelineLine'
 import { TimelineLine } from './components/TimelineLine'
 import { PinIcon } from './components/PinIcon'
@@ -41,7 +42,7 @@ function Experience({ projectFilter, id = 'experience', hideHeading, isLast, nex
                     ) : (
                         <div className={styles.fallbackLogo}>{companyName.charAt(0)}</div>
                     )}
-                    <span className={styles.subheading}>{companyName}</span>
+                    <LinkHighlight href={activeCompany.href} color="#a7c08044" className={styles.subheading}>{companyName}</LinkHighlight>
                     <span className={styles.sep}>&middot;</span>    
                     <span className={styles.roleMonospace}>{activeCompany.role}</span>
                 </div>
@@ -62,9 +63,9 @@ function Experience({ projectFilter, id = 'experience', hideHeading, isLast, nex
                 {filtered.map((proj) => (
                     <div key={proj.title} className={styles.project}>
                         <div className={styles.projectHeader}>
-                            <span className={`${styles.projectTitle} ${proj.highlight}`}>
+                            <LinkHighlight href={proj.href} color={proj.highlightColor ?? '#0ea5e944'} className={styles.projectTitle}>
                                 {proj.title}
-                            </span>
+                            </LinkHighlight>
                         </div>
                         <div className={styles.projectDesc}>{proj.description}</div>
                         {proj.points.length > 0 ? (

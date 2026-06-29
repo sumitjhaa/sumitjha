@@ -4,11 +4,13 @@ export interface CompanyData {
     location: string
     role: string
     period: string
+    href?: string
 }
 
 export interface ProjectData {
     title: string
-    highlight: string
     description: string
     points: string[]
+    href?: string
+    highlightColor?: string
 }
