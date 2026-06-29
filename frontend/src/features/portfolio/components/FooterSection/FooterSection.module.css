@@ -71,13 +71,24 @@
 
 .footer {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: baseline;
+    justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 8px;
     margin-top: auto;
     padding-top: 2em;
-    color: var(--base-200);
-    font-size: 0.9rem;
+    font-size: 1.2em;
+    font-weight: var(--body-weight);
+    line-height: var(--body-line-height);
+    color: var(--body-color);
+}
+
+.cat {
+    width: 2em;
+    height: 1.5em;
+    overflow: visible;
+    position: relative;
+    top: 0.15em;
 }
 
 .sep {

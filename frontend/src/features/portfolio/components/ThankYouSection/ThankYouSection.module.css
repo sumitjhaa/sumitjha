@@ -1,0 +1,32 @@
+.page {
+    position: relative;
+    width: var(--section-width);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: var(--section-padding);
+    justify-content: center;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    color: var(--primary);
+    opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+    .svg {
+        max-width: 320px;
+    }
+}

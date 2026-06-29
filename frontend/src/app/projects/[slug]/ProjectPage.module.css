@@ -13,12 +13,17 @@
     margin-bottom: 24px;
 }
 
-.image {
+.imageWrapper {
+    position: relative;
     width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 8px;
+    height: 400px;
     margin-bottom: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
 }
 
 .title {

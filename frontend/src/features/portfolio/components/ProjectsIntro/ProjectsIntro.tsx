@@ -17,6 +17,7 @@ function ProjectsIntro() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />{' '}
                     Famous last words. If debugging is removing bugs, then programming is adding
                     them.{' '}
@@ -29,6 +30,7 @@ function ProjectsIntro() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />{' '}
                     The runtime took that personally. May the source be with me.
                 </p>

@@ -1,6 +1,8 @@
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import { PROJECTS } from '@/features/portfolio/data/projects'
+import Image from 'next/image'
+import { PROJECTS, getProjectColor } from '@/features/portfolio/data/projects'
 import { LinkHighlight } from '@/shared/components/ui/LinkHighlight/LinkHighlight'
 import styles from './ProjectPage.module.css'
 
@@ -8,31 +10,23 @@ interface Props {
     params: Promise<{ slug: string }>
 }
 
-const colorMap: Record<string, string> = {
-    'otakudoro': 'rgba(254, 240, 138, 0.5)',
-    'tugnotes': 'rgba(252, 165, 165, 0.5)',
-    'charcha': 'rgba(147, 197, 253, 0.5)',
-    'freddit': 'rgba(165, 180, 252, 0.5)',
-    'vigilante': 'rgba(204, 122, 255, 0.5)',
-    'tick': 'rgba(74, 222, 128, 0.5)',
-    'dragnotes': 'rgba(254, 240, 138, 0.5)',
-    'ziggle': 'rgba(252, 165, 165, 0.5)',
-}
-
 export async function generateStaticParams() {
     return PROJECTS.map((p) => ({ slug: p.slug }))
 }
 
-function getProjectColor(slug: string): string {
-    const projectColors = [
-        'rgba(254, 240, 138, 0.5)',
-        'rgba(252, 165, 165, 0.5)',
-        'rgba(147, 197, 253, 0.5)',
-        'rgba(165, 180, 252, 0.5)',
-        'rgba(204, 122, 255, 0.5)',
-        'rgba(74, 222, 128, 0.5)',
-    ]
-    return colorMap[slug] || projectColors[slug.length % projectColors.length]
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params
+    const project = PROJECTS.find((p) => p.slug === slug)
+    if (!project) return {}
+    return {
+        title: project.title,
+        description: project.description,
+        openGraph: {
+            title: project.title,
+            description: project.description,
+            images: [{ url: project.image }],
+        },
+    }
 }
 
 export default async function ProjectPage({ params }: Props) {
@@ -46,7 +40,9 @@ export default async function ProjectPage({ params }: Props) {
                 &larr; Back
             </Link>
 
-            <img src={project.image} alt={project.title} className={styles.image} />
+            <div className={styles.imageWrapper}>
+                <Image src={project.image} alt={project.title} fill className={styles.image} sizes="(max-width: 768px) 100vw, 768px" />
+            </div>
 
             <h1 className={styles.title}>
                 <LinkHighlight
@@ -70,7 +66,7 @@ export default async function ProjectPage({ params }: Props) {
             <div className={styles.techList}>
                 {project.technologies.map((t) => (
                     <span key={t.name} className={styles.techItem}>
-                        <img src={t.icon} alt="" className={styles.techIcon} />
+                        <img src={t.icon} alt="" className={styles.techIcon} loading="lazy" />
                         {t.name}
                     </span>
                 ))}

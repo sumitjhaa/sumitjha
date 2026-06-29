@@ -4,7 +4,7 @@ import { memo, useCallback, type ReactNode } from 'react'
 import { FadeInSection } from '@/features/portfolio/ui'
 import { useTooltip } from '@/shared/hooks'
 import TechTooltip from './TechTooltip'
-import type { Skill, SkillCategory } from './data'
+import type { Skill, SkillCategory } from '@/features/portfolio/data/skills'
 import styles from './SkillsSection.module.css'
 
 interface SkillCardProps {

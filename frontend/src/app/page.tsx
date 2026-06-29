@@ -5,6 +5,7 @@ import { ProjectsIntro } from '@/features/portfolio/components/ProjectsIntro'
 import { ExperienceIntro } from '@/features/portfolio/components/ExperienceIntro'
 import { Experience } from '@/features/portfolio/components/Experience'
 import { LastSection } from '@/features/portfolio/components/LastSection'
+import { ThankYouSection } from '@/features/portfolio/components/ThankYouSection'
 import { FooterSection } from '@/features/portfolio/components/FooterSection'
 import { EducationSection } from '@/features/portfolio/components/EducationSection'
 import {
@@ -16,8 +17,10 @@ import {
     KeyboardShortcuts,
     ThemeToggle,
 } from '@/features/portfolio/ui'
-import { SkillsSection, SKILL_CATEGORIES } from '@/features/portfolio/ui/skills'
-import { PROJECTS, ProjectSection } from '@/features/portfolio/ui/projects'
+import { SKILL_CATEGORIES } from '@/features/portfolio/data/skills'
+import { PROJECTS } from '@/features/portfolio/data/projects'
+import { SkillsSection } from '@/features/portfolio/ui/skills'
+import { ProjectSection } from '@/features/portfolio/ui/projects'
 import { VisuallyHidden } from '@/shared/components/ui'
 
 export default function Home() {
@@ -49,6 +52,7 @@ export default function Home() {
                                         margin: '0 0.15em',
                                     }}
                                     alt=""
+                                    loading="lazy"
                                 />
                                 Each framework made me an offer I couldn&apos;t refuse. And
                                 they&apos;re still around haunting my terminal.
@@ -61,6 +65,7 @@ export default function Home() {
                                         margin: '0 0.15em',
                                     }}
                                     alt=""
+                                    loading="lazy"
                                 />
                                 Unfortunately, no kung fu montage required to debug them.
                             </p>
@@ -76,6 +81,7 @@ export default function Home() {
                                         margin: '0 0.15em',
                                     }}
                                     alt=""
+                                    loading="lazy"
                                 />
                                 Still haven&apos;t found a framework that doesn&apos;t demand a
                                 pound of soul. Production goes live and I stare into the flames.
@@ -88,6 +94,7 @@ export default function Home() {
                                         margin: '0 0.15em',
                                     }}
                                     alt=""
+                                    loading="lazy"
                                 />
                                 This is fine, everything is fine. Maybe I&apos;ll look at the error
                                 tomorrow. But tonight, the code works somehow.
@@ -97,7 +104,7 @@ export default function Home() {
                 />
             </Section>
             <ExperienceIntro />
-            <Experience projectFilter={['Taxspanner']} nextPageId="experience-propel" />
+            <Experience projectFilter={['Taxspanner']} />
             <Experience projectFilter={['Propel']} id="experience-propel" hideHeading isLast />
             <Section id="section-4">
                 <SkillsSection
@@ -111,7 +118,7 @@ export default function Home() {
             <ProjectsIntro />
             {PROJECTS.toReversed()
                 .filter((p) => p.slug !== 'ziggle')
-                .map((project, i) => (
+                .map((project) => (
                     <Section key={project.slug} id={`project-${project.slug}`}>
                         <FadeInSection>
                             <ProjectSection project={project} />
@@ -121,6 +128,7 @@ export default function Home() {
 
             <EducationSection />
             <LastSection />
+            <ThankYouSection />
             <FooterSection />
             <ProgressBar />
             <ScrollToTop />

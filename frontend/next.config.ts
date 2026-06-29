@@ -18,6 +18,18 @@ const nextConfig: NextConfig = {
         { key: 'Cache-Control', value: 'public, max-age=86400' },
       ],
     },
+    {
+      source: '/(.*)',
+      headers: [
+        {
+          key: 'Content-Security-Policy',
+          value: "default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'",
+        },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'X-Frame-Options', value: 'DENY' },
+        { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+      ],
+    },
   ],
   experimental: {
     optimizePackageImports: ['@/shared/components/ui'],

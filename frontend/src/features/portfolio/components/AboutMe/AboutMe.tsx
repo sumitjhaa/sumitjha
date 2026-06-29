@@ -10,14 +10,15 @@ function AboutMe() {
             <div className={styles.descriptions}>
                 <p>
                     I&apos;m CS Engineer
-                    <img src="/img/inline-images/coder.gif" alt="" /> from NIT Allahabad — four
+                    <img src="/img/inline-images/coder.gif" alt="" loading="lazy" /> from NIT Allahabad — four
                     years of deadlines, coffee-powered
-                    <img src="/img/inline-images/coffee-machine.gif" alt="" /> coding nights, and
+                    <img src="/img/inline-images/coffee-machine.gif" alt="" loading="lazy" /> coding nights, and
                     occasional existential spiral.
                     <img
                         src="/img/inline-images/nepal-flag.gif"
                         className={styles.nepaliFlag}
                         alt=""
+                        loading="lazy"
                     />
                     Nepali by roots, I grew up in{' '}
                     <LinkHighlight
@@ -32,14 +33,14 @@ function AboutMe() {
 
                 <p>
                     Lately, I am rebuilding things
-                    <img src="/img/inline-images/coder-typing.gif" alt="" /> and diving in
-                    <img src="/img/inline-images/arch.png" alt="" className={styles.archImage} />
+                    <img src="/img/inline-images/coder-typing.gif" alt="" loading="lazy" /> and diving in
+                    <img src="/img/inline-images/arch.png" alt="" className={styles.archImage} loading="lazy" />
                     Arch linux mostly at the cost of sleep. Off the keyboard, you&apos;ll find me
                     watching anime, series, or movies.
                 </p>
 
                 <p>Code keeps me busy. Anime keeps me sane. Sarcasm keeps it real.</p>
-                <img src="/img/backgrounds/totoro.gif" alt="" className={styles.background} />
+                <img src="/img/backgrounds/totoro.gif" alt="" className={styles.background} loading="lazy" />
             </div>
         </section>
     )

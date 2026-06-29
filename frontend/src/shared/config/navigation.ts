@@ -21,6 +21,7 @@ const PROJECT_SECTIONS: SectionConfig[] = PROJECTS.toReversed().filter((p) => p.
 const END_SECTIONS: SectionConfig[] = [
     { id: 'education', label: 'Education', level: 0 },
     { id: 'last-page', label: 'Epilogue', level: 0 },
+    { id: 'thank-you', label: 'Thank you', level: 0 },
     { id: 'footer', label: 'Connect', level: 0 },
 ]
 

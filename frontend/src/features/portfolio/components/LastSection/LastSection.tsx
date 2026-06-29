@@ -20,6 +20,7 @@ function LastSection() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />
                     my inbox is open.
                 </p>
@@ -36,6 +37,7 @@ function LastSection() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />
                     Others were promoted to features.
                 </p>

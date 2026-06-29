@@ -5,7 +5,6 @@ export interface ExperienceProps {
     id?: string
     hideHeading?: boolean
     isLast?: boolean
-    nextPageId?: string
     companyData?: CompanyData
     projectsData?: ProjectData[]
 }

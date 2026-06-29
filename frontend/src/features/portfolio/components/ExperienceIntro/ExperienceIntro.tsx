@@ -17,6 +17,7 @@ function ExperienceIntro() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />{' '}
                     Then came meetings, deadlines, production incidents, and &ldquo;quick&rdquo;
                     fixes.
@@ -32,6 +33,7 @@ function ExperienceIntro() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />{' '}
                 </p>
                 <p>
@@ -45,6 +47,7 @@ function ExperienceIntro() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />{' '}
                     <code className={styles.code}>March 13 2025</code>, <em>un</em>reviewed
                     migration as an intern (totally not my fault).
@@ -59,6 +62,7 @@ function ExperienceIntro() {
                             margin: '0 0.15em',
                         }}
                         alt=""
+                        loading="lazy"
                     />
                     Turns out &ldquo;it works on my machine&rdquo; isn&apos;t an acceptable
                     deployment strategy.

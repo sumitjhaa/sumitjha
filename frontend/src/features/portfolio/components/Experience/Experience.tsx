@@ -10,7 +10,7 @@ import { PinIcon } from './components/PinIcon'
 import type { ExperienceProps } from './types'
 import styles from './Experience.module.css'
 
-function Experience({ projectFilter, id = 'experience', hideHeading, isLast, nextPageId, companyData, projectsData }: ExperienceProps) {
+function Experience({ projectFilter, id = 'experience', hideHeading, isLast, companyData, projectsData }: ExperienceProps) {
     const activeCompany = companyData ?? experience.company
     const activeProjects = projectsData ?? experience.projects
     const companyName = activeCompany.name || 'Unknown'

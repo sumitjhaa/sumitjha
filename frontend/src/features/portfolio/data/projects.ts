@@ -20,6 +20,30 @@ export interface Project {
     status: string
 }
 
+export const PROJECT_COLOR_MAP: Record<string, string> = {
+    otakudoro: 'rgba(254, 240, 138, 0.5)',
+    tugnotes: 'rgba(252, 165, 165, 0.5)',
+    charcha: 'rgba(147, 197, 253, 0.5)',
+    freddit: 'rgba(165, 180, 252, 0.5)',
+    vigilante: 'rgba(204, 122, 255, 0.5)',
+    tick: 'rgba(74, 222, 128, 0.5)',
+    dragnotes: 'rgba(254, 240, 138, 0.5)',
+    ziggle: 'rgba(252, 165, 165, 0.5)',
+}
+
+const PROJECT_COLORS_FALLBACK = [
+    'rgba(254, 240, 138, 0.5)',
+    'rgba(252, 165, 165, 0.5)',
+    'rgba(147, 197, 253, 0.5)',
+    'rgba(165, 180, 252, 0.5)',
+    'rgba(204, 122, 255, 0.5)',
+    'rgba(74, 222, 128, 0.5)',
+]
+
+export function getProjectColor(slug: string): string {
+    return PROJECT_COLOR_MAP[slug] || PROJECT_COLORS_FALLBACK[slug.length % PROJECT_COLORS_FALLBACK.length]
+}
+
 export const PROJECTS: Project[] = [
     {
         slug: 'charcha',

@@ -1,33 +1,13 @@
 'use client'
 
 import { memo, useCallback, useState } from 'react'
-import type { Project } from './data'
+import type { Project } from '@/features/portfolio/data/projects'
+import { getProjectColor } from '@/features/portfolio/data/projects'
 import { LinkHighlight } from '@/shared/components/ui/LinkHighlight/LinkHighlight'
 import { SoundButton } from '@/features/portfolio/ui/common/SoundButton/SoundButton'
 import { useTooltip } from '@/shared/hooks'
 import TechTooltip from '@/features/portfolio/ui/skills/TechTooltip'
 import styles from './ProjectSection.module.css'
-
-// Color palette for projects to ensure punchy colors
-const projectColors = [
-    'rgba(254, 240, 138, 0.5)',    // yellow
-    'rgba(252, 165, 165, 0.5)',    // red
-    'rgba(147, 197, 253, 0.5)',    // blue
-    'rgba(165, 180, 252, 0.5)',    // indigo
-    'rgba(204, 122, 255, 0.5)',    // purple
-    'rgba(74, 222, 128, 0.5)',    // green
-]
-
-const colorMap: Record<string, string> = {
-    'otakudoro': 'rgba(254, 240, 138, 0.5)',        // yellow
-    'tugnotes': 'rgba(252, 165, 165, 0.5)',        // red
-    'charcha': 'rgba(147, 197, 253, 0.5)',          // blue
-    'freddit': 'rgba(165, 180, 252, 0.5)',         // indigo
-    'vigilante': 'rgba(204, 122, 255, 0.5)',      // purple
-    'tick': 'rgba(74, 222, 128, 0.5)',              // green
-    'dragnotes': 'rgba(254, 240, 138, 0.5)',       // yellow (same as otakudoro)
-    'ziggle': 'rgba(252, 165, 165, 0.5)',        // red (same as tugnotes)
-}
 
 const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
     Completed: { bg: '#36d399', text: '#1a1a1a' },
@@ -37,7 +17,7 @@ const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
 }
 
 function GitHubIcon() {
-    return <img src="/img/icons/github.svg" alt="" className={styles.linkIcon} />
+    return <img src="/img/icons/github.svg" alt="" className={styles.linkIcon} loading="lazy" />
 }
 
 function LiveIcon() {
@@ -79,7 +59,7 @@ const TechItem = memo(function TechItem({ name, icon, color, showTooltip, hideTo
 
     return (
         <div className={styles.techItem} onMouseEnter={handleMouseEnter} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
-            <img src={icon} alt={name} className={styles.techIcon} />
+            <img src={icon} alt={name} className={styles.techIcon} loading="lazy" />
         </div>
     )
 })
@@ -168,16 +148,11 @@ export function ProjectSection({ project }: Props) {
     const statusColor = STATUS_COLORS[project.status] ?? { bg: 'var(--background)', text: 'var(--base-100)' }
     const { wrapperClass, imageStyle, badgeStyle, techBarStyle, onMove, onLeave } = useAnimation()
 
-    // Get project-specific color from the predefined mapping
-    const getProjectColor = (slug: string): string => {
-        return colorMap[slug] || projectColors[slug.length % projectColors.length]
-    }
-
     return (
         <>
             <section className={styles.section}>
                 <div className={`${styles.imageWrapper} ${wrapperClass}`} onMouseMove={onMove} onMouseLeave={onLeave}>
-                    <img src={project.image} alt={project.title} className={styles.image} style={imageStyle} />
+                    <img src={project.image} alt={project.title} className={styles.image} style={imageStyle} loading="lazy" />
                     <span className={`${styles.badge} ${styles.badgeDate}`} style={badgeStyle}>
                         {new Date(project.date).toLocaleDateString('en-US', {
                             year: 'numeric',
