@@ -1,5 +1,5 @@
 import type { SectionConfig } from '@/shared/types'
-import { PROJECTS } from '@/features/portfolio/ui/projects/data'
+import { PROJECTS } from '@/features/portfolio/data/projects'
 
 const STATIC_SECTIONS: SectionConfig[] = [
     { id: 'hero', label: 'Home', level: 0 },
