@@ -1,6 +1,28 @@
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { PROJECTS } from '@/features/portfolio/ui/projects'
+import { LinkHighlight } from '@/shared/components/ui/LinkHighlight/LinkHighlight'
+
+// Color map for projects to ensure punchy colors
+const projectColors = [
+    'rgba(254, 240, 138, 0.5)',    // yellow
+    'rgba(252, 165, 165, 0.5)',    // red
+    'rgba(147, 197, 253, 0.5)',    // blue
+    'rgba(165, 180, 252, 0.5)',    // indigo
+    'rgba(204, 122, 255, 0.5)',    // purple
+    'rgba(74, 222, 128, 0.5)',    // green
+]
+
+const colorMap: Record<string, string> = {
+    'otakudoro': 'rgba(254, 240, 138, 0.5)',        // yellow
+    'tugnotes': 'rgba(252, 165, 165, 0.5)',        // red
+    'charcha': 'rgba(147, 197, 253, 0.5)',          // blue
+    'freddit': 'rgba(165, 180, 252, 0.5)',         // indigo
+    'vigilante': 'rgba(204, 122, 255, 0.5)',      // purple
+    'tick': 'rgba(74, 222, 128, 0.5)',              // green
+    'dragnotes': 'rgba(254, 240, 138, 0.5)',       // yellow (same as otakudoro)
+    'ziggle': 'rgba(252, 165, 165, 0.5)',        // red (same as tugnotes)
+}
 
 interface Props {
     params: Promise<{ slug: string }>
@@ -44,13 +66,17 @@ export default async function ProjectPage({ params }: Props) {
                 }}
             />
 
-            <h1 style={{
-                fontSize: 'var(--heading-size)',
-                fontWeight: 'var(--heading-weight)',
-                margin: '0 0 8px',
-            }}>
-                {project.title}
-            </h1>
+                <h1 style={{
+                    fontSize: 'var(--heading-size)',
+                    fontWeight: 'var(--heading-weight)',
+                    margin: '0 0 8px',
+                }}>
+                    <LinkHighlight 
+                        href={project.links.find(l => l.label.toLowerCase() === 'github')?.url} 
+                        color={colorMap[project.slug] || projectColors[project.slug.length % projectColors.length]}
+                    ></LinkHighlight>
+                    {project.title}
+                </h1>
 
             <p style={{
                 color: 'var(--base-300)',

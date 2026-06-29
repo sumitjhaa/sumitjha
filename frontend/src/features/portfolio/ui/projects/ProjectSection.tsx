@@ -2,10 +2,32 @@
 
 import { memo, useCallback, useState } from 'react'
 import type { Project } from './data'
+import { LinkHighlight } from '@/shared/components/ui/LinkHighlight/LinkHighlight'
 import { SoundButton } from '@/features/portfolio/ui/common/SoundButton/SoundButton'
 import { useTooltip } from '@/shared/hooks'
 import TechTooltip from '@/features/portfolio/ui/skills/TechTooltip'
 import styles from './ProjectSection.module.css'
+
+// Color palette for projects to ensure punchy colors
+const projectColors = [
+    'rgba(254, 240, 138, 0.5)',    // yellow
+    'rgba(252, 165, 165, 0.5)',    // red
+    'rgba(147, 197, 253, 0.5)',    // blue
+    'rgba(165, 180, 252, 0.5)',    // indigo
+    'rgba(204, 122, 255, 0.5)',    // purple
+    'rgba(74, 222, 128, 0.5)',    // green
+]
+
+const colorMap: Record<string, string> = {
+    'otakudoro': 'rgba(254, 240, 138, 0.5)',        // yellow
+    'tugnotes': 'rgba(252, 165, 165, 0.5)',        // red
+    'charcha': 'rgba(147, 197, 253, 0.5)',          // blue
+    'freddit': 'rgba(165, 180, 252, 0.5)',         // indigo
+    'vigilante': 'rgba(204, 122, 255, 0.5)',      // purple
+    'tick': 'rgba(74, 222, 128, 0.5)',              // green
+    'dragnotes': 'rgba(254, 240, 138, 0.5)',       // yellow (same as otakudoro)
+    'ziggle': 'rgba(252, 165, 165, 0.5)',        // red (same as tugnotes)
+}
 
 const STATUS_COLORS: Record<string, { bg: string; text: string }> = {
     Completed: { bg: '#36d399', text: '#1a1a1a' },
@@ -87,7 +109,7 @@ interface AnimReturn {
 }
 
 function useAnimation() {
-    const [s, set] = useState<AnimState>(idleState)
+    const [state, set] = useState<AnimState>(idleState)
 
     const onMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         const { x, y, cx, cy } = getCursorOffset(e)
@@ -100,23 +122,23 @@ function useAnimation() {
     const badgeOff = 10
     const barOff = 14
 
-    const baseI = s.active
-        ? `translate(${s.cx * imgOff}px, ${s.cy * imgOff}px) scale(1.06)`
+    const baseI = state.active
+        ? `translate(${state.cx * imgOff}px, ${state.cy * imgOff}px) scale(1.06)`
         : 'translate(0, 0) scale(1)'
-    const baseB = s.active
-        ? `translate(${-s.cx * badgeOff}px, ${-s.cy * badgeOff}px)`
+    const baseB = state.active
+        ? `translate(${-state.cx * badgeOff}px, ${-state.cy * badgeOff}px)`
         : 'translate(0, 0)'
-    const baseT = s.active
-        ? `translate(${s.cx * barOff}px, ${s.cy * barOff}px)`
+    const baseT = state.active
+        ? `translate(${state.cx * barOff}px, ${state.cy * barOff}px)`
         : 'translate(0, 0)'
 
-    const tI = s.active
+    const tI = state.active
         ? 'transform 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         : 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    const tB = s.active
+    const tB = state.active
         ? 'transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         : 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-    const tT = s.active
+    const tT = state.active
         ? 'transform 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         : 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
 
@@ -127,7 +149,7 @@ function useAnimation() {
     const badgeBase: React.CSSProperties = { transform: baseB, transition: tB }
     const techBase: React.CSSProperties = { transform: baseT, transition: tT }
 
-    let res: AnimReturn = {
+    const res: AnimReturn = {
         wrapperClass: styles.depthParallax,
         imageStyle: imgBase,
         badgeStyle: badgeBase,
@@ -145,6 +167,11 @@ export function ProjectSection({ project }: Props) {
     const { data: tooltip, pos, show: showTooltip, hide: hideTooltip, move: moveTooltip } = useTooltip()
     const statusColor = STATUS_COLORS[project.status] ?? { bg: 'var(--background)', text: 'var(--base-100)' }
     const { wrapperClass, imageStyle, badgeStyle, techBarStyle, onMove, onLeave } = useAnimation()
+
+    // Get project-specific color from the predefined mapping
+    const getProjectColor = (slug: string): string => {
+        return colorMap[slug] || projectColors[slug.length % projectColors.length]
+    }
 
     return (
         <>
@@ -178,7 +205,14 @@ export function ProjectSection({ project }: Props) {
                         ))}
                     </div>
                 </div>
-                <h2 className={styles.title}>{project.title}</h2>
+                <h2 className={styles.title}>
+                    <LinkHighlight 
+                        href={project.links.find(l => l.label.toLowerCase() === 'github')?.url}
+                        color={getProjectColor(project.slug)}
+                    >
+                        {project.title}
+                    </LinkHighlight>
+                </h2>
                 <p className={styles.description}>{project.description}</p>
                 <div className={styles.links}>
                     {project.links.map((link) => (
@@ -189,7 +223,7 @@ export function ProjectSection({ project }: Props) {
                         >
                             <div className={styles.linkTop}>
                                 {link.label.toLowerCase() === 'github' ? <GitHubIcon /> : <LiveIcon />}
-                                {link.label}
+                                <LinkHighlight href={link.url} className="!text-current !no-underline hover:!no-underline" color={getProjectColor(project.slug)}>{link.label}</LinkHighlight>
                             </div>
                             <div className={styles.linkBottom} />
                         </SoundButton>
