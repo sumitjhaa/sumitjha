@@ -10,18 +10,14 @@ export default function GlobalError({
     reset: () => void
 }) {
     return (
-        <html>
-            <body>
-                <main className={styles.container}>
-                    <div>
-                        <h1>Something went wrong</h1>
-                        <p className={styles.message}>{error.message}</p>
-                        <button onClick={() => reset()} className={styles.resetButton}>
-                            Try again
-                        </button>
-                    </div>
-                </main>
-            </body>
-        </html>
+        <main className={styles.container}>
+            <div>
+                <h1>Something went wrong</h1>
+                <p className={styles.message}>{error.message}</p>
+                <button onClick={() => reset()} className={styles.resetButton}>
+                    Try again
+                </button>
+            </div>
+        </main>
     )
 }

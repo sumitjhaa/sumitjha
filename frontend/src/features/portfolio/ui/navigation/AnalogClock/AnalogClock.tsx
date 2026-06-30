@@ -7,7 +7,16 @@ import { usePanel } from '@/app/providers/PanelProvider'
 import { PALETTE_COLORS } from '@/shared/config'
 import styles from './AnalogClock.module.css'
 
-function getTime() {
+interface TimeData {
+    hour: number
+    minute: number
+    second: number
+    ampm: string
+    timeDigits: string
+    date: string
+}
+
+function getTime(): TimeData {
     const now = new Date()
     const h24 = now.getHours()
     const h = h24 % 12 || 12
@@ -17,9 +26,6 @@ function getTime() {
         hour: ((h24 % 12) + m / 60) * 30,
         minute: (m + s / 60) * 6,
         second: s * 6,
-        hours: h,
-        minutes: m,
-        seconds: s,
         ampm: h24 >= 12 ? 'PM' : 'AM',
         timeDigits: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,
         date: `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`,
@@ -27,9 +33,10 @@ function getTime() {
 }
 
 function ClockSVG({ size, className }: { size: number; className?: string }) {
-    const [t, setT] = useState(getTime)
+    const [t, setT] = useState<TimeData | null>(null)
 
     useEffect(() => {
+        setT(getTime())
         const id = setInterval(() => setT(getTime()), 1000)
         return () => clearInterval(id)
     }, [])
@@ -47,7 +54,7 @@ function ClockSVG({ size, className }: { size: number; className?: string }) {
                 strokeWidth="0.85"
                 strokeLinecap="round"
                 className={styles.hourHand}
-                style={{ transform: `rotate(${t.hour}deg)` }}
+                style={{ transform: t ? `rotate(${t.hour}deg)` : undefined }}
             />
             <line
                 x1={r}
@@ -58,7 +65,7 @@ function ClockSVG({ size, className }: { size: number; className?: string }) {
                 strokeWidth="0.55"
                 strokeLinecap="round"
                 className={styles.minuteHand}
-                style={{ transform: `rotate(${t.minute}deg)` }}
+                style={{ transform: t ? `rotate(${t.minute}deg)` : undefined }}
             />
             <line
                 x1={r}
@@ -69,7 +76,7 @@ function ClockSVG({ size, className }: { size: number; className?: string }) {
                 strokeWidth="0.3"
                 strokeLinecap="round"
                 className={styles.secondHand}
-                style={{ transform: `rotate(${t.second}deg)` }}
+                style={{ transform: t ? `rotate(${t.second}deg)` : undefined }}
             />
             <circle cx={r} cy={r} r="0.45" fill="#e11d48" />
         </svg>
@@ -77,7 +84,7 @@ function ClockSVG({ size, className }: { size: number; className?: string }) {
 }
 
 export function AnalogClock() {
-    const [t, setT] = useState(getTime)
+    const [t, setT] = useState<TimeData | null>(null)
     const { theme } = useTheme()
     const { isOpen, toggle, close } = usePanel()
     const open = isOpen('clock')
@@ -99,6 +106,7 @@ export function AnalogClock() {
     const accentColor = isClient ? `color-mix(in srgb, ${accent} 45%, var(--base-100))` : undefined
 
     useEffect(() => {
+        setT(getTime())
         const id = setInterval(() => setT(getTime()), 1000)
         return () => clearInterval(id)
     }, [])
@@ -197,7 +205,7 @@ export function AnalogClock() {
                 aria-label="Toggle clock"
                 style={accentColor ? { color: accentColor } : undefined}
             >
-                <span className={styles.dateText}>{t.date}</span>
+                <span className={styles.dateText}>{t?.date ?? '--/--'}</span>
                 <span className={cn(styles.miniClockWrap, open && styles.miniHidden)} ref={miniRef}>
                     <ClockSVG size={40} />
                 </span>
@@ -216,8 +224,8 @@ export function AnalogClock() {
                     <ClockSVG size={130} />
                 </div>
                 <div className={cn(styles.body, reveal && styles.bodyVisible)}>
-                    <span className={styles.timeDigits}>{t.timeDigits}</span>
-                    <span className={styles.ampm}>{t.ampm}</span>
+                    <span className={styles.timeDigits}>{t?.timeDigits ?? '--:--'}</span>
+                    <span className={styles.ampm}>{t?.ampm ?? ''}</span>
                 </div>
             </div>
 
