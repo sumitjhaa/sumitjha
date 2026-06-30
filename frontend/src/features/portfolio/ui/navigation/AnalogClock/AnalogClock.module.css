@@ -35,9 +35,10 @@
 }
 
 .dateText {
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: 'Doto', sans-serif;
     opacity: 0.7;
     letter-spacing: 0.02em;
+    font-weight: 600;
 }
 
 .triggerActive {
@@ -123,7 +124,7 @@
 }
 
 .timeDigits {
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: 'Doto', sans-serif;
     font-size: 1.05rem;
     font-weight: 600;
     letter-spacing: 0.04em;
@@ -131,10 +132,11 @@
 }
 
 .ampm {
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: 'Doto', sans-serif;
     font-size: 0.6rem;
     opacity: 0.4;
     letter-spacing: 0.08em;
+    font-weight: 600;
 }
 
 .flyClock {

@@ -33,6 +33,16 @@
     }
 }
 
+.weatherLine {
+    font-family: 'Doto', sans-serif;
+    font-weight: 600;
+    font-size: 1.2em;
+    color: var(--body-color);
+    display: block;
+    margin: 0.2em 0 0.4em;
+    letter-spacing: 0.05em;
+}
+
 .header p {
     color: var(--base-300);
     line-height: 1.5em;

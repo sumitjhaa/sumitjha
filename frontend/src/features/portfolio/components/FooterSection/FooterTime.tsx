@@ -15,13 +15,21 @@ function getTime() {
 
 function FooterTime() {
     const [time, setTime] = useState(getTime)
+    const [temp, setTemp] = useState<number | null>(null)
 
     useEffect(() => {
         const id = setInterval(() => setTime(getTime()), 30_000)
         return () => clearInterval(id)
     }, [])
 
-    return <span>Madhubani, India &middot; {time}</span>
+    useEffect(() => {
+        fetch('/api/weather')
+            .then((r) => r.json())
+            .then((d) => setTemp(d.temp))
+            .catch(() => setTemp(null))
+    }, [])
+
+    return <span>Madhubani, India &middot; {time}{temp != null ? ` \u00b7 ${temp}\u00b0F` : ''}</span>
 }
 
 export default FooterTime

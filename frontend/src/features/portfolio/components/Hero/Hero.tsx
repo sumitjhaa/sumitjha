@@ -9,6 +9,75 @@ import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
 import styles from './Hero.module.css'
 
+function weatherIcon(code: number, temp: number) {
+    if (code <= 1 || (code <= 3 && temp >= 80)) {
+        return (
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+        )
+    }
+    if (code <= 3) {
+        return (
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
+                <circle cx="12" cy="12" r="4" />
+                <path d="M16.5 12.5a4 4 0 0 1-4 4.5H8a4 4 0 0 1 0-8h.5" />
+            </svg>
+        )
+    }
+    if (code >= 95) {
+        return (
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
+                <path d="M17.5 12.5a4 4 0 0 1-4 4.5H7a4 4 0 0 1 0-8h1" />
+                <path d="M12 7v6" />
+                <path d="M9 10h6" />
+            </svg>
+        )
+    }
+    if (code >= 71) {
+        return (
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
+                <path d="M17.5 12.5a4 4 0 0 1-4 4.5H7a4 4 0 0 1 0-8h1" />
+                <line x1="12" y1="18" x2="12" y2="23" />
+                <line x1="8" y1="21" x2="16" y2="21" />
+            </svg>
+        )
+    }
+    return (
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
+            <path d="M17.5 12.5a4 4 0 0 1-4 4.5H7a4 4 0 0 1 0-8h1" />
+            <path d="M9.5 8.5a4 4 0 0 1 4-3.5H18a4 4 0 0 1 0 8h-.5" />
+            <line x1="12" y1="18" x2="12" y2="21" />
+        </svg>
+    )
+}
+
+function WeatherLine() {
+    const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null)
+
+    useEffect(() => {
+        fetch('/api/weather')
+            .then((r) => r.json())
+            .then((d) => setWeather(d))
+            .catch(() => setWeather(null))
+    }, [])
+
+    return (
+        <span className={styles.weatherLine}>
+            {weather && weatherIcon(weather.code, weather.temp)}
+            {weather ? ` Chillin' in Madhubani \u00b7 ${weather.temp}\u00b0F` : " Chillin' in Madhubani"}
+        </span>
+    )
+}
+
 export default function Hero() {
     const isStuck = useAvatarStick()
     const { theme } = useTheme()
@@ -72,6 +141,7 @@ export default function Hero() {
                 <div onMouseMove={onHeadingMove} onMouseLeave={onHeadingLeave} className={styles.headingWrapper}>
                     <h1 ref={headingRef}>{SITE_CONFIG.name}</h1>
                 </div>
+                <WeatherLine />
                 <p>
                     I&apos;m a Detail-obsessed *software Developer* from{' '}
                     <LinkHighlight

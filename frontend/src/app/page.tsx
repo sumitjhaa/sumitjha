@@ -6,6 +6,7 @@ import { ExperienceIntro } from '@/features/portfolio/components/ExperienceIntro
 import { Experience } from '@/features/portfolio/components/Experience'
 import { LastSection } from '@/features/portfolio/components/LastSection'
 import { ThankYouSection } from '@/features/portfolio/components/ThankYouSection'
+import { ShoutoutsSection } from '@/features/portfolio/components/ShoutoutsSection'
 import { FooterSection } from '@/features/portfolio/components/FooterSection'
 import { EducationSection } from '@/features/portfolio/components/EducationSection'
 import {
@@ -130,6 +131,7 @@ export default function Home() {
 
             <EducationSection />
             <LastSection />
+            <ShoutoutsSection />
             <ThankYouSection />
             <FooterSection />
             <LoopedPaging />

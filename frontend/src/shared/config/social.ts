@@ -24,7 +24,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     },
     {
         href: 'https://gitlab.com/thesumitjha',
-        username: '@thesumitjha',
+        username: 'thesumitjha',
         platform: 'GitLab',
         color: '#FC6D26',
         icon: '/img/icons/gitlab.svg',

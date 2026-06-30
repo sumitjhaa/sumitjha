@@ -77,3 +77,11 @@
     font-style: italic;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'Doto';
+    src: url('/fonts/dotfont.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
