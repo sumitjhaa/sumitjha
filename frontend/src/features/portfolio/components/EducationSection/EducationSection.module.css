@@ -28,32 +28,21 @@
     flex-direction: column;
 }
 
-.separator {
-    height: 2px;
-    background: repeating-linear-gradient(
-        to right,
-        var(--base-300) 0,
-        var(--base-300) 16px,
-        transparent 16px,
-        transparent 24px
-    );
-    opacity: 0.5;
-    margin: 1.5em 0;
-}
-
 .row {
     display: flex;
     gap: 1.5em;
     align-items: center;
+    padding: 1.5em 1em;
+    border-radius: 2px;
+    transition: background 0.25s;
 }
 
-.logoCol {
-    flex-shrink: 0;
+.row:hover {
+    background: color-mix(in srgb, var(--primary) 8%, transparent);
 }
 
-.logo {
-    border-radius: 10px;
-    object-fit: contain;
+.row:hover .institute {
+    color: var(--secondary);
 }
 
 .info {
@@ -69,9 +58,10 @@
 }
 
 .institute {
-    font-size: 26px;
-    letter-spacing: 0.6px;
-    font-weight: 500;
+    font-family: 'Doto', sans-serif;
+    font-size: 2em;
+    letter-spacing: 0.05em;
+    font-weight: 600;
     color: var(--base-100);
     line-height: 1.3;
 }

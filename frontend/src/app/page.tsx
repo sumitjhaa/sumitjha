@@ -130,8 +130,8 @@ export default function Home() {
                 ))}
 
             <EducationSection />
-            <LastSection />
             <ShoutoutsSection />
+            <LastSection />
             <ThankYouSection />
             <FooterSection />
             <LoopedPaging />

@@ -9,54 +9,191 @@ import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
 import styles from './Hero.module.css'
 
+function Svg({ children, title }: { children: React.ReactNode; title?: string }) {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.25em' }}>
+            {title && <title>{title}</title>}
+            {children}
+        </svg>
+    )
+}
+
 function weatherIcon(code: number, temp: number) {
-    if (code <= 1 || (code <= 3 && temp >= 80)) {
+    if (code === 0 || (code === 1 && temp >= 80)) {
         return (
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-            </svg>
-        )
-    }
-    if (code <= 3) {
-        return (
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
+            <Svg title="sun">
                 <circle cx="12" cy="12" r="4" />
-                <path d="M16.5 12.5a4 4 0 0 1-4 4.5H8a4 4 0 0 1 0-8h.5" />
-            </svg>
+                <path d="M12 2v2" />
+                <path d="M12 20v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="m17.66 17.66 1.41 1.41" />
+                <path d="M2 12h2" />
+                <path d="M20 12h2" />
+                <path d="m6.34 17.66-1.41 1.41" />
+                <path d="m19.07 4.93-1.41 1.41" />
+            </Svg>
         )
     }
-    if (code >= 95) {
+    if (code === 1) {
         return (
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
-                <path d="M17.5 12.5a4 4 0 0 1-4 4.5H7a4 4 0 0 1 0-8h1" />
-                <path d="M12 7v6" />
-                <path d="M9 10h6" />
-            </svg>
+            <Svg title="partly cloudy">
+                <path d="M12 2v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="M20 12h2" />
+                <path d="m19.07 4.93-1.41 1.41" />
+                <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+                <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+            </Svg>
         )
     }
-    if (code >= 71) {
+    if (code === 2) {
         return (
-            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
-                <path d="M17.5 12.5a4 4 0 0 1-4 4.5H7a4 4 0 0 1 0-8h1" />
-                <line x1="12" y1="18" x2="12" y2="23" />
-                <line x1="8" y1="21" x2="16" y2="21" />
-            </svg>
+            <Svg title="cloud-sun">
+                <path d="M12 2v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="M20 12h2" />
+                <path d="m19.07 4.93-1.41 1.41" />
+                <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+                <path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z" />
+            </Svg>
+        )
+    }
+    if (code === 3) {
+        return (
+            <Svg title="cloudy">
+                <path d="M17.5 12a1 1 0 1 1 0 9H9.006a7 7 0 1 1 6.702-9z" />
+                <path d="M21.832 9A3 3 0 0 0 19 7h-2.207a5.5 5.5 0 0 0-10.72.61" />
+            </Svg>
+        )
+    }
+    if (code === 45 || code === 48) {
+        return (
+            <Svg title="fog">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                <path d="M16 17H7" />
+                <path d="M17 21H9" />
+            </Svg>
+        )
+    }
+    if (code >= 51 && code <= 55) {
+        return (
+            <Svg title="drizzle">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                <path d="M8 19v1" />
+                <path d="M8 14v1" />
+                <path d="M16 19v1" />
+                <path d="M16 14v1" />
+                <path d="M12 21v1" />
+                <path d="M12 16v1" />
+            </Svg>
+        )
+    }
+    if (code >= 56 && code <= 57) {
+        return (
+            <Svg title="freezing drizzle">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                <path d="M16 14v2" />
+                <path d="M8 14v2" />
+                <path d="M16 20h.01" />
+                <path d="M8 20h.01" />
+                <path d="M12 16v2" />
+                <path d="M12 22h.01" />
+            </Svg>
+        )
+    }
+    if (code >= 61 && code <= 65) {
+        return (
+            <Svg title="rain">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                <path d="M16 14v6" />
+                <path d="M8 14v6" />
+                <path d="M12 16v6" />
+            </Svg>
+        )
+    }
+    if (code >= 66 && code <= 67) {
+        return (
+            <Svg title="freezing rain">
+                <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                <path d="m9.2 22 3-7" />
+                <path d="m9 13-3 7" />
+                <path d="m17 13-3 7" />
+            </Svg>
+        )
+    }
+    if (code >= 71 && code <= 77) {
+        return (
+            <Svg title="snow">
+                <path d="m10 20-1.25-2.5L6 18" />
+                <path d="M10 4 8.75 6.5 6 6" />
+                <path d="m14 20 1.25-2.5L18 18" />
+                <path d="m14 4 1.25 2.5L18 6" />
+                <path d="m17 21-3-6h-4" />
+                <path d="m17 3-3 6 1.5 3" />
+                <path d="M2 12h6.5L10 9" />
+                <path d="m20 10-1.5 2 1.5 2" />
+                <path d="M22 12h-6.5L14 15" />
+                <path d="m4 10 1.5 2L4 14" />
+                <path d="m7 21 3-6-1.5-3" />
+                <path d="m7 3 3 6h4" />
+            </Svg>
+        )
+    }
+    if (code >= 80 && code <= 82) {
+        return (
+            <Svg title="rain showers">
+                <path d="M12 2v2" />
+                <path d="m4.93 4.93 1.41 1.41" />
+                <path d="M20 12h2" />
+                <path d="m19.07 4.93-1.41 1.41" />
+                <path d="M15.947 12.65a4 4 0 0 0-5.925-4.128" />
+                <path d="M3 20a5 5 0 1 1 8.9-4H13a3 3 0 0 1 2 5.24" />
+                <path d="M11 20v2" />
+                <path d="M7 19v2" />
+            </Svg>
+        )
+    }
+    if (code >= 85 && code <= 86) {
+        return (
+            <Svg title="sun snow">
+                <path d="M10 21v-1" />
+                <path d="M10 4V3" />
+                <path d="M10 9a3 3 0 0 0 0 6" />
+                <path d="m14 20 1.25-2.5L18 18" />
+                <path d="m14 4 1.25 2.5L18 6" />
+                <path d="m17 21-3-6 1.5-3H22" />
+                <path d="m17 3-3 6 1.5 3" />
+                <path d="M2 12h1" />
+                <path d="m20 10-1.5 2 1.5 2" />
+                <path d="m3.64 18.36.7-.7" />
+                <path d="m4.34 6.34-.7-.7" />
+            </Svg>
+        )
+    }
+    if (code === 95) {
+        return (
+            <Svg title="thunderstorm">
+                <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
+                <path d="m13 12-3 5h4l-3 5" />
+            </Svg>
+        )
+    }
+    if (code >= 96) {
+        return (
+            <Svg title="thunderstorm with hail">
+                <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
+                <path d="m13 12-3 5h4l-3 5" />
+                <path d="M16 14v2" />
+                <path d="M8 14v2" />
+                <path d="M16 20h.01" />
+                <path d="M8 20h.01" />
+            </Svg>
         )
     }
     return (
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.2em' }}>
-            <path d="M17.5 12.5a4 4 0 0 1-4 4.5H7a4 4 0 0 1 0-8h1" />
-            <path d="M9.5 8.5a4 4 0 0 1 4-3.5H18a4 4 0 0 1 0 8h-.5" />
-            <line x1="12" y1="18" x2="12" y2="21" />
-        </svg>
+        <Svg title="cloud">
+            <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+        </Svg>
     )
 }
 
@@ -72,8 +209,9 @@ function WeatherLine() {
 
     return (
         <span className={styles.weatherLine}>
-            {weather && weatherIcon(weather.code, weather.temp)}
-            {weather ? ` Chillin' in Madhubani \u00b7 ${weather.temp}\u00b0F` : " Chillin' in Madhubani"}
+            {weather
+                ? <> Chillin' in Madhubani &middot; {weatherIcon(weather.code, weather.temp)} {weather.temp}&deg;F</>
+                : " Chillin' in Madhubani"}
         </span>
     )
 }

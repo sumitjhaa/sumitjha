@@ -1,0 +1,16 @@
+.tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    padding: 10px;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0.9;
+}
+
+.logo {
+    border-radius: 10px;
+    object-fit: contain;
+    display: block;
+}
