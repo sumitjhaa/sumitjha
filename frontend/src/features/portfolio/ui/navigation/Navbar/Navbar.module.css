@@ -1,0 +1,24 @@
+.outer {
+    position: fixed;
+    top: 2em;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.navbar {
+    width: 720px;
+    display: flex;
+    justify-content: flex-end;
+    padding: 12px 20px;
+    pointer-events: auto;
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}

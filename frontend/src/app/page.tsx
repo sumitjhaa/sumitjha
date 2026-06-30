@@ -15,10 +15,8 @@ import {
     ScrollToTop,
     FadeInSection,
     DotNavigation,
-    KeyboardShortcuts,
-    ThemeToggle,
-    AnalogClock,
     LoopedPaging,
+    Navbar,
 } from '@/features/portfolio/ui'
 import { SKILL_CATEGORIES } from '@/features/portfolio/data/skills'
 import { PROJECTS } from '@/features/portfolio/data/projects'
@@ -34,6 +32,7 @@ export default function Home() {
                 <h1>Sumit Jha - Portfolio</h1>
             </VisuallyHidden>
 
+            <Navbar />
             <Hero />
             <AboutMe />
 
@@ -138,9 +137,6 @@ export default function Home() {
             <ProgressBar />
             <ScrollToTop />
             <DotNavigation />
-            <KeyboardShortcuts />
-            <ThemeToggle />
-            <AnalogClock />
         </main>
     )
 }

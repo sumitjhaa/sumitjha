@@ -1,4 +1,5 @@
 // navigation
+export { Navbar } from './navigation/Navbar/Navbar'
 export { DotNavigation } from './navigation/DotNavigation/DotNavigation'
 export { KeyboardShortcuts } from './navigation/KeyboardShortcuts/KeyboardShortcuts'
 export { AnalogClock } from './navigation/AnalogClock/AnalogClock'

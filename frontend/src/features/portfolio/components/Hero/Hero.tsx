@@ -11,7 +11,18 @@ import styles from './Hero.module.css'
 
 function Svg({ children, title }: { children: React.ReactNode; title?: string }) {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ verticalAlign: '-0.25em' }}>
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ verticalAlign: '-0.25em' }}
+        >
             {title && <title>{title}</title>}
             {children}
         </svg>
@@ -209,9 +220,15 @@ function WeatherLine() {
 
     return (
         <span className={styles.weatherLine}>
-            {weather
-                ? <> Chillin' in Madhubani &middot; {weatherIcon(weather.code, weather.temp)} {weather.temp}&deg;F</>
-                : " Chillin' in Madhubani"}
+            {weather ? (
+                <>
+                    {' '}
+                    Chillin' in Madhubani &middot; {weatherIcon(weather.code, weather.temp)}{' '}
+                    {weather.temp}&deg;F
+                </>
+            ) : (
+                " Chillin' in Madhubani"
+            )}
         </span>
     )
 }
@@ -222,7 +239,9 @@ export default function Hero() {
     const [mounted, setMounted] = useState(false)
     useEffect(() => setMounted(true), [])
     const secAccent = PALETTE_COLORS[theme][4]
-    const ctaColor = mounted ? `color-mix(in srgb, ${secAccent} 30%, var(--secondary-content))` : undefined
+    const ctaColor = mounted
+        ? `color-mix(in srgb, ${secAccent} 30%, var(--secondary-content))`
+        : undefined
     const headingRef = useRef<HTMLHeadingElement>(null)
 
     const onHeadingMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -276,12 +295,16 @@ export default function Hero() {
             <Avatar isStuck={isStuck} />
 
             <header className={styles.header}>
-                <div onMouseMove={onHeadingMove} onMouseLeave={onHeadingLeave} className={styles.headingWrapper}>
+                <div
+                    onMouseMove={onHeadingMove}
+                    onMouseLeave={onHeadingLeave}
+                    className={styles.headingWrapper}
+                >
                     <h1 ref={headingRef}>{SITE_CONFIG.name}</h1>
                 </div>
                 <WeatherLine />
                 <p>
-                    I&apos;m a Detail-obsessed *software Developer* from{' '}
+                    I&apos;m a Detail-obsessed *software Developer*, a CS graduate from{' '}
                     <LinkHighlight
                         href="https://www.mnnit.ac.in/index.php/department/engineering/csed"
                         color="#0AC3F545"
@@ -334,7 +357,12 @@ export default function Hero() {
                     className="sparkclick"
                     onClick={() => window.open(`mailto:${SITE_CONFIG.email}`, '_blank')}
                 >
-                    <div className={styles.ctaTop} style={ctaColor ? { color: ctaColor } : undefined}>Let&apos;s talk!</div>
+                    <div
+                        className={styles.ctaTop}
+                        style={ctaColor ? { color: ctaColor } : undefined}
+                    >
+                        Let&apos;s talk!
+                    </div>
                     <div className={styles.ctaBottom} />
                 </SoundButton>
             </div>

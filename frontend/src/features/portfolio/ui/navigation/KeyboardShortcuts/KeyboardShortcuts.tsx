@@ -77,20 +77,21 @@ export const KeyboardShortcuts = memo(function KeyboardShortcuts() {
 
     return (
         <>
-            <GlassButton
-                className={cn(styles.trigger, vimMode && styles.vimActive)}
-                onClick={toggle}
-                aria-label="Toggle keyboard shortcuts"
-                style={
-                    isClient
-                        ? { color: `color-mix(in srgb, ${accent} 45%, var(--base-100))` }
-                        : undefined
-                }
-            >
-                {vimMode ? (
-                    <span className={styles.vimBadge}>VIM</span>
-                ) : (
-                    <svg
+            <div className={styles.wrapper}>
+                <GlassButton
+                    className={cn(styles.trigger, vimMode && styles.vimActive)}
+                    onClick={toggle}
+                    aria-label="Toggle keyboard shortcuts"
+                    style={
+                        isClient
+                            ? { color: `color-mix(in srgb, ${accent} 45%, var(--base-100))` }
+                            : undefined
+                    }
+                >
+                    {vimMode ? (
+                        <span className={styles.vimBadge}>VIM</span>
+                    ) : (
+                        <svg
                         width="18"
                         height="18"
                         viewBox="0 0 24 24"
@@ -144,6 +145,7 @@ export const KeyboardShortcuts = memo(function KeyboardShortcuts() {
             </div>
 
             {vimMode && <VimKeyHandler last={last} />}
+            </div>
         </>
     )
 })

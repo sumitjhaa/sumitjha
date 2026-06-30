@@ -199,49 +199,54 @@ export function AnalogClock() {
 
     return (
         <>
-            <button
-                className={cn(styles.trigger, open && styles.triggerActive)}
-                onClick={togglePanel}
-                aria-label="Toggle clock"
-                style={accentColor ? { color: accentColor } : undefined}
-            >
-                <span className={styles.dateText}>{t?.date ?? '--/--'}</span>
-                <span className={cn(styles.miniClockWrap, open && styles.miniHidden)} ref={miniRef}>
-                    <ClockSVG size={40} />
-                </span>
-            </button>
-
-            {open && <div className={styles.backdrop} onClick={close} aria-hidden />}
-
-            <div
-                ref={modalRef}
-                className={cn(styles.panel, open && styles.open)}
-                role="dialog"
-                aria-modal={open}
-                aria-label="Clock"
-            >
-                <div ref={targetRef} className={cn(styles.clockWrap, reveal && styles.clockVisible)}>
-                    <ClockSVG size={130} />
-                </div>
-                <div className={cn(styles.body, reveal && styles.bodyVisible)}>
-                    <span className={styles.timeDigits}>{t?.timeDigits ?? '--:--'}</span>
-                    <span className={styles.ampm}>{t?.ampm ?? ''}</span>
-                </div>
-            </div>
-
-            {flyStart && (
-                <div
-                    ref={flyRef}
-                    className={styles.flyClock}
-                    style={{
-                        transform: `translate(${flyStart.x}px, ${flyStart.y}px) translate(-50%, -50%)`,
-                        width: flyStart.size,
-                        height: flyStart.size,
-                    }}
+            <div className={styles.wrapper}>
+                <button
+                    className={cn(styles.trigger, open && styles.triggerActive)}
+                    onClick={togglePanel}
+                    aria-label="Toggle clock"
+                    style={accentColor ? { color: accentColor } : undefined}
                 >
-                    <ClockSVG size={flyStart.size} />
+                    <span className={styles.dateText}>{t?.date ?? '--/--'}</span>
+                    <span className={cn(styles.miniClockWrap, open && styles.miniHidden)} ref={miniRef}>
+                        <ClockSVG size={40} />
+                    </span>
+                </button>
+
+                {open && <div className={styles.backdrop} onClick={close} aria-hidden />}
+
+                <div
+                    ref={modalRef}
+                    className={cn(styles.panel, open && styles.open)}
+                    role="dialog"
+                    aria-modal={open}
+                    aria-label="Clock"
+                >
+                    <div
+                        ref={targetRef}
+                        className={cn(styles.clockWrap, reveal && styles.clockVisible)}
+                    >
+                        <ClockSVG size={130} />
+                    </div>
+                    <div className={cn(styles.body, reveal && styles.bodyVisible)}>
+                        <span className={styles.timeDigits}>{t?.timeDigits ?? '--:--'}</span>
+                        <span className={styles.ampm}>{t?.ampm ?? ''}</span>
+                    </div>
                 </div>
-            )}
+
+                {flyStart && (
+                    <div
+                        ref={flyRef}
+                        className={styles.flyClock}
+                        style={{
+                            transform: `translate(${flyStart.x}px, ${flyStart.y}px) translate(-50%, -50%)`,
+                            width: flyStart.size,
+                            height: flyStart.size,
+                        }}
+                    >
+                        <ClockSVG size={flyStart.size} />
+                    </div>
+                )}
+            </div>
         </>
     )
 }
