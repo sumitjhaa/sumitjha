@@ -18,7 +18,7 @@ interface EduTooltipProps {
 function EduTooltip({ data, pos }: EduTooltipProps) {
     if (!data) return null
 
-    const offset = -10
+    const offset = 20
     let left = pos.x + offset
     let top = pos.y + offset
 
@@ -27,7 +27,7 @@ function EduTooltip({ data, pos }: EduTooltipProps) {
 
     return (
         <div className={styles.tooltip} style={{ left, top } as React.CSSProperties}>
-            <Image src={data.logo} alt="" width={200} height={200} className={styles.logo} />
+            <Image src={data.logo} alt="" width={150} height={150} className={styles.logo} />
         </div>
     )
 }

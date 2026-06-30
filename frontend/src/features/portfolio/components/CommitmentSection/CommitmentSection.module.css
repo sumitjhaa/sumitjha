@@ -1,0 +1,1751 @@
+.page {
+    position: relative;
+    width: var(--section-width);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: var(--section-padding);
+    justify-content: center;
+    line-height: 1.6em;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.heading {
+    font-size: var(--heading-size);
+    line-height: var(--heading-line-height);
+    -webkit-text-stroke-width: var(--heading-stroke-width);
+    -webkit-text-stroke-color: currentColor;
+    -webkit-text-fill-color: transparent;
+    font-weight: var(--heading-weight);
+    width: max-content;
+    margin: 0 0 var(--heading-margin);
+    color: var(--base-100);
+    flex-shrink: 0;
+}
+
+/* Wrapper for the commit card + graph.
+   No internal scroll — the page itself scrolls if content overflows. */
+.scrollArea {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ── Last commit card — polished with clear hierarchy ── */
+
+/* Hierarchy:
+   1. PRIMARY   → commit message (the content, largest, boldest)
+   2. SECONDARY → author identity (who, medium)
+   3. TERTIARY  → repo + time (context, small, muted)
+   4. QUATERNARY→ branch diagram + stats (supplementary, monospace)
+*/
+
+/* ── Last commit card — minimal, single-column, tight rhythm ── */
+
+/* Spacing rhythm (3 tiers):
+   - within a group: 4px
+   - between groups: 10px
+   - major sections: 16px
+*/
+
+.card {
+    padding: 20px 22px;
+    position: relative;
+    animation: cardIn 500ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cardInner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    min-width: 0;
+    /* Ensure the right column sticks to the end (right edge) of the card */
+    position: relative;
+}
+
+@media (max-width: 520px) {
+    .cardInner {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+}
+
+/* ── RIGHT column: identity (avatar + username) ── */
+
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 96px;
+    order: 1; /* Push the avatar panel to the right side of the grid */
+    animation: identityIn 500ms ease 200ms backwards;
+    /* No background, no border — just floats on the card */
+    padding: 0;
+    /* Stick to the end (right edge) */
+    justify-self: end;
+    position: sticky;
+    top: 20px;
+}
+
+@keyframes identityIn {
+    from {
+        opacity: 0;
+        transform: translateX(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.avatarLinkRight {
+    display: block;
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    text-decoration: none;
+    flex-shrink: 0;
+    animation: avatarInRight 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 100ms backwards;
+    position: relative;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatarLinkRight:hover {
+    transform: scale(1.06);
+}
+
+/* Online status badge — pulsing green dot in the bottom-right */
+.avatarLinkRight::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--success);
+    border: 3px solid var(--background);
+    box-shadow: 0 0 12px color-mix(in srgb, var(--success) 50%, transparent);
+    animation: onlinePulse 2.4s ease-in-out 1s infinite;
+}
+
+@keyframes onlinePulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 12px color-mix(in srgb, var(--success) 50%, transparent),
+            0 0 0 0 color-mix(in srgb, var(--success) 40%, transparent);
+    }
+    50% {
+        box-shadow:
+            0 0 18px color-mix(in srgb, var(--success) 70%, transparent),
+            0 0 0 8px color-mix(in srgb, var(--success) 0%, transparent);
+    }
+}
+
+@keyframes avatarInRight {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-6deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+.identityTextRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    text-align: center;
+    min-width: 0;
+}
+
+.identityNameRight {
+    color: var(--base-100);
+    font-weight: 700;
+    font-size: 0.82em;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.identityHandleRight {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.72em;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    opacity: 0.85;
+    transition: opacity 150ms ease;
+    word-break: break-all;
+}
+
+.identityHandleRight:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.committerRight {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    color: var(--base-300);
+    opacity: 0.7;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.65em;
+    margin-top: 4px;
+    padding-top: 6px;
+    border-top: 1px solid color-mix(in srgb, var(--neutral) 30%, transparent);
+    text-align: center;
+    line-height: 1.3;
+}
+
+/* ── LEFT column: time + commit data ── */
+
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+    order: 0; /* Commit data sits on the left */
+}
+
+.repo {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.82em;
+    color: var(--base-200);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition:
+        color 150ms ease,
+        transform 150ms ease,
+        background 150ms ease;
+    padding: 4px 10px 4px 8px;
+    border-radius: 5px;
+    align-self: flex-start;
+    /* Subtle background so it reads as a clickable "chip" */
+    background: color-mix(in srgb, var(--base-100) 3%, transparent);
+}
+
+.repo:hover {
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    transform: translateX(1px);
+    text-decoration: none;
+}
+
+.repoIcon {
+    color: var(--primary);
+    font-size: 1em;
+    opacity: 0.85;
+    display: inline-block;
+    transition:
+        opacity 200ms ease,
+        transform 200ms ease;
+}
+
+.repo:hover .repoIcon {
+    opacity: 1;
+    transform: rotate(-8deg);
+}
+
+.messageRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 0;
+    animation: messageIn 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 300ms backwards;
+}
+
+.headerRow {
+    display: flex;
+    align-items: baseline;
+    gap: 1em;
+    min-width: 0;
+    /* No space-between — label and time sit flush next to each other */
+}
+
+.lastCommitLabel {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    opacity: 0.75;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.time {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.72em;
+    color: var(--base-300);
+    opacity: 0.55;
+    cursor: help;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 200ms ease;
+    /* Position at the baseline of the message */
+    align-self: baseline;
+}
+
+.time:hover {
+    opacity: 0.9;
+}
+
+/* ── Small inline avatar (next to author name) ── */
+
+.avatarLinkSmall {
+    display: block;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    text-decoration: none;
+    flex-shrink: 0;
+    animation: avatarInSmall 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 100ms backwards;
+    position: relative;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatarLinkSmall:hover {
+    transform: scale(1.08);
+}
+
+@keyframes avatarInSmall {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* The inner avatar visual — used by GitHubAvatar client component.
+   Fills its parent (.avatarLinkSmall at 36px). */
+.avatar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--primary-content);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.95em;
+    font-weight: 700;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 1.5px color-mix(in srgb, var(--background) 70%, transparent),
+        0 2px 8px color-mix(in srgb, var(--primary) 25%, transparent),
+        inset 0 0 0 1px color-mix(in srgb, var(--base-100) 15%, transparent);
+    transition: box-shadow 200ms ease;
+}
+
+.avatarLinkSmall:hover .avatar {
+    box-shadow:
+        0 0 0 1.5px var(--primary),
+        0 4px 12px color-mix(in srgb, var(--primary) 50%, transparent),
+        inset 0 0 0 1px color-mix(in srgb, var(--base-100) 25%, transparent);
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatarFallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.avatarFallbackShow {
+    opacity: 1;
+}
+
+/* ── Secondary: identity (author) ─────────────── */
+
+.identityBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* Tight grouping between name and handle */
+    animation: identityIn 500ms ease 200ms backwards;
+}
+
+@keyframes identityIn {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.identityRow {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.92em;
+    line-height: 1.4;
+}
+
+.identityName {
+    color: var(--base-100);
+    font-weight: 700;
+    font-size: 1em;
+    letter-spacing: -0.005em;
+    /* Subtle text shadow for depth */
+    text-shadow: 0 0 20px color-mix(in srgb, var(--base-100) 20%, transparent);
+}
+
+.identityHandle {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0.85;
+    transition: opacity 150ms ease;
+}
+
+.identityHandle:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.staff {
+    color: #ffd33d;
+    margin-left: 2px;
+    font-size: 0.9em;
+    filter: drop-shadow(0 0 4px rgba(255, 211, 61, 0.5));
+}
+
+.committerInline {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 5px;
+    color: var(--base-300);
+    opacity: 0.75;
+    font-size: 0.88em;
+    margin-left: 4px;
+    padding-left: 10px;
+    border-left: 1px solid color-mix(in srgb, var(--neutral) 40%, transparent);
+}
+
+.committerSep {
+    color: var(--secondary);
+    opacity: 0.7;
+    font-size: 0.95em;
+}
+
+.committerName {
+    color: var(--base-200);
+    font-weight: 500;
+}
+
+/* ── PRIMARY: commit message (the hero) ────────── */
+
+.message {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--base-100);
+    line-height: 1.3;
+    word-break: break-word;
+    transition: color 150ms ease;
+    /* Slight upward offset so it aligns with the meta line baseline */
+    animation: messageIn 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 300ms backwards;
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateX(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.message:hover {
+    color: var(--primary);
+}
+
+.messageText {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 1.55em;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: var(--base-100);
+}
+
+/* Body (subordinate to title) */
+.body {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.82em;
+    color: var(--body-color);
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+    opacity: 0.8;
+    animation: bodyIn 500ms ease 500ms backwards;
+}
+
+@keyframes bodyIn {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+/* ── Quaternary: commit chain (compact list) ──── */
+
+.branch {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    animation: branchIn 600ms ease 400ms backwards;
+    align-self: flex-start;
+    min-width: 0;
+}
+
+@keyframes branchIn {
+    from {
+        opacity: 0;
+        transform: translateX(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.branchRow {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    /* More gap so the stats/label has clear breathing room from the SHA */
+    gap: 16px;
+    transition: transform 200ms ease;
+    min-width: 0;
+}
+
+.branchRow:hover {
+    transform: translateX(2px);
+}
+
+.branchSha {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 1em;
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 200ms ease;
+    opacity: 0.7;
+    padding: 2px 4px;
+    display: inline-block;
+}
+
+.branchSha[data-current='true'] {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.1em;
+    /* No background, no ring — just a bolder, bigger version of the same flat style */
+    opacity: 1;
+}
+
+.branchSha:hover {
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 1;
+    text-shadow: 0 0 8px color-mix(in srgb, var(--accent) 40%, transparent);
+    transition:
+        color 200ms ease,
+        text-shadow 200ms ease;
+}
+
+/* Inline +/- stats on each branch row (Doto font for the numbers) */
+.branchStats {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    font-variant-numeric: tabular-nums;
+    animation: branchStatIn 400ms ease 600ms backwards;
+}
+
+@keyframes branchStatIn {
+    from {
+        opacity: 0;
+        transform: translateX(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.branchStatDoto {
+    font-family: 'Doto', sans-serif;
+    font-size: 0.95em;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    transition: transform 200ms ease;
+}
+
+.branchRow:hover .branchStatDoto {
+    transform: scale(1.05);
+}
+
+.branchStatPos {
+    color: var(--success);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--success) 25%, transparent);
+}
+
+.branchStatNeg {
+    color: var(--error);
+    text-shadow: 0 0 8px color-mix(in srgb, var(--error) 25%, transparent);
+}
+
+/* Label for parent rows (e.g. "parent", "parent 1", "parent 2") */
+.branchLabel {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.82em;
+    color: var(--base-300);
+    opacity: 0.6;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 200ms ease;
+    align-self: center;
+    white-space: nowrap;
+}
+
+.branchRow:hover .branchLabel {
+    color: var(--secondary);
+    opacity: 1;
+}
+
+/* ── Quaternary: stats row removed (stats now inline in branch graph) ─ */
+
+/* ── Files block (collapsible) ─────────────── */
+
+.filesBlock {
+    border: 1px solid color-mix(in srgb, var(--neutral) 50%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--base-100) 3%, transparent);
+    overflow: hidden;
+}
+
+.filesBlock[open] {
+    border-color: color-mix(in srgb, var(--neutral) 80%, transparent);
+}
+
+.filesSummary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 0.8em;
+    color: var(--base-200);
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.filesSummary::-webkit-details-marker {
+    display: none;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid var(--base-300);
+    transition: transform 150ms ease;
+    margin-right: 4px;
+}
+
+.filesBlock[open] .caret {
+    transform: rotate(180deg);
+}
+
+.filesSummaryStats {
+    margin-left: auto;
+    display: inline-flex;
+    gap: 8px;
+}
+
+.fileList {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0 8px;
+    border-top: 1px solid color-mix(in srgb, var(--neutral) 50%, transparent);
+}
+
+.fileItem {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 12px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.78em;
+}
+
+.fileItem:hover {
+    background: color-mix(in srgb, var(--base-100) 4%, transparent);
+}
+
+.fileStatus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--base-100);
+    flex-shrink: 0;
+}
+
+.status_added {
+    background: color-mix(in srgb, var(--success) 30%, transparent);
+    color: var(--success);
+}
+
+.status_removed {
+    background: color-mix(in srgb, var(--error) 30%, transparent);
+    color: var(--error);
+}
+
+.status_modified {
+    background: color-mix(in srgb, var(--primary) 30%, transparent);
+    color: var(--primary);
+}
+
+.status_renamed {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+}
+
+.status_copied,
+.status_changed {
+    background: color-mix(in srgb, var(--secondary) 30%, transparent);
+    color: var(--secondary);
+}
+
+.status_unchanged {
+    background: color-mix(in srgb, var(--base-300) 30%, transparent);
+    color: var(--base-300);
+}
+
+.fileName {
+    color: var(--base-200);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.fileName:hover {
+    color: var(--primary);
+}
+
+.fileOld {
+    color: var(--base-300);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.fileArrow {
+    color: var(--base-300);
+    opacity: 0.6;
+}
+
+.fileStats {
+    display: inline-flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.fileMore {
+    padding: 4px 12px 4px 44px;
+    font-size: 0.78em;
+    color: var(--base-300);
+    opacity: 0.7;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+}
+
+/* ── Graph resize polish (when period changes) ── */
+
+.graph {
+    /* The `key={period}` on the section re-mounts on change, triggering
+       this fade-in. Combined with the staggered cell animation below,
+       the height change feels intentional rather than jarring. */
+    animation: graphIn 450ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes graphIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── Card footer (dead — kept for backwards compat) ─ */
+
+.stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.85em;
+}
+
+.total {
+    color: var(--base-300);
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.additions {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.deletions {
+    color: var(--error);
+    font-weight: 600;
+}
+
+/* ── Fallback ──────────────────────────────── */
+
+.fallback {
+    font-size: 1em;
+    color: var(--body-color);
+    line-height: 1.6;
+}
+
+.fallback a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.fallback a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .heading {
+        font-size: calc(var(--heading-size) * 0.75);
+    }
+
+    .card {
+        padding: 18px 18px;
+        gap: 12px;
+    }
+
+    .message {
+        font-size: 1.1em;
+    }
+
+    .fileItem {
+        font-size: 0.72em;
+    }
+}
+
+/* ── Contribution graph ────────────────────── */
+
+.graph {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 22px;
+}
+
+.graphHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.graphTitleBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.graphTitle {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--base-100);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.graphSubtitle {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.75em;
+    color: var(--base-300);
+    opacity: 0.7;
+}
+
+.graphStats {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    white-space: nowrap;
+}
+
+.statValue {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.1;
+}
+
+.statLabel {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.7em;
+    color: var(--base-300);
+    opacity: 0.8;
+    text-transform: lowercase;
+    white-space: nowrap;
+}
+
+.graphBody {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+    width: 100%;
+}
+
+.dayLabels {
+    width: 22px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.6em;
+    color: var(--base-300);
+    opacity: 0.6;
+}
+
+.dayLabels span {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.monthLabelsRow {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+}
+
+.dayLabelsSpacer {
+    width: 22px;
+    flex-shrink: 0;
+}
+
+.monthLabels {
+    flex: 1;
+    display: flex;
+    gap: 2px;
+    height: 14px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.65em;
+    color: var(--base-300);
+    opacity: 0.7;
+    align-items: flex-end;
+    padding-left: 0;
+}
+
+.monthLabel {
+    flex: 1;
+    min-width: 0;
+    line-height: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    text-align: left;
+}
+
+.weeks {
+    flex: 1;
+    display: flex;
+    gap: 2px;
+    /* Allow horizontal scroll if the fixed cells overflow on narrow screens */
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Center the graph if there's extra horizontal space */
+    justify-content: center;
+    /* Keep a consistent row height regardless of tenure — uses the same cell-size variable */
+    min-height: calc(7 * var(--cell-size, 18px) + 6 * 2px);
+    align-items: flex-start;
+    scrollbar-width: none; /* Firefox */
+}
+
+.weeks::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+.week {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    /* Cell size varies by tenure: 3M=22px, 6M=18px, 12M=14px */
+    width: var(--cell-size, 18px);
+    flex-shrink: 0;
+}
+
+.weekNewMonth {
+    margin-left: 6px;
+}
+
+.day {
+    /* Cell size varies by tenure via --cell-size CSS variable */
+    width: var(--cell-size, 18px);
+    height: var(--cell-size, 18px);
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--primary) 5%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--base-100) 4%, transparent);
+    transition:
+        transform 120ms ease,
+        box-shadow 120ms ease;
+    cursor: default;
+}
+
+.day:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 1.5px var(--primary);
+    z-index: 2;
+    position: relative;
+}
+
+.dayOutOfRange {
+    visibility: hidden;
+}
+
+.day[data-level='0'] {
+    background: color-mix(in srgb, var(--base-100) 2.5%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--base-300) 14%, transparent);
+}
+
+.day[data-level='1'] {
+    background: color-mix(in srgb, var(--primary) 22%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.day[data-level='2'] {
+    background: color-mix(in srgb, var(--primary) 48%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+.day[data-level='3'] {
+    background: color-mix(in srgb, var(--primary) 72%, transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+
+.day[data-level='4'] {
+    background: var(--primary);
+    box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--primary-content) 20%, transparent),
+        0 0 6px color-mix(in srgb, var(--primary) 45%, transparent);
+}
+
+.graphLegend {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    align-self: flex-end;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.65em;
+    color: var(--base-300);
+    opacity: 0.7;
+}
+
+.legendLabel {
+    margin: 0 4px;
+}
+
+.legendCell {
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    cursor: default;
+}
+
+.legendCell:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* ── Graph tooltip ────────────────────────── */
+
+/* ── Graph tooltip ────────────────────────── */
+
+.tooltip {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    padding: 8px 14px;
+    background: color-mix(in srgb, var(--background) 88%, transparent);
+    border: 1px solid color-mix(in srgb, var(--neutral) 70%, transparent);
+    border-radius: 6px;
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    color: var(--base-100);
+    box-shadow:
+        0 1px 0 0 color-mix(in srgb, var(--base-100) 8%, transparent) inset,
+        0 6px 24px rgba(0, 0, 0, 0.35),
+        0 0 0 1px color-mix(in srgb, var(--primary) 8%, transparent);
+    transform: translate(-50%, calc(-100% - 6px));
+    white-space: nowrap;
+    animation: ttIn 140ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+/* Arrow/caret pointing down to the cell */
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid color-mix(in srgb, var(--background) 88%, transparent);
+    filter: drop-shadow(0 1px 0 color-mix(in srgb, var(--neutral) 70%, transparent));
+}
+
+@keyframes ttIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, calc(-100% - 2px)) scale(0.94);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, calc(-100% - 6px)) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tooltip {
+        animation: none;
+    }
+}
+
+.tooltipDate {
+    font-family: 'Doto', sans-serif;
+    font-size: 0.85em;
+    font-weight: 600;
+    color: var(--base-100);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    line-height: 1;
+}
+
+.tooltipCountPositive {
+    font-family: 'Doto', sans-serif;
+    color: var(--success);
+    font-weight: 700;
+    font-size: 1.5em;
+    line-height: 1;
+}
+
+.tooltipCountZero {
+    font-family: 'Doto', sans-serif;
+    color: var(--secondary);
+    font-weight: 700;
+    font-size: 1.5em;
+    line-height: 1;
+    opacity: 0.8;
+}
+
+.tooltipLabel {
+    font-family: 'Doto', sans-serif;
+    color: var(--base-200);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-size: 0.85em;
+    opacity: 0.8;
+}
+
+.tooltipStats {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 3px;
+    font-family: 'Doto', sans-serif;
+    font-size: 0.95em;
+    padding-left: 4px;
+    border-left: 1px solid color-mix(in srgb, var(--neutral) 50%, transparent);
+    margin-left: 2px;
+}
+
+.tooltipPositive {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.tooltipNegative {
+    color: var(--error);
+    font-weight: 700;
+}
+
+.tooltipDate {
+    font-family: 'Doto', sans-serif;
+    font-size: 0.95em;
+    font-weight: 700;
+    color: var(--base-100);
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+}
+
+.tooltipCount {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    font-size: 1.2em;
+    font-weight: 700;
+    line-height: 1;
+    flex-wrap: wrap;
+}
+
+.tooltipCountNumber {
+    font-family: 'Doto', sans-serif;
+    color: var(--base-100);
+    font-weight: 700;
+}
+
+.tooltipLabel {
+    font-family: 'Doto', sans-serif;
+    color: var(--base-200);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.tooltipStats {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 2px;
+    font-family: 'Doto', sans-serif;
+}
+
+.tooltipPositive {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.tooltipNegative {
+    color: var(--error);
+    font-weight: 700;
+}
+
+.graphYear {
+    font-family: 'Doto', sans-serif;
+    font-size: 3em;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.graphHeaderRight {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.graphFallback {
+    font-size: 0.9em;
+    color: var(--body-color);
+    line-height: 1.6;
+    padding: 14px 18px;
+    border: 1px dashed color-mix(in srgb, var(--neutral) 60%, transparent);
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--background) 30%, transparent);
+}
+
+.graphFallback a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.graphFallback a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+    .graph {
+        padding: 16px 14px;
+        gap: 12px;
+    }
+
+    .dayLabels,
+    .dayLabelsSpacer {
+        display: none;
+    }
+
+    .graphBody,
+    .monthLabelsRow {
+        gap: 0;
+    }
+
+    .weeks {
+        gap: 1px;
+    }
+
+    .week {
+        gap: 1px;
+    }
+
+    .weekNewMonth {
+        margin-left: 3px;
+    }
+
+    .monthLabels {
+        gap: 1px;
+        font-size: 0.55em;
+    }
+
+    .graphStats {
+        gap: 10px;
+    }
+
+    .statLabel {
+        font-size: 0.75em;
+    }
+}
+
+/* ── Snap fix + new graph features ────────── */
+
+.graph {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    /* Allow the graph to grow naturally without breaking the outer page snap.
+       The outer .page is exactly 100vh, so the snap point always aligns. */
+    min-height: 0;
+}
+
+.graphTopRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Period toggle (3M / 6M / 1Y) — sits at the top */
+.periodToggle {
+    display: inline-flex;
+    gap: 2px;
+    padding: 2px;
+    background: color-mix(in srgb, var(--base-100) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--neutral) 50%, transparent);
+    border-radius: 6px;
+}
+
+.periodOption {
+    border: none;
+    background: transparent;
+    color: var(--base-300);
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.72em;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition:
+        color 150ms ease,
+        background 150ms ease;
+}
+
+.periodOption:hover {
+    color: var(--base-100);
+}
+
+.periodActive {
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* Period comparison badge */
+.comparison {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.7em;
+    font-weight: 600;
+    display: inline-block;
+    width: max-content;
+}
+
+.comparisonUp {
+    color: var(--success);
+}
+
+.comparisonDown {
+    color: var(--error);
+}
+
+/* Today marker */
+.today {
+    box-shadow:
+        0 0 0 1.5px var(--base-100),
+        0 0 8px color-mix(in srgb, var(--base-100) 40%, transparent);
+    z-index: 1;
+    position: relative;
+}
+
+/* Weekend differentiation (slightly muted when empty) */
+.weekend[data-level='0'] {
+    background: color-mix(in srgb, var(--base-100) 2%, transparent);
+    border-color: color-mix(in srgb, var(--base-300) 8%, transparent);
+}
+
+/* Hover ghost — dim all cells except the hovered column */
+.weeksDimmed .day {
+    opacity: 0.25;
+    transition: opacity 150ms ease;
+}
+
+.weeksDimmed .weekHighlighted .day {
+    opacity: 1;
+}
+
+/* Cell entrance animation (respects reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+    .day {
+        animation: cellEnter 350ms ease-out backwards;
+        animation-delay: var(--cell-delay, 0ms);
+    }
+}
+
+@keyframes cellEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.4);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Loading skeleton */
+.weeksLoading .day {
+    animation: skeletonPulse 1.4s ease-in-out infinite;
+    animation-delay: calc(var(--cell-delay, 0ms) + 200ms);
+}
+
+@keyframes skeletonPulse {
+    0%,
+    100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.55;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .weeksLoading .day {
+        animation: none;
+        opacity: 0.4;
+    }
+}
+
+/* Repo breakdown */
+.breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.breakdownBar {
+    display: flex;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--base-100) 5%, transparent);
+    border: 1px solid color-mix(in srgb, var(--neutral) 40%, transparent);
+}
+
+.breakdownSegment {
+    height: 100%;
+    transition: filter 150ms ease;
+    cursor: default;
+}
+
+.breakdownSegment:hover {
+    filter: brightness(1.2);
+}
+
+.breakdownLegend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 14px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.68em;
+    color: var(--base-300);
+    opacity: 0.85;
+}
+
+.breakdownItem {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.breakdownDot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+}
+
+/* Commit drill-down panel */
+.commitPanel {
+    padding: 10px 12px;
+    border: 1px solid var(--neutral);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--background) 50%, transparent);
+    animation: panelIn 200ms ease;
+}
+
+@keyframes panelIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .commitPanel {
+        animation: none;
+    }
+}
+
+.commitPanelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.commitPanelTitle {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.78em;
+    font-weight: 600;
+    color: var(--base-200);
+}
+
+.commitPanelClose {
+    border: none;
+    background: none;
+    color: var(--base-300);
+    font-size: 1.3em;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: color 150ms ease;
+}
+
+.commitPanelClose:hover {
+    color: var(--base-100);
+}
+
+.commitEmpty {
+    color: var(--base-300);
+    font-size: 0.82em;
+    margin: 0;
+    font-style: italic;
+}
+
+.commitList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.commitItem {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 4px 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--neutral) 30%, transparent);
+}
+
+.commitItem:last-child {
+    border-bottom: none;
+}
+
+.commitMessage {
+    color: var(--base-100);
+    text-decoration: none;
+    font-size: 0.85em;
+    line-height: 1.4;
+    transition: color 150ms ease;
+}
+
+.commitMessage:hover {
+    color: var(--primary);
+}
+
+.commitRepo {
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 0.68em;
+    color: var(--base-300);
+    opacity: 0.7;
+}
+
+/* Tooltip commit list (inside the hover tooltip) */
+.tooltipCommits {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 6px 0 0;
+    border-top: 1px solid color-mix(in srgb, var(--neutral) 50%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.tooltipCommitItem {
+    font-family: 'Doto', sans-serif;
+    font-size: 0.82em;
+    color: var(--base-200);
+    line-height: 1.3;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ── Print styles ─────────────────────────── */
+
+@media print {
+    .graph {
+        break-inside: avoid;
+    }
+
+    .periodToggle,
+    .commitPanel,
+    .tooltip,
+    .breakdown {
+        display: none !important;
+    }
+
+    .day,
+    .weekend,
+    .today,
+    .graphLegend {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .day[data-level='0'] {
+        background: #f5f5f5;
+        border-color: #d0d0d0;
+    }
+    .day[data-level='1'] {
+        background: #b0b0b0;
+    }
+    .day[data-level='2'] {
+        background: #707070;
+    }
+    .day[data-level='3'] {
+        background: #383838;
+    }
+    .day[data-level='4'] {
+        background: #000;
+    }
+}

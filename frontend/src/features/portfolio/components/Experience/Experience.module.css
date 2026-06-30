@@ -47,17 +47,25 @@
 }
 
 .line--tail {
+    background-color: transparent;
     background-image: repeating-linear-gradient(
         to bottom,
-        transparent 0,
-        transparent 12px,
-        black 12px,
-        black 24px
+        var(--primary) 0,
+        var(--primary) 6px,
+        transparent 6px,
+        transparent 12px
     );
     background-size: 100% 120px;
     background-position: left bottom;
     background-repeat: no-repeat;
-    background-blend-mode: destination-out;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+    mask-image: linear-gradient(to bottom, black, transparent);
+    -webkit-mask-size: 100% 120px;
+    mask-size: 100% 120px;
+    -webkit-mask-position: left bottom;
+    mask-position: left bottom;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
 }
 
 .company {

@@ -17,5 +17,5 @@ const style: React.CSSProperties = {
 }
 
 export const VisuallyHidden = memo(function VisuallyHidden({ children }: VisuallyHiddenProps) {
-    return <span style={style}>{children}</span>
+    return <div style={style}>{children}</div>
 })

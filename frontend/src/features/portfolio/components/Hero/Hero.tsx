@@ -269,9 +269,9 @@ export default function Hero() {
     } = useTooltip()
 
     const handleMouseEnter = useCallback(
-        (e: React.MouseEvent, link: { username: string; platform: string; color: string }) => {
+        (e: React.MouseEvent, link: { username: string; platform: string; color: string; icon: string }) => {
             showTooltip(
-                { username: link.username, platform: link.platform, color: link.color },
+                { username: link.username, platform: link.platform, color: link.color, icon: link.icon },
                 e.clientX,
                 e.clientY,
             )

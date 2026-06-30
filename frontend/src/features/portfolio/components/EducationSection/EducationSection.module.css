@@ -31,7 +31,7 @@
 .row {
     display: flex;
     gap: 1.5em;
-    align-items: center;
+    align-items: flex-starts;
     padding: 1.5em 1em;
     border-radius: 2px;
     transition: background 0.25s;

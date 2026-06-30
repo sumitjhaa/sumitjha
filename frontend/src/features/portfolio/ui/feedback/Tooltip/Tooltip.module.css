@@ -5,26 +5,29 @@
     pointer-events: none;
     z-index: 9999;
     max-width: 270px;
-    padding: 6px 14px;
-    background: color-mix(in srgb, var(--background) 90%, transparent);
-    border-radius: 10px;
-    border: 1px solid var(--tooltip-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    padding: 10px 16px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--tooltip-border) 20%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    opacity: 0.9;
 }
 
 .username {
-    font-size: 14px;
+    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-size: 1rem;
     font-weight: 600;
     display: block;
-    line-height: 1.4;
-    background: linear-gradient(transparent 65%, var(--tooltip-highlight) 65%);
+    line-height: 1.5;
+    color: color-mix(in srgb, var(--tooltip-border) 70%, var(--base-100));
 }
 
 .platform {
-    font-size: 0.7em;
-    font-weight: 400;
+    font-family: 'Doto', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
     color: var(--base-300);
     display: block;
-    line-height: 1.4;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
 }

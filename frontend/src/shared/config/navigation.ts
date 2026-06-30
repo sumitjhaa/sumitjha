@@ -19,6 +19,7 @@ const PROJECT_SECTIONS: SectionConfig[] = PROJECTS.toReversed().filter((p) => p.
 }))
 
 const END_SECTIONS: SectionConfig[] = [
+    { id: 'commitment', label: 'Very Committed', level: 0 },
     { id: 'education', label: 'Education', level: 0 },
     { id: 'shoutouts', label: 'Shoutouts', level: 0 },
     { id: 'last-page', label: 'Epilogue', level: 0 },

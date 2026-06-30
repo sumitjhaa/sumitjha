@@ -1,33 +1,73 @@
 .tooltip {
+    --tt-color: #888;
+    --tt-highlight: rgba(136, 136, 136, 0.25);
+    --tt-name-size: 1.3em;
+    --tt-padding: 8px 14px;
+    --tt-gap: 8px;
+
     position: fixed;
-    left: var(--tooltip-x);
-    top: var(--tooltip-y);
-    pointer-events: none;
+    left: var(--tt-x, 0);
+    top: var(--tt-y, 0);
     z-index: 9999;
+    pointer-events: none;
     max-width: 240px;
-    padding: var(--tooltip-padding, 8px 14px);
-    background: color-mix(in srgb, var(--background) 90%, transparent);
+    padding: var(--tt-padding);
+    border: 1px solid color-mix(in srgb, var(--tt-color) 30%, transparent);
     border-radius: 10px;
-    border: 1px solid var(--tooltip-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: color-mix(in srgb, var(--background) 80%, transparent);
+    backdrop-filter: blur(80px) saturate(200%);
+    -webkit-backdrop-filter: blur(80px) saturate(200%);
+    box-shadow:
+        inset 0 1px 0 0 color-mix(in srgb, var(--tt-color) 35%, transparent),
+        inset 0 0 0 1px color-mix(in srgb, var(--tt-color) 20%, transparent),
+        0 8px 32px rgba(0, 0, 0, 0.35);
+    color: var(--base-100);
+    opacity: 0;
+    transform: scale(0.96);
+    transform-origin: top left;
+    transition:
+        opacity 120ms ease,
+        transform 120ms ease;
+    will-change: transform, opacity;
+}
+
+.tooltip[data-placed='true'] {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.tooltip[data-flip-x='true'] {
+    transform-origin: top right;
+}
+
+.tooltip[data-flip-y='true'] {
+    transform-origin: bottom left;
+}
+
+.tooltip[data-flip-x='true'][data-flip-y='true'] {
+    transform-origin: bottom right;
 }
 
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--tooltip-gap, 8px);
+    gap: var(--tt-gap);
 }
 
 .name {
-    font-size: 18px;
-    font-weight: 600;
+    /*font-family: 'Doto', sans-serif;*/
+    font-size: var(--tt-name-size);
+    font-weight: 500;
     line-height: 1.5;
+    letter-spacing: 0.05em;
+    text-transform: capitalize;
+    /*color: var(--tt-color);*/
+    /*text-shadow: 1px 0px var(--base-100);*/
 }
 
-.nameInner {
-    background: linear-gradient(transparent 65%, var(--tooltip-highlight) 65%);
+.nameUnderline {
+    background-image: linear-gradient(transparent 65%, var(--tt-highlight) 65%);
 }
 
 .badge {
@@ -50,8 +90,7 @@
     font-size: 0.85em;
     font-weight: 400;
     color: var(--base-200);
-    display: block;
     line-height: 1.7;
-    margin-top: 6px;
+    margin: 6px 0 0;
     max-width: 220px;
 }

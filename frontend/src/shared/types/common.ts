@@ -2,6 +2,7 @@ export interface TooltipState {
     username: string
     platform: string
     color: string
+    icon?: string
     description?: string
 }
 

@@ -9,6 +9,7 @@ import { ThankYouSection } from '@/features/portfolio/components/ThankYouSection
 import { ShoutoutsSection } from '@/features/portfolio/components/ShoutoutsSection'
 import { FooterSection } from '@/features/portfolio/components/FooterSection'
 import { EducationSection } from '@/features/portfolio/components/EducationSection'
+import { CommitmentSection } from '@/features/portfolio/components/CommitmentSection'
 import {
     Section,
     ProgressBar,
@@ -128,6 +129,7 @@ export default function Home() {
                     </Section>
                 ))}
 
+            <CommitmentSection />
             <EducationSection />
             <ShoutoutsSection />
             <LastSection />
