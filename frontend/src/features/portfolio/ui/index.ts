@@ -21,6 +21,7 @@ export { default as Avatar } from './media/Avatar/Avatar'
 // layout
 export { default as Section } from './layout/Section/Section'
 export { FadeInSection } from './layout/FadeInSection/FadeInSection'
+export { LoopedPaging } from './layout/LoopedPaging/LoopedPaging'
 
 // common
 export { default as ArrowIcon } from './common/ArrowIcon/ArrowIcon'

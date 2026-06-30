@@ -11,10 +11,10 @@ export function DotNavigation() {
     const navRef = useRef<HTMLDivElement>(null)
 
     const scrollTo = useCallback(
-        (index: number) => {
+        (index: number, instant?: boolean) => {
             const el = document.getElementById(sections[index].id)
             if (el) {
-                el.scrollIntoView({ behavior: prefersReducedMotion ? 'instant' : 'smooth' })
+                el.scrollIntoView({ behavior: instant || prefersReducedMotion ? 'instant' : 'smooth' })
             }
         },
         [sections, prefersReducedMotion],
@@ -31,8 +31,9 @@ export function DotNavigation() {
             if (dir === 0) return
             e.preventDefault()
             const active = sections.findIndex((s) => s.isActive)
-            const next = Math.max(0, Math.min(active + dir, sections.length - 1))
-            scrollTo(next)
+            const next = ((active + dir) % sections.length + sections.length) % sections.length
+            const wrapped = dir === 1 ? next <= active : next >= active
+            scrollTo(next, wrapped)
             const btn = navRef.current?.querySelector<HTMLButtonElement>(`[data-index="${next}"]`)
             btn?.focus()
         },

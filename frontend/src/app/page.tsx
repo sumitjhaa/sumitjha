@@ -17,6 +17,7 @@ import {
     KeyboardShortcuts,
     ThemeToggle,
     AnalogClock,
+    LoopedPaging,
 } from '@/features/portfolio/ui'
 import { SKILL_CATEGORIES } from '@/features/portfolio/data/skills'
 import { PROJECTS } from '@/features/portfolio/data/projects'
@@ -131,6 +132,7 @@ export default function Home() {
             <LastSection />
             <ThankYouSection />
             <FooterSection />
+            <LoopedPaging />
             <ProgressBar />
             <ScrollToTop />
             <DotNavigation />
