@@ -16,6 +16,7 @@ import {
     DotNavigation,
     KeyboardShortcuts,
     ThemeToggle,
+    AnalogClock,
 } from '@/features/portfolio/ui'
 import { SKILL_CATEGORIES } from '@/features/portfolio/data/skills'
 import { PROJECTS } from '@/features/portfolio/data/projects'
@@ -135,6 +136,7 @@ export default function Home() {
             <DotNavigation />
             <KeyboardShortcuts />
             <ThemeToggle />
+            <AnalogClock />
         </main>
     )
 }

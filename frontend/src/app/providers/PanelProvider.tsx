@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useCallback, useMemo, useReducer, type ReactNode } from 'react'
 
-type PanelId = 'theme' | 'keyboard' | null
+type PanelId = 'theme' | 'keyboard' | 'clock' | null
 
 interface PanelState {
     active: PanelId

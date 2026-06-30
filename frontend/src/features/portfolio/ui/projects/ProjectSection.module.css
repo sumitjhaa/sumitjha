@@ -122,13 +122,16 @@
 }
 
 .linkTop {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 10px 20px;
-    background: var(--primary);
-    color: var(--primary-content);
-    font-size: 0.9rem;
+    background: var(--secondary);
+    color: var(--base-100);
+    font-size: 0.85rem;
     border-radius: 7mm;
     outline: 2px solid var(--neutral);
     transition: 0.2s;
@@ -159,7 +162,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: var(--primary-focus);
+    background: var(--secondary-focus);
     top: 10px;
     left: 0;
     border-radius: 7mm;
@@ -172,7 +175,7 @@
     content: '';
     width: calc(100% + 2px);
     height: 100%;
-    background: var(--primary-focus);
+    background: var(--secondary-focus);
     top: 14px;
     left: -1px;
     border-radius: 7mm;
@@ -181,8 +184,7 @@
 }
 
 .linkIcon {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     flex-shrink: 0;
-    filter: brightness(0) invert(1);
 }

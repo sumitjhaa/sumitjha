@@ -1,7 +1,9 @@
 'use client'
 
-import { useCallback } from 'react'
+import { useCallback, useRef, useState, useEffect } from 'react'
 import { useAvatarStick, useTooltip } from '@/shared/hooks'
+import { useTheme } from '@/app/providers/ThemeProvider'
+import { PALETTE_COLORS } from '@/shared/config'
 import { Avatar, ScrollIndicator, Tooltip, SoundButton } from '@/features/portfolio/ui'
 import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
@@ -9,6 +11,29 @@ import styles from './Hero.module.css'
 
 export default function Hero() {
     const isStuck = useAvatarStick()
+    const { theme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => setMounted(true), [])
+    const secAccent = PALETTE_COLORS[theme][4]
+    const ctaColor = mounted ? `color-mix(in srgb, ${secAccent} 30%, var(--secondary-content))` : undefined
+    const headingRef = useRef<HTMLHeadingElement>(null)
+
+    const onHeadingMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        const el = headingRef.current
+        if (!el) return
+        const rect = e.currentTarget.getBoundingClientRect()
+        const cx = (e.clientX - rect.left) / rect.width - 0.5
+        const cy = (e.clientY - rect.top) / rect.height - 0.5
+        el.style.transform = `translate(${cx * 12}px, ${cy * 12}px) scale(1.03)`
+        el.style.transition = 'transform 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }, [])
+
+    const onHeadingLeave = useCallback(() => {
+        const el = headingRef.current
+        if (!el) return
+        el.style.transform = 'translate(0, 0) scale(1)'
+        el.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+    }, [])
     const {
         data: tooltip,
         pos,
@@ -44,7 +69,9 @@ export default function Hero() {
             <Avatar isStuck={isStuck} />
 
             <header className={styles.header}>
-                <h1>{SITE_CONFIG.name}</h1>
+                <div onMouseMove={onHeadingMove} onMouseLeave={onHeadingLeave} className={styles.headingWrapper}>
+                    <h1 ref={headingRef}>{SITE_CONFIG.name}</h1>
+                </div>
                 <p>
                     I&apos;m a Detail-obsessed *software Developer* from{' '}
                     <LinkHighlight
@@ -99,7 +126,7 @@ export default function Hero() {
                     className="sparkclick"
                     onClick={() => window.open(`mailto:${SITE_CONFIG.email}`, '_blank')}
                 >
-                    <div className={styles.ctaTop}>Let&apos;s talk!</div>
+                    <div className={styles.ctaTop} style={ctaColor ? { color: ctaColor } : undefined}>Let&apos;s talk!</div>
                     <div className={styles.ctaBottom} />
                 </SoundButton>
             </div>

@@ -1,7 +1,7 @@
 'use client'
 
-import { useSyncExternalStore, memo, useCallback } from 'react'
-import { cn } from '@/shared/utils'
+import { useState, useEffect, memo, useCallback } from 'react'
+import { cn, playSound } from '@/shared/utils'
 import { useTheme } from '@/app/providers/ThemeProvider'
 import { GlassButton } from '@/shared/components/ui'
 import { usePanel } from '@/app/providers/PanelProvider'
@@ -17,13 +17,14 @@ export const ThemeToggle = memo(function ThemeToggle() {
     const { theme, setTheme } = useTheme()
     const { isOpen, toggle, close } = usePanel()
     const open = isOpen('theme')
-    const isClient = useSyncExternalStore(
-        () => () => {},
-        () => true,
-        () => false,
-    )
+    const [isClient, setIsClient] = useState(false)
 
-    const togglePanel = useCallback(() => toggle('theme'), [toggle])
+    useEffect(() => setIsClient(true), [])
+
+    const togglePanel = useCallback(() => {
+        playSound('/sounds/laptop-touchpad.mp3')
+        toggle('theme')
+    }, [toggle])
 
     const selectTheme = useCallback(
         (t: Theme) => {

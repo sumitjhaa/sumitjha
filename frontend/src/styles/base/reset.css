@@ -20,6 +20,28 @@ a {
     text-decoration: none;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-focus);
+}
+
+* {
+    scrollbar-color: var(--primary) var(--background);
+    scrollbar-width: thin;
+}
+
 code,
 pre,
 kbd {

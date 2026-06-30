@@ -12,18 +12,23 @@
     scroll-snap-stop: always;
 }
 
-.header h1 {
-    font-size: var(--heading-size);
+.headingWrapper {
+    display: inline-block;
+}
+
+.headingWrapper h1 {
+    font-size: 72px;
     line-height: var(--heading-line-height);
     -webkit-text-stroke-width: var(--heading-stroke-width);
     -webkit-text-stroke-color: currentColor;
     -webkit-text-fill-color: transparent;
     width: max-content;
-    margin: 20px 0 var(--heading-margin);
+    /*margin: 20px 0 var(--heading-margin);*/
+    will-change: transform;
 }
 
 @media (max-width: 640px) {
-    .header h1 {
+    .headingWrapper h1 {
         font-size: calc(var(--heading-size) * 0.75);
     }
 }

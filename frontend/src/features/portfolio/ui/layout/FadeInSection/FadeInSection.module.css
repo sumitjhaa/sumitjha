@@ -1,15 +1,14 @@
 .wrapper {
-    transition:
-        opacity 0.6s ease-out,
-        transform 0.6s ease-out;
+    animation: subtleBlur 0.2s ease-out forwards;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
 }
 
-.hidden {
-    opacity: 0;
-    transform: translateY(24px);
-}
-
-.visible {
-    opacity: 1;
-    transform: translateY(0);
+@keyframes subtleBlur {
+    from {
+        filter: blur(2px);
+    }
+    to {
+        filter: blur(0);
+    }
 }

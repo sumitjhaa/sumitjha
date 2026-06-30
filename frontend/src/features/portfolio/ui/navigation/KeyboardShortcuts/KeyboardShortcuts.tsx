@@ -1,12 +1,11 @@
 'use client'
 
-import { useState, useCallback, useRef, memo } from 'react'
-import { useSyncExternalStore } from 'react'
+import { useState, useCallback, useRef, useEffect, memo } from 'react'
 import { useKeyPress, useSectionNavigation } from '@/shared/hooks'
 import { GlassButton } from '@/shared/components/ui'
 import { usePanel } from '@/app/providers/PanelProvider'
 import { useTheme } from '@/app/providers/ThemeProvider'
-import { scrollToTop, cn } from '@/shared/utils'
+import { scrollToTop, cn, playSound } from '@/shared/utils'
 import { BASE_SHORTCUTS, VIM_SHORTCUTS, PALETTE_COLORS } from '@/shared/config'
 import { VimKeyHandler } from './VimKeyHandler'
 import styles from './KeyboardShortcuts.module.css'
@@ -23,15 +22,16 @@ export const KeyboardShortcuts = memo(function KeyboardShortcuts() {
     const { isOpen: isPanelOpen, toggle: togglePanel, close: closePanel } = usePanel()
     const { last, scrollToSection, scrollToNext, scrollToPrev } = useSectionNavigation()
     const { theme } = useTheme()
-    const isClient = useSyncExternalStore(
-        () => () => {},
-        () => true,
-        () => false,
-    )
+    const [isClient, setIsClient] = useState(false)
+
+    useEffect(() => setIsClient(true), [])
     const accent = PALETTE_COLORS[theme][3]
     const isOpen = isPanelOpen('keyboard')
 
-    const toggle = useCallback(() => togglePanel('keyboard'), [togglePanel])
+    const toggle = useCallback(() => {
+        playSound('/sounds/laptop-touchpad.mp3')
+        togglePanel('keyboard')
+    }, [togglePanel])
     const close = useCallback(() => closePanel(), [closePanel])
 
     const toggleVimMode = useCallback(() => setVimMode((p) => !p), [])

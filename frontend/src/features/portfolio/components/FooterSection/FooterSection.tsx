@@ -48,14 +48,14 @@ function FooterSection() {
                         <rect fill="currentColor" x="5.777" y="19.766" width="5" height="1.4" rx="0.7" ry="0.7"/>
                         <rect fill="currentColor" x="17.378" y="19.766" width="5" height="1.4" rx="0.7" ry="0.7"/>
                     </g>
-                    <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                        <g stroke-width="1.5" style={{ animation: 'zFloat1 3s ease-out 0s infinite normal both' }}>
+                    <g stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" fill="none">
+                        <g strokeWidth="1.5" style={{ animation: 'zFloat1 3s ease-out 0s infinite normal both' }}>
                             <path d="M32 5 L36 5 L32 9 L36 9"/>
                         </g>
-                        <g stroke-width="1.3" style={{ animation: 'zFloat2 3s ease-out 1s infinite normal both' }}>
+                        <g strokeWidth="1.3" style={{ animation: 'zFloat2 3s ease-out 1s infinite normal both' }}>
                             <path d="M34 3 L37 3 L34 6 L37 6"/>
                         </g>
-                        <g stroke-width="1.1" style={{ animation: 'zFloat3 3s ease-out 2s infinite normal both' }}>
+                        <g strokeWidth="1.1" style={{ animation: 'zFloat3 3s ease-out 2s infinite normal both' }}>
                             <path d="M36 1 L38.5 1 L36 3.5 L38.5 3.5"/>
                         </g>
                     </g>

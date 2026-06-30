@@ -41,7 +41,10 @@ const PROJECT_COLORS_FALLBACK = [
 ]
 
 export function getProjectColor(slug: string): string {
-    return PROJECT_COLOR_MAP[slug] || PROJECT_COLORS_FALLBACK[slug.length % PROJECT_COLORS_FALLBACK.length]
+    return (
+        PROJECT_COLOR_MAP[slug] ||
+        PROJECT_COLORS_FALLBACK[slug.length % PROJECT_COLORS_FALLBACK.length]
+    )
 }
 
 export const PROJECTS: Project[] = [
@@ -61,7 +64,7 @@ export const PROJECTS: Project[] = [
         ],
         links: [
             { label: 'GitHub', url: 'https://github.com/sumitjhaa/charcha' },
-            { label: 'Live Demo', url: 'https://charcha-lpvh.onrender.com' },
+            { label: 'Live', url: 'https://charcha-lpvh.onrender.com' },
         ],
         date: '2025-07-15',
         status: 'Completed',
@@ -114,7 +117,7 @@ export const PROJECTS: Project[] = [
         ],
         links: [
             { label: 'GitHub', url: 'https://github.com/sumitjhaa/Tick' },
-            { label: 'Live Demo', url: 'https://tick-eight.vercel.app/' },
+            { label: 'Live', url: 'https://tick-eight.vercel.app/' },
         ],
         date: '2025-02-18',
         status: 'Completed',
@@ -136,7 +139,7 @@ export const PROJECTS: Project[] = [
                 label: 'GitHub',
                 url: 'https://github.com/sumitjhaa/FrontEnd-projects/tree/main/DragDocs',
             },
-            { label: 'Live Demo', url: 'https://dragnote.vercel.app/' },
+            { label: 'Live', url: 'https://dragnote.vercel.app/' },
         ],
         date: '2025-01-05',
         status: 'Completed',
@@ -157,7 +160,7 @@ export const PROJECTS: Project[] = [
                 label: 'GitHub',
                 url: 'https://github.com/sumitjhaa/js-rookies/tree/main/18-TugNotes/v2',
             },
-            { label: 'Live Demo', url: 'https://tugnote.vercel.app/' },
+            { label: 'Live', url: 'https://tugnote.vercel.app/' },
         ],
         date: '2024-11-28',
         status: 'Completed',
@@ -176,7 +179,7 @@ export const PROJECTS: Project[] = [
         ],
         links: [
             { label: 'GitHub', url: 'https://github.com/sumitjhaa/otakudoro' },
-            { label: 'Live Demo', url: 'https://otakudoro.vercel.app/' },
+            { label: 'Live', url: 'https://otakudoro.vercel.app/' },
         ],
         date: '2024-10-12',
         status: 'Completed',
@@ -197,7 +200,7 @@ export const PROJECTS: Project[] = [
                 label: 'GitHub',
                 url: 'https://github.com/sumitjhaa/js-rookies/blob/main/22-ziggle/index.html',
             },
-            { label: 'Live Demo', url: 'https://ziggle-cubes.vercel.app/' },
+            { label: 'Live', url: 'https://ziggle-cubes.vercel.app/' },
         ],
         date: '2024-08-20',
         status: 'Completed',
