@@ -2,25 +2,25 @@
     --tt-color: #888;
     --tt-highlight: rgba(136, 136, 136, 0.25);
     --tt-name-size: 1.3em;
-    --tt-padding: 8px 14px;
-    --tt-gap: 8px;
+    --tt-padding: 0.5rem 0.875rem;
+    --tt-gap: 0.5rem;
 
     position: fixed;
     left: var(--tt-x, 0);
     top: var(--tt-y, 0);
     z-index: 9999;
     pointer-events: none;
-    max-width: 240px;
+    max-width: 15rem;
     padding: var(--tt-padding);
-    border: 1px solid color-mix(in srgb, var(--tt-color) 30%, transparent);
-    border-radius: 10px;
+    border: 0.0625rem solid color-mix(in srgb, var(--tt-color) 30%, transparent);
+    border-radius: 0.625rem;
     background: color-mix(in srgb, var(--background) 80%, transparent);
-    backdrop-filter: blur(80px) saturate(200%);
-    -webkit-backdrop-filter: blur(80px) saturate(200%);
+    backdrop-filter: blur(5rem) saturate(200%);
+    -webkit-backdrop-filter: blur(5rem) saturate(200%);
     box-shadow:
-        inset 0 1px 0 0 color-mix(in srgb, var(--tt-color) 35%, transparent),
-        inset 0 0 0 1px color-mix(in srgb, var(--tt-color) 20%, transparent),
-        0 8px 32px rgba(0, 0, 0, 0.35);
+        inset 0 0.0625rem 0 0 color-mix(in srgb, var(--tt-color) 35%, transparent),
+        inset 0 0 0 0.0625rem color-mix(in srgb, var(--tt-color) 20%, transparent),
+        0 0.5rem 2rem rgba(0, 0, 0, 0.35);
     color: var(--base-100);
     opacity: 0;
     transform: scale(0.96);
@@ -63,7 +63,7 @@
     letter-spacing: 0.05em;
     text-transform: capitalize;
     /*color: var(--tt-color);*/
-    /*text-shadow: 1px 0px var(--base-100);*/
+    /*text-shadow: 0.0625rem 0rem var(--base-100);*/
 }
 
 .nameUnderline {
@@ -74,10 +74,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 7px;
-    border-radius: 4px;
+    padding: 0 0.4375rem;
+    border-radius: 0.25rem;
     background: color-mix(in srgb, var(--base-100) 10%, transparent);
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 0.7rem;
     text-transform: capitalize;
     color: var(--base-100);
@@ -91,6 +91,6 @@
     font-weight: 400;
     color: var(--base-200);
     line-height: 1.7;
-    margin: 6px 0 0;
-    max-width: 220px;
+    margin: 0.375rem 0 0;
+    max-width: 13.75rem;
 }

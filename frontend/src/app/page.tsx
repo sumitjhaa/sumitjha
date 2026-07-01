@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { ClickEffect } from '@/shared/components/effects/ClickEffect'
 import { Hero } from '@/features/portfolio/components/Hero'
 import { AboutMe } from '@/features/portfolio/components/AboutMe'
@@ -5,13 +6,8 @@ import { ProjectsIntro } from '@/features/portfolio/components/ProjectsIntro'
 import { ExperienceIntro } from '@/features/portfolio/components/ExperienceIntro'
 import { Experience } from '@/features/portfolio/components/Experience'
 import { LastSection } from '@/features/portfolio/components/LastSection'
-import { ThankYouSection } from '@/features/portfolio/components/ThankYouSection'
-import { ShoutoutsSection } from '@/features/portfolio/components/ShoutoutsSection'
-import { FooterSection } from '@/features/portfolio/components/FooterSection'
-import { EducationSection } from '@/features/portfolio/components/EducationSection'
-import { CommitmentSection } from '@/features/portfolio/components/CommitmentSection'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 import {
-    Section,
     ProgressBar,
     ScrollToTop,
     FadeInSection,
@@ -25,6 +21,12 @@ import { SkillsSection } from '@/features/portfolio/ui/skills'
 import { ProjectSection } from '@/features/portfolio/ui/projects'
 import { VisuallyHidden } from '@/shared/components/ui'
 
+const ThankYouSection = dynamic(() => import('@/features/portfolio/components/ThankYouSection/ThankYouSection'))
+const ShoutoutsSection = dynamic(() => import('@/features/portfolio/components/ShoutoutsSection/ShoutoutsSection'))
+const FooterSection = dynamic(() => import('@/features/portfolio/components/FooterSection/FooterSection'))
+const EducationSection = dynamic(() => import('@/features/portfolio/components/EducationSection/EducationSection'))
+const CommitmentSection = dynamic(() => import('@/features/portfolio/components/CommitmentSection/CommitmentSection'))
+
 export default function Home() {
     return (
         <main>
@@ -37,7 +39,7 @@ export default function Home() {
             <Hero />
             <AboutMe />
 
-            <Section id="section-3">
+            <SectionShell id="section-3">
                 <SkillsSection
                     categories={SKILL_CATEGORIES}
                     hideGrid
@@ -56,7 +58,7 @@ export default function Home() {
                                     }}
                                     alt=""
                                     loading="lazy"
-                                />
+                                 decoding="async" />
                                 Each framework made me an offer I couldn&apos;t refuse. And
                                 they&apos;re still around haunting my terminal.
                                 <img
@@ -69,7 +71,7 @@ export default function Home() {
                                     }}
                                     alt=""
                                     loading="lazy"
-                                />
+                                 decoding="async" />
                                 Unfortunately, no kung fu montage required to debug them.
                             </p>
                             <p>
@@ -85,7 +87,7 @@ export default function Home() {
                                     }}
                                     alt=""
                                     loading="lazy"
-                                />
+                                 decoding="async" />
                                 Still haven&apos;t found a framework that doesn&apos;t demand a
                                 pound of soul. Production goes live and I stare into the flames.
                                 <img
@@ -98,18 +100,18 @@ export default function Home() {
                                     }}
                                     alt=""
                                     loading="lazy"
-                                />
+                                 decoding="async" />
                                 This is fine, everything is fine. Maybe I&apos;ll look at the error
                                 tomorrow. But tonight, the code works somehow.
                             </p>
                         </>
                     }
                 />
-            </Section>
+            </SectionShell>
             <ExperienceIntro />
             <Experience projectFilter={['Taxspanner']} />
             <Experience projectFilter={['Propel']} id="experience-propel" hideHeading isLast />
-            <Section id="section-4">
+            <SectionShell id="section-4">
                 <SkillsSection
                     categories={SKILL_CATEGORIES}
                     iconSize={88}
@@ -117,16 +119,16 @@ export default function Home() {
                     title="Runtime Armoury"
                     titleGap="1.8em"
                 />
-            </Section>
+            </SectionShell>
             <ProjectsIntro />
             {PROJECTS.toReversed()
                 .filter((p) => p.slug !== 'ziggle')
                 .map((project) => (
-                    <Section key={project.slug} id={`project-${project.slug}`}>
+                    <SectionShell key={project.slug} id={`project-${project.slug}`}>
                         <FadeInSection>
                             <ProjectSection project={project} />
                         </FadeInSection>
-                    </Section>
+                    </SectionShell>
                 ))}
 
             <CommitmentSection />

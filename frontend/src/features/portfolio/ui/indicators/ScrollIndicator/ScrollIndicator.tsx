@@ -2,7 +2,7 @@
 
 import { memo } from 'react'
 import { cn } from '@/shared/utils'
-import ArrowIcon from '@/features/portfolio/ui/common/ArrowIcon/ArrowIcon'
+import { Icon } from '@/shared/components/ui'
 import styles from './ScrollIndicator.module.css'
 
 function ScrollIndicator() {
@@ -19,7 +19,7 @@ function ScrollIndicator() {
             onKeyDown={(e) => e.key === 'Enter' && handleClick()}
             aria-label="Scroll down"
         >
-            <ArrowIcon direction="down" />
+            <Icon name="arrow" direction="down" />
             <span className={cn(styles.text, 'sparkclick')}>scroll</span>
         </div>
     )

@@ -2,7 +2,7 @@
 
 import { memo, useCallback } from 'react'
 import { useScrollProgress } from '@/shared/hooks'
-import ArrowIcon from '@/features/portfolio/ui/common/ArrowIcon/ArrowIcon'
+import { Icon } from '@/shared/components/ui'
 import styles from './ScrollToTop.module.css'
 
 const RADIUS = 45
@@ -35,7 +35,7 @@ function ScrollToTop() {
                 aria-label="Scroll to top"
                 style={{ opacity: show ? 1 : 0 }}
             >
-                <ArrowIcon />
+                <Icon name="arrow" />
             </button>
         </div>
     )

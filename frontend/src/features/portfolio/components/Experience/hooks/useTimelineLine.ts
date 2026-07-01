@@ -4,16 +4,17 @@ import { useEffect, useState, type RefObject } from 'react'
 import { LINE_TOP_OFFSET, TIMELINE_POINT_SELECTOR } from '../config'
 
 export function useTimelineLine(
-    sectionRef: RefObject<HTMLElement | null>,
     descRef: RefObject<HTMLDivElement | null>,
+    sectionId?: string,
 ): number {
     const [lineHeight, setLineHeight] = useState(0)
 
     useEffect(() => {
-        if (!sectionRef.current || !descRef.current) return
+        const section = sectionId ? document.getElementById(sectionId) : null
+        if (!descRef.current) return
 
         const measure = () => {
-            if (!sectionRef.current || !descRef.current) return
+            if (!descRef.current) return
             const desc = descRef.current
 
             const allPoints = document.querySelectorAll(TIMELINE_POINT_SELECTOR)
@@ -24,8 +25,8 @@ export function useTimelineLine(
             if (lastPoint) {
                 const lastRect = lastPoint.getBoundingClientRect()
                 setLineHeight(Math.max(0, lastRect.bottom - descRect.top - LINE_TOP_OFFSET))
-            } else {
-                const sectionRect = sectionRef.current.getBoundingClientRect()
+            } else if (section) {
+                const sectionRect = section.getBoundingClientRect()
                 setLineHeight(Math.max(0, sectionRect.bottom - descRect.top - LINE_TOP_OFFSET))
             }
         }
@@ -34,7 +35,7 @@ export function useTimelineLine(
         const ro = new ResizeObserver(measure)
         ro.observe(document.body)
         return () => ro.disconnect()
-    }, [sectionRef, descRef])
+    }, [descRef, sectionId])
 
     return lineHeight
 }

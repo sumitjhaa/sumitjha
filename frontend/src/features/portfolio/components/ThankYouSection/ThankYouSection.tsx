@@ -1,9 +1,10 @@
 import { memo } from 'react'
 import styles from './ThankYouSection.module.css'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 
 function ThankYouSection() {
     return (
-        <section id="thank-you" className={styles.page}>
+        <SectionShell id="thank-you" className={styles.page}>
             <div className={styles.container}>
                 <svg viewBox="0 0 521 434" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.svg}>
                     <path d="M483.022 58.3877H477.818V1H467.41V63.5918H472.614V68.7959H477.818V74H509.114V68.7959H514.318V63.5918H519.522V1H509.114V58.3877H503.91V63.5918H483.022V58.3877ZM520.522 64.5918H515.318V69.7959H510.114V75H476.818V69.7959H471.614V64.5918H466.41V0H478.818V57.3877H484.022V62.5918H502.91V57.3877H508.114V0H520.522V64.5918Z" fill="currentColor"/>
@@ -60,7 +61,7 @@ function ThankYouSection() {
                     <path d="M350.143 428.879H347.594V411H350.143V418.028H359.082V411H361.64V428.879H359.082V420.585H350.143V428.879Z" fill="currentColor"/>
                 </svg>
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

@@ -27,7 +27,13 @@ export type { CompanyData, ProjectData } from './types'
 export { cn, hexToRgba, isBrowser, scrollToTop, scrollToElement } from './utils'
 
 // components
-export { GlassButton, VisuallyHidden, Skeleton } from './components/ui'
+export { GlassButton, VisuallyHidden, Skeleton, Icon } from './components/ui'
+
+// layout
+export { SectionShell } from './components/layout/SectionShell'
+
+// component utilities
+export { createPolymorphic, findChild, findAllChildren, withoutChildren, cloneChild } from './components/utils'
 
 // config
 export { SITE_CONFIG, SOCIAL_LINKS, SECTIONS, SCROLL_DEBOUNCE_MS, SCROLL_THROTTLE_MS, THEMES, PALETTE_COLORS, THEME_PAIRS, getThemeRows, BASE_SHORTCUTS, VIM_SHORTCUTS } from './config'

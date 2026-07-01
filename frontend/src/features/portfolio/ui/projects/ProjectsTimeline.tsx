@@ -22,7 +22,7 @@ export function ProjectsTimeline() {
                             </div>
                             <div className={styles.line} />
                             <div className={styles.card}>
-                                <img src={project.image} alt={project.title} className={styles.thumbnail} loading="lazy" />
+                                <img src={project.image} alt={project.title} className={styles.thumbnail} loading="lazy"  decoding="async" />
                                 <div className={styles.info}>
                                     <h3 className={styles.title}>
                                         <LinkHighlight 
@@ -35,7 +35,7 @@ export function ProjectsTimeline() {
                                     <p className={styles.desc}>{project.description}</p>
                                     <div className={styles.techs}>
                                         {project.technologies.map((t) => (
-                                            <img key={t.name} src={t.icon} alt={t.name} className={styles.techIcon} title={t.name} loading="lazy" />
+                                            <img key={t.name} src={t.icon} alt={t.name} className={styles.techIcon} title={t.name} loading="lazy"  decoding="async" />
                                         ))}
                                     </div>
                                 </div>

@@ -18,6 +18,7 @@ function createMockElements(descRect: { top: number; bottom: number }) {
     }))
 
     const section = document.createElement('section')
+    section.id = 'experience-test'
     section.getBoundingClientRect = vi.fn(() => ({
         top: descRect.top,
         bottom: descRect.bottom + 200,
@@ -43,15 +44,14 @@ beforeEach(() => {
 })
 
 describe('useTimelineLine', () => {
-    it('returns zero when refs are null', () => {
-        const sectionRef = { current: null }
+    it('returns zero when desc ref is null', () => {
         const descRef = { current: null }
-        const { result } = renderHook(() => useTimelineLine(sectionRef, descRef))
+        const { result } = renderHook(() => useTimelineLine(descRef))
         expect(result.current).toBe(0)
     })
 
     it('measures from desc top + offset to last point bottom', () => {
-        const { desc, section } = createMockElements({ top: 100, bottom: 400 })
+        const { desc } = createMockElements({ top: 100, bottom: 400 })
 
         const point = document.createElement('li')
         point.classList.add('points')
@@ -69,7 +69,6 @@ describe('useTimelineLine', () => {
         desc.appendChild(point)
 
         const descRef = { current: desc }
-        const sectionRef = { current: section }
 
         vi.spyOn(document, 'querySelectorAll').mockImplementation((selector) => {
             if (selector === '[class*="points"] li') {
@@ -78,7 +77,7 @@ describe('useTimelineLine', () => {
             return document.querySelectorAll(selector)
         })
 
-        const { result } = renderHook(() => useTimelineLine(sectionRef, descRef))
+        const { result } = renderHook(() => useTimelineLine(descRef))
 
         const expected = point.getBoundingClientRect().bottom - desc.getBoundingClientRect().top - LINE_TOP_OFFSET
         expect(result.current).toBe(expected)
@@ -86,15 +85,17 @@ describe('useTimelineLine', () => {
 
     it('falls back to section bottom when no points exist', () => {
         const { desc, section } = createMockElements({ top: 100, bottom: 400 })
+        document.body.appendChild(section)
 
         const descRef = { current: desc }
-        const sectionRef = { current: section }
 
         vi.spyOn(document, 'querySelectorAll').mockImplementation(() => [] as unknown as NodeListOf<Element>)
 
-        const { result } = renderHook(() => useTimelineLine(sectionRef, descRef))
+        const { result } = renderHook(() => useTimelineLine(descRef, 'experience-test'))
 
         const expected = section.getBoundingClientRect().bottom - desc.getBoundingClientRect().top - LINE_TOP_OFFSET
         expect(result.current).toBe(expected)
+
+        document.body.removeChild(section)
     })
 })

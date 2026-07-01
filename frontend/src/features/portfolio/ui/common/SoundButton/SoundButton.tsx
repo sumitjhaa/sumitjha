@@ -1,11 +1,16 @@
 'use client'
 
-import { useRef, useCallback, memo, type ReactNode, type MouseEvent } from 'react'
+import { memo, useCallback, type ReactNode, type MouseEvent } from 'react'
+import { playSound } from '@/shared/utils'
 
 interface SoundButtonProps {
     children: ReactNode
     className?: string
-    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
+    onClick?: (e: MouseEvent<HTMLElement>) => void
+    as?: 'button' | 'a' | 'div'
+    href?: string
+    target?: string
+    rel?: string
     type?: 'button' | 'submit' | 'reset'
 }
 
@@ -13,32 +18,20 @@ export const SoundButton = memo(function SoundButton({
     children,
     className,
     onClick,
-    type = 'button',
+    as: Tag = 'button',
+    ...rest
 }: SoundButtonProps) {
-    const audioRef = useRef<HTMLAudioElement | null>(null)
-
-    const playSound = useCallback(() => {
-        let audio = audioRef.current
-        if (!audio) {
-            audio = new Audio('/sounds/mouse-click.mp3')
-            audio.preload = 'auto'
-            audioRef.current = audio
-        }
-        audio.currentTime = 0
-        audio.play().catch(() => {})
-    }, [])
-
     const handleClick = useCallback(
-        (e: MouseEvent<HTMLButtonElement>) => {
-            playSound()
+        (e: MouseEvent<HTMLElement>) => {
+            playSound('/sounds/mouse-click.mp3')
             onClick?.(e)
         },
-        [onClick, playSound],
+        [onClick],
     )
 
     return (
-        <button type={type} className={className} onClick={handleClick}>
+        <Tag className={className} onClick={handleClick} {...rest}>
             {children}
-        </button>
+        </Tag>
     )
 })

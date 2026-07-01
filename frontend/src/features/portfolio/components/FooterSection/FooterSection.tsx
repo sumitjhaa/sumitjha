@@ -1,11 +1,12 @@
 import { memo } from 'react'
 import { SOCIAL_LINKS } from '@/shared/config'
 import FooterTime from './FooterTime'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 import styles from './FooterSection.module.css'
 
 function FooterSection() {
     return (
-        <section id="footer" className={styles.page}>
+        <SectionShell id="footer">
             <div className={styles.anchor}>
                 <div className={styles.grid}>
                     {SOCIAL_LINKS.map((link) => (
@@ -116,7 +117,7 @@ function FooterSection() {
                     </div>
                 </div>
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

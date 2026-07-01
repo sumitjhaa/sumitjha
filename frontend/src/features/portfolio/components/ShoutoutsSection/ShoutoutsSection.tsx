@@ -1,11 +1,10 @@
 import { memo } from 'react'
 import styles from './ShoutoutsSection.module.css'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 
 function ShoutoutsSection() {
     return (
-        <section id="shoutouts" className={styles.page}>
-            <h1 className={styles.heading}>Shoutouts</h1>
-
+        <SectionShell id="shoutouts" heading="Shoutouts" className={styles.page}>
             <div className={styles.body}>
                 <p className={styles.intro}>
                     Turns out the real plot twist wasn&apos;t the bugs—it was meeting people who made
@@ -26,7 +25,7 @@ function ShoutoutsSection() {
                     My confidence never fully recovered, and my ego never had the high ground.
                 </p>
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

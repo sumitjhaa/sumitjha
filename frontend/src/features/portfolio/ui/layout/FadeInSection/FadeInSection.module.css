@@ -6,7 +6,7 @@
 
 @keyframes subtleBlur {
     from {
-        filter: blur(2px);
+        filter: blur(0.125rem);
     }
     to {
         filter: blur(0);

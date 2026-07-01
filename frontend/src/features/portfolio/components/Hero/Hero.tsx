@@ -1,9 +1,7 @@
 'use client'
 
-import { useCallback, useRef, useState, useEffect } from 'react'
+import { memo, useCallback, useRef, useState, useEffect } from 'react'
 import { useAvatarStick, useTooltip } from '@/shared/hooks'
-import { useTheme } from '@/app/providers/ThemeProvider'
-import { PALETTE_COLORS } from '@/shared/config'
 import { Avatar, ScrollIndicator, Tooltip, SoundButton } from '@/features/portfolio/ui'
 import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
@@ -42,15 +40,8 @@ function WeatherLine() {
     )
 }
 
-export default function Hero() {
+const Hero = memo(function Hero() {
     const isStuck = useAvatarStick()
-    const { theme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-    useEffect(() => setMounted(true), [])
-    const secAccent = PALETTE_COLORS[theme][4]
-    const ctaColor = mounted
-        ? `color-mix(in srgb, ${secAccent} 30%, var(--secondary-content))`
-        : undefined
     const headingRef = useRef<HTMLHeadingElement>(null)
 
     const onHeadingMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -124,20 +115,20 @@ export default function Hero() {
                         src="/img/inline-images/mnnit.jpg"
                         className={styles.smallInlineImages}
                         alt=""
-                    />
+                     decoding="async" />
                     focused on building reliable AI-driven products and machine learning systems -no
                     vibe coding
                     <img
                         src="/img/inline-images/vibe-coding.png"
                         className={styles.smallInlineImages}
                         alt=""
-                    />
+                     decoding="async" />
                     just solid engineering.
                     <img
                         src="/img/inline-images/cat-flying-plane.jpeg"
                         className={styles.smallInlineImages}
                         alt=""
-                    />
+                     decoding="async" />
                 </p>
             </header>
 
@@ -152,7 +143,7 @@ export default function Hero() {
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}
                     >
-                        <img src={link.icon} alt={link.platform} />
+                        <img src={link.icon} alt={link.platform} loading="lazy"  decoding="async" />
                     </a>
                 ))}
             </div>
@@ -163,18 +154,15 @@ export default function Hero() {
 
             <div className={styles.cta}>
                 <SoundButton
-                    className="sparkclick"
-                    onClick={() => window.open(`mailto:${SITE_CONFIG.email}`, '_blank')}
+                    as="a"
+                    href={`mailto:${SITE_CONFIG.email}`}
+                    className={`${styles.ctaButton} sparkclick`}
                 >
-                    <div
-                        className={styles.ctaTop}
-                        style={ctaColor ? { color: ctaColor } : undefined}
-                    >
-                        Let&apos;s talk!
-                    </div>
-                    <div className={styles.ctaBottom} />
+                    Let&apos;s talk!
                 </SoundButton>
             </div>
         </section>
     )
-}
+})
+
+export default Hero

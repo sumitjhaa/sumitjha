@@ -17,7 +17,7 @@ export function ProjectsGrid() {
                     
                     return (
                         <Link key={project.slug} href={`/projects/${project.slug}`} className={styles.card}>
-                            <img src={project.image} alt={project.title} className={styles.image} loading="lazy" />
+                            <img src={project.image} alt={project.title} className={styles.image} loading="lazy"  decoding="async" />
                             <div className={styles.info}>
                                 <h3 className={styles.title}>
                                     <LinkHighlight 

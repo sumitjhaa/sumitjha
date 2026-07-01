@@ -1,10 +1,10 @@
 import { memo } from 'react'
 import styles from './ProjectsIntro.module.css'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 
 function ProjectsIntro() {
     return (
-        <section id="projects-intro" className={styles.projectsIntro}>
-            <h1 className={styles.heading}>Version Controlled Chaos</h1>
+        <SectionShell id="projects-intro" heading="Version Controlled Chaos" className={styles.intro}>
             <div className={styles.descriptions}>
                 <p>
                     Every project began with &ldquo;How hard could it be?&rdquo;{' '}
@@ -18,7 +18,7 @@ function ProjectsIntro() {
                         }}
                         alt=""
                         loading="lazy"
-                    />{' '}
+                     decoding="async" />{' '}
                     Famous last words. If debugging is removing bugs, then programming is adding
                     them.{' '}
                     <img
@@ -31,12 +31,12 @@ function ProjectsIntro() {
                         }}
                         alt=""
                         loading="lazy"
-                    />{' '}
+                     decoding="async" />{' '}
                     The runtime took that personally. May the source be with me.
                 </p>
                 <p>Some shipped. Some learned. None were built by vibe coding.</p>
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

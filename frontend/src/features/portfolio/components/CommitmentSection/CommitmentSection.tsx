@@ -1,3 +1,4 @@
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 import styles from './CommitmentSection.module.css'
 import { CommitCardClient, type CommitData } from './CommitCardClient'
 import { MonthlyHeatmap } from './MonthlyHeatmap'
@@ -12,20 +13,8 @@ export default async function CommitmentSection() {
     const [commit, heatmap] = await Promise.all([getLastCommit(), getMonthlyCommits()])
 
     return (
-        <section id="commitment" className={styles.page}>
-            <h1 className={styles.heading}>Very Committed</h1>
+        <SectionShell id="commitment" heading="Very Committed">
             <div className={styles.scrollArea}>
-                {commit ? (
-                    <CommitCard commit={commit} totalCommits={heatmap?.totalCommits} />
-                ) : (
-                    <p className={styles.fallback}>
-                        Couldn&apos;t fetch the latest commit right now.{' '}
-                        <a href={GITHUB_PROFILE_URL} target="_blank" rel="noopener noreferrer">
-                            See activity on GitHub →
-                        </a>
-                    </p>
-                )}
-
                 {heatmap ? (
                     <MonthlyHeatmap data={heatmap} />
                 ) : (
@@ -36,7 +25,18 @@ export default async function CommitmentSection() {
                         </a>
                     </p>
                 )}
+
+                {commit ? (
+                    <CommitCard commit={commit} totalCommits={heatmap?.totalCommits} />
+                ) : (
+                    <p className={styles.fallback}>
+                        Couldn&apos;t fetch the latest commit right now.{' '}
+                        <a href={GITHUB_PROFILE_URL} target="_blank" rel="noopener noreferrer">
+                            See activity on GitHub →
+                        </a>
+                    </p>
+                )}
             </div>
-        </section>
+        </SectionShell>
     )
 }

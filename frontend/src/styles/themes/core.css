@@ -22,8 +22,8 @@
     --background: #1e1e1e;
     --progress-bar: #569cd680;
 
-    --heading-size: 64px;
-    --heading-stroke-width: 2px;
+    --heading-size: 4rem;
+    --heading-stroke-width: 0.125rem;
     --heading-line-height: 1.2;
     --heading-weight: 700;
     --heading-margin: 0.5em;
@@ -31,10 +31,10 @@
     --body-weight: 400;
     --body-line-height: 1.5em;
     --body-color: var(--base-300);
-    --section-width: 720px;
-    --section-padding: 0 20px;
-    --tl-left: 25px;
-    --tl-width: 2.5px;
+    --section-width: min(45rem, 100%);
+    --section-padding: 0 1.25rem;
+    --tl-left: 1.5625rem;
+    --tl-width: 0.1562rem;
     --tl-opacity: 1;
 }
 

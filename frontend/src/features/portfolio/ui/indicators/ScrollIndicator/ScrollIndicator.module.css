@@ -5,7 +5,7 @@
     font-weight: 800;
     cursor: pointer;
     border-radius: 50%;
-    padding: 10px 12px;
+    padding: 0.625rem 0.75rem;
     color: var(--neutral);
     animation: bounce 2s infinite;
     display: flex;
@@ -19,7 +19,7 @@
 }
 
 .text {
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: var(--font-mono);
 }
 
 @keyframes bounce {
@@ -28,6 +28,6 @@
         transform: translateY(0);
     }
     50% {
-        transform: translateY(10px);
+        transform: translateY(0.625rem);
     }
 }

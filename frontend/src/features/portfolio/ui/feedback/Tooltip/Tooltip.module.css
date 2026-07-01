@@ -4,17 +4,17 @@
     top: var(--tooltip-y);
     pointer-events: none;
     z-index: 9999;
-    max-width: 270px;
-    padding: 10px 16px;
-    border-radius: 12px;
+    max-width: 16.875rem;
+    padding: 0.625rem 1rem;
+    border-radius: 0.75rem;
     background: color-mix(in srgb, var(--tooltip-border) 20%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(0.75rem);
+    -webkit-backdrop-filter: blur(0.75rem);
     opacity: 0.9;
 }
 
 .username {
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: var(--font-mono);
     font-size: 1rem;
     font-weight: 600;
     display: block;
@@ -23,7 +23,7 @@
 }
 
 .platform {
-    font-family: 'Doto', sans-serif;
+    font-family: var(--font-doto);
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--base-300);

@@ -1,0 +1,760 @@
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(0.5rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes identityIn {
+    from {
+        opacity: 0;
+        transform: translateX(-0.25rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes messageIn {
+    from {
+        opacity: 0;
+        transform: translateX(-0.375rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes avatarInRight {
+    from {
+        opacity: 0;
+        transform: scale(0.5) rotate(-6deg);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@keyframes avatarInSmall {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bodyIn {
+    from {
+        opacity: 0;
+        transform: translateY(0.25rem);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateY(0);
+    }
+}
+
+@keyframes branchIn {
+    from {
+        opacity: 0;
+        transform: translateX(-0.375rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes branchStatIn {
+    from {
+        opacity: 0;
+        transform: translateX(0.375rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes onlinePulse {
+    0%,
+    100% {
+        box-shadow:
+            0 0 0.75rem color-mix(in srgb, var(--success) 50%, transparent),
+            0 0 0 0 color-mix(in srgb, var(--success) 40%, transparent);
+    }
+    50% {
+        box-shadow:
+            0 0 1.125rem color-mix(in srgb, var(--success) 70%, transparent),
+            0 0 0 0.5rem color-mix(in srgb, var(--success) 0%, transparent);
+    }
+}
+
+.card {
+    padding: 1.25rem 1.375rem;
+    position: relative;
+    animation: cardIn 500ms cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+}
+
+.cardInner {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    min-width: 0;
+    position: relative;
+}
+
+@media (max-width: 520px) {
+    .cardInner {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    min-width: 0;
+    order: 1;
+}
+
+.avatarLinkRight {
+    display: block;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    text-decoration: none;
+    flex-shrink: 0;
+    animation: avatarInRight 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 100ms backwards;
+    position: relative;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatarLinkRight:hover {
+    transform: scale(1.06);
+}
+
+.avatarLinkRight::after {
+    content: '';
+    position: absolute;
+    bottom: 0.375rem;
+    right: 0.375rem;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 50%;
+    background: var(--success);
+    border: 0.1875rem solid var(--background);
+    box-shadow: 0 0 0.75rem color-mix(in srgb, var(--success) 50%, transparent);
+    animation: onlinePulse 2.4s ease-in-out 1s infinite;
+}
+
+.identityTextRight {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1875rem;
+    text-align: center;
+    min-width: 0;
+    margin-top: 0.5rem;
+}
+
+.identityNameRight {
+    color: var(--base-100);
+    font-weight: 700;
+    font-size: 0.82em;
+    font-family: var(--font-mono);
+    letter-spacing: -0.005em;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.identityHandleRight {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.72em;
+    font-family: var(--font-mono);
+    opacity: 0.85;
+    transition: opacity 150ms ease;
+    word-break: break-all;
+}
+
+.identityHandleRight:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.staff {
+    color: #ffd33d;
+    margin-left: 0.125rem;
+    font-size: 0.9em;
+    filter: drop-shadow(0 0 0.25rem rgba(255, 211, 61, 0.5));
+}
+
+.contributionCount {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.375rem;
+    margin-top: 0.375rem;
+    padding-top: 0;
+    text-align: center;
+    line-height: 1;
+}
+
+.contributionCountNumber {
+    font-family: var(--font-doto);
+    font-size: 1.8em;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.contributionCountLabel {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--base-200);
+    opacity: 0.75;
+    margin-left: 0.375rem;
+    align-self: center;
+}
+
+.committerRight {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.1875rem;
+    color: var(--base-300);
+    opacity: 0.7;
+    font-family: var(--font-mono);
+    font-size: 0.65em;
+    margin-top: 0.25rem;
+    padding-top: 0.375rem;
+    border-top: 0.0625rem solid color-mix(in srgb, var(--neutral) 30%, transparent);
+    text-align: center;
+    line-height: 1.3;
+}
+
+.committerSep {
+    color: var(--secondary);
+    opacity: 0.7;
+    font-size: 0.95em;
+}
+
+.committerName {
+    color: var(--base-200);
+    font-weight: 500;
+}
+
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    min-width: 6rem;
+    order: 0;
+    animation: identityIn 500ms ease 200ms backwards;
+    padding: 0;
+    justify-self: start;
+    position: sticky;
+    top: 1.25rem;
+}
+
+.headerRow {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5em;
+    min-width: 0;
+}
+
+.lastCommitLabel {
+    font-family: var(--font-mono);
+    font-size: 1em;
+    color: var(--secondary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    opacity: 0.7;
+    padding: 0.125rem 0.25rem;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.time {
+    font-family: var(--font-mono);
+    font-size: 1em;
+    color: var(--secondary);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    opacity: 0.7;
+    padding: 0.125rem 0.25rem;
+    display: inline-block;
+    cursor: help;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: color 200ms ease;
+}
+
+.time:hover {
+    color: var(--accent);
+    opacity: 1;
+    text-shadow: 0 0 0.5rem color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.repo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    color: var(--base-200);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition:
+        color 150ms ease,
+        transform 150ms ease,
+        background 150ms ease;
+    padding: 0.25rem 0.625rem 0.25rem 0.5rem;
+    border-radius: 0.3125rem;
+    align-self: flex-start;
+    background: color-mix(in srgb, var(--base-100) 3%, transparent);
+}
+
+.repo:hover {
+    color: var(--primary);
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    transform: translateX(0.0625rem);
+    text-decoration: none;
+}
+
+.repoIcon {
+    color: var(--primary);
+    font-size: 1em;
+    opacity: 0.85;
+    display: inline-block;
+    transition:
+        opacity 200ms ease,
+        transform 200ms ease;
+}
+
+.repo:hover .repoIcon {
+    opacity: 1;
+    transform: rotate(-8deg);
+}
+
+.messageRow {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 0;
+    animation: messageIn 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 300ms backwards;
+}
+
+.message {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--base-100);
+    line-height: 1.3;
+    word-break: break-word;
+    transition: color 150ms ease;
+    animation: messageIn 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 300ms backwards;
+    margin-left: 0.3rem;
+}
+
+.message:hover {
+    color: var(--primary);
+}
+
+.messageText {
+    font-family: var(--font-mono);
+    font-size: 1.55em;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    line-height: 1.3;
+    color: var(--base-300);
+}
+
+.body {
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    color: var(--body-color);
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+    opacity: 0.8;
+    animation: bodyIn 500ms ease 500ms backwards;
+}
+
+.branch {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1875rem;
+    animation: branchIn 600ms ease 400ms backwards;
+    align-self: flex-start;
+    min-width: 0;
+}
+
+.branchRow {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: baseline;
+    gap: 1rem;
+    transition: transform 200ms ease;
+    min-width: 0;
+}
+
+.branchRow:hover {
+    transform: translateX(0.125rem);
+}
+
+.branchSha {
+    font-family: var(--font-mono);
+    font-size: 1em;
+    color: var(--secondary);
+    text-decoration: none;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: color 200ms ease;
+    opacity: 0.7;
+    padding: 0.125rem 0.25rem;
+    display: inline-block;
+}
+
+.branchSha[data-current='true'] {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.1em;
+    opacity: 1;
+}
+
+.branchSha:hover {
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 1;
+    text-shadow: 0 0 0.5rem color-mix(in srgb, var(--accent) 40%, transparent);
+    transition:
+        color 200ms ease,
+        text-shadow 200ms ease;
+}
+
+.branchStats {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-variant-numeric: tabular-nums;
+    animation: branchStatIn 400ms ease 600ms backwards;
+}
+
+.branchStatDoto {
+    font-family: var(--font-doto);
+    font-size: 0.95em;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    transition: transform 200ms ease;
+}
+
+.branchRow:hover .branchStatDoto {
+    transform: scale(1.05);
+}
+
+.branchStatPos {
+    color: var(--success);
+    text-shadow: 0 0 0.5rem color-mix(in srgb, var(--success) 25%, transparent);
+}
+
+.branchStatNeg {
+    color: var(--error);
+    text-shadow: 0 0 0.5rem color-mix(in srgb, var(--error) 25%, transparent);
+}
+
+.branchLabel {
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    color: var(--base-300);
+    opacity: 0.6;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 200ms ease;
+    align-self: center;
+    white-space: nowrap;
+}
+
+.branchRow:hover .branchLabel {
+    color: var(--secondary);
+    opacity: 1;
+}
+
+.filesBlock {
+    border: 0.0625rem solid color-mix(in srgb, var(--neutral) 50%, transparent);
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--base-100) 3%, transparent);
+    overflow: hidden;
+}
+
+.filesBlock[open] {
+    border-color: color-mix(in srgb, var(--neutral) 80%, transparent);
+}
+
+.filesSummary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8em;
+    color: var(--base-200);
+    font-family: var(--font-mono);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+}
+
+.filesSummary::-webkit-details-marker {
+    display: none;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 0.25rem solid transparent;
+    border-right: 0.25rem solid transparent;
+    border-top: 0.3125rem solid var(--base-300);
+    transition: transform 150ms ease;
+    margin-right: 0.25rem;
+}
+
+.filesBlock[open] .caret {
+    transform: rotate(180deg);
+}
+
+.filesSummaryStats {
+    margin-left: auto;
+    display: inline-flex;
+    gap: 0.5rem;
+}
+
+.fileList {
+    list-style: none;
+    margin: 0;
+    padding: 0.25rem 0 0.5rem;
+    border-top: 0.0625rem solid color-mix(in srgb, var(--neutral) 50%, transparent);
+}
+
+.fileItem {
+    display: grid;
+    grid-template-columns: 1.375rem 1fr auto;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.25rem 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+}
+
+.fileItem:hover {
+    background: color-mix(in srgb, var(--base-100) 4%, transparent);
+}
+
+.fileStatus {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 0.25rem;
+    font-weight: 700;
+    font-size: 0.85em;
+    color: var(--base-100);
+    flex-shrink: 0;
+}
+
+.status_added {
+    background: color-mix(in srgb, var(--success) 30%, transparent);
+    color: var(--success);
+}
+
+.status_removed {
+    background: color-mix(in srgb, var(--error) 30%, transparent);
+    color: var(--error);
+}
+
+.status_modified {
+    background: color-mix(in srgb, var(--primary) 30%, transparent);
+    color: var(--primary);
+}
+
+.status_renamed {
+    background: color-mix(in srgb, var(--accent) 30%, transparent);
+    color: var(--accent);
+}
+
+.status_copied,
+.status_changed {
+    background: color-mix(in srgb, var(--secondary) 30%, transparent);
+    color: var(--secondary);
+}
+
+.status_unchanged {
+    background: color-mix(in srgb, var(--base-300) 30%, transparent);
+    color: var(--base-300);
+}
+
+.fileName {
+    color: var(--base-200);
+    text-decoration: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-width: 0;
+}
+
+.fileName:hover {
+    color: var(--primary);
+}
+
+.fileOld {
+    color: var(--base-300);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.fileArrow {
+    color: var(--base-300);
+    opacity: 0.6;
+}
+
+.fileStats {
+    display: inline-flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.fileMore {
+    padding: 0.25rem 0.75rem 0.25rem 2.75rem;
+    font-size: 0.78em;
+    color: var(--base-300);
+    opacity: 0.7;
+    font-family: var(--font-mono);
+}
+
+.stats {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+}
+
+.total {
+    color: var(--base-300);
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+.additions {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.deletions {
+    color: var(--error);
+    font-weight: 600;
+}
+
+/* ── GitHubAvatar ── */
+
+.avatarLinkSmall {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    text-decoration: none;
+    flex-shrink: 0;
+    animation: avatarInSmall 600ms cubic-bezier(0.34, 1.56, 0.64, 1) 100ms backwards;
+    position: relative;
+    transition: transform 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.avatarLinkSmall:hover {
+    transform: scale(1.08);
+}
+
+.avatar {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: var(--primary-content);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.95em;
+    font-weight: 700;
+    flex-shrink: 0;
+    overflow: hidden;
+    box-shadow:
+        0 0 0 0.0938rem color-mix(in srgb, var(--background) 70%, transparent),
+        0 0.125rem 0.5rem color-mix(in srgb, var(--primary) 25%, transparent),
+        inset 0 0 0 0.0625rem color-mix(in srgb, var(--base-100) 15%, transparent);
+    transition: box-shadow 200ms ease;
+}
+
+.avatarLinkSmall:hover .avatar {
+    box-shadow:
+        0 0 0 0.0938rem var(--primary),
+        0 0.25rem 0.75rem color-mix(in srgb, var(--primary) 50%, transparent),
+        inset 0 0 0 0.0625rem color-mix(in srgb, var(--base-100) 25%, transparent);
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatarFallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+
+.avatarFallbackShow {
+    opacity: 1;
+}
+
+@media (max-width: 640px) {
+    .card {
+        padding: 1.125rem 1.125rem;
+        gap: 0.75rem;
+    }
+
+    .message {
+        font-size: 1.1em;
+    }
+
+    .fileItem {
+        font-size: 0.72em;
+    }
+}

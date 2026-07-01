@@ -50,7 +50,7 @@ const SkillCard = memo(function SkillCard({ skill, showTooltip, hideTooltip, mov
                             ? { '--icon-scale': skill.iconScale } as React.CSSProperties
                             : undefined
                     }
-                />
+                 decoding="async" />
             </div>
             <span className={styles.name}>{skill.name}</span>
         </div>

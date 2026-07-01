@@ -3,10 +3,10 @@
 import Image from 'next/image'
 import { memo, useRef, useMemo } from 'react'
 import { experience } from './data'
-import { LinkHighlight } from '@/shared/components/ui'
+import { LinkHighlight, Icon } from '@/shared/components/ui'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 import { useTimelineLine } from './hooks/useTimelineLine'
 import { TimelineLine } from './components/TimelineLine'
-import { PinIcon } from './components/PinIcon'
 import type { ExperienceProps } from './types'
 import styles from './Experience.module.css'
 
@@ -22,13 +22,11 @@ function Experience({ projectFilter, id = 'experience', hideHeading, isLast, com
         [projectFilter, activeProjects],
     )
 
-    const sectionRef = useRef<HTMLElement>(null)
     const descRef = useRef<HTMLDivElement>(null)
-    const lineHeight = useTimelineLine(sectionRef, descRef)
+    const lineHeight = useTimelineLine(descRef, id)
 
     return (
-        <section id={id} ref={sectionRef} className={styles.section}>
-            {!hideHeading && <h1 className={styles.heading}>The Corporate Arc</h1>}
+        <SectionShell id={id} heading={!hideHeading ? 'The Corporate Arc' : undefined}>
             <div ref={descRef} className={styles.descriptions}>
                 <div className={styles.company}>
                     {activeCompany.logo ? (
@@ -48,7 +46,7 @@ function Experience({ projectFilter, id = 'experience', hideHeading, isLast, com
                 </div>
 
                 <div className={styles.meta}>
-                    <PinIcon />
+                    <Icon name="pin" size={18} />
                     <span className={styles.location}>{activeCompany.location}</span>
                     <span className={styles.sep}>&middot;</span>
                     <span className={styles.period}>{activeCompany.period}</span>
@@ -81,7 +79,7 @@ function Experience({ projectFilter, id = 'experience', hideHeading, isLast, com
                 ))}
                 <TimelineLine lineHeight={lineHeight} isLast={isLast} />
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

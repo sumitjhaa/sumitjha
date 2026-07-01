@@ -1,10 +1,10 @@
 import { memo } from 'react'
 import styles from './ExperienceIntro.module.css'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 
 function ExperienceIntro() {
     return (
-        <section id="experience-intro" className={styles.section}>
-            <h1 className={styles.heading}>I have the logs</h1>
+        <SectionShell id="experience-intro" heading="I have the logs" className={styles.intro}>
             <div className={styles.descriptions}>
                 <p>
                     Back then, I thought software development was mostly about writing code.{' '}
@@ -18,7 +18,7 @@ function ExperienceIntro() {
                         }}
                         alt=""
                         loading="lazy"
-                    />{' '}
+                     decoding="async" />{' '}
                     Then came meetings, deadlines, production incidents, and &ldquo;quick&rdquo;
                     fixes.
                 </p>
@@ -34,7 +34,7 @@ function ExperienceIntro() {
                         }}
                         alt=""
                         loading="lazy"
-                    />{' '}
+                     decoding="async" />{' '}
                 </p>
                 <p>
                     I came, I coded, and I accidentally deployed on a Friday.{' '}
@@ -48,7 +48,7 @@ function ExperienceIntro() {
                         }}
                         alt=""
                         loading="lazy"
-                    />{' '}
+                     decoding="async" />{' '}
                     <code className={styles.code}>March 13 2025</code>, <em>un</em>reviewed
                     migration as an intern (totally not my fault).
                 </p>
@@ -63,12 +63,12 @@ function ExperienceIntro() {
                         }}
                         alt=""
                         loading="lazy"
-                    />
+                     decoding="async" />
                     Turns out &ldquo;it works on my machine&rdquo; isn&apos;t an acceptable
                     deployment strategy.
                 </p>
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

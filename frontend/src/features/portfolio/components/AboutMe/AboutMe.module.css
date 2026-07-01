@@ -1,32 +1,5 @@
 .about {
     position: relative;
-    width: var(--section-width);
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    padding: var(--section-padding);
-    justify-content: center;
-    line-height: 1.6em;
-    min-height: 100vh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-}
-
-.heading {
-    font-size: var(--heading-size);
-    line-height: var(--heading-line-height);
-    -webkit-text-stroke-width: var(--heading-stroke-width);
-    -webkit-text-stroke-color: currentColor;
-    -webkit-text-fill-color: transparent;
-    font-weight: var(--heading-weight);
-    width: max-content;
-    margin: 0 0 var(--heading-margin);
-}
-
-@media (max-width: 640px) {
-    .heading {
-        font-size: calc(var(--heading-size) * 0.75);
-    }
 }
 
 .descriptions {
@@ -41,14 +14,14 @@
 
 .descriptions p img {
     height: 1.5em;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     vertical-align: middle;
     margin: 0 0.15em;
 }
 
 .nepaliFlag {
     position: relative;
-    top: -5px;
+    top: -0.3125rem;
     transform: rotate(-15deg);
 }
 

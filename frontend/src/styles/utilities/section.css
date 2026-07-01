@@ -1,0 +1,10 @@
+.section-base {
+    width: min(45rem, 100%);
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100dvh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}

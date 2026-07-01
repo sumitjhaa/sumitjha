@@ -3,6 +3,7 @@ import { SITE_CONFIG } from '@/shared/config'
 import ErrorBoundary from '@/features/portfolio/ui/feedback/ErrorBoundary/ErrorBoundary'
 import { ThemeProvider } from '@/app/providers/ThemeProvider'
 import { PanelProvider } from '@/app/providers/PanelProvider'
+import { GooCursor } from '@/shared/components/effects/GooCursor'
 import './globals.css'
 
 const siteUrl = 'https://snapfolio.sumitjha.me'
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="preload" href="/fonts/Raveo.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
             </head>
             <body>
+                <GooCursor />
                 <ErrorBoundary>
                     <ThemeProvider>
                         <PanelProvider>{children}</PanelProvider>

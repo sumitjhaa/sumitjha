@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    padding-top: 28px;
+    padding-top: 1.75rem;
 }
 
 .isStuck {
@@ -14,35 +14,35 @@
 
 .image {
     border-radius: 50%;
-    border: 2px solid var(--base-300);
+    border: 0.125rem solid var(--base-300);
     object-fit: cover;
     transition:
         height 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
         width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
         border 0.25s ease;
-    height: 200px;
-    width: 200px;
+    height: 12.5rem;
+    width: 12.5rem;
 }
 
 .wrapper:hover .image {
-    box-shadow: 0 0 0 3px var(--primary);
+    box-shadow: 0 0 0 0.1875rem var(--primary);
 }
 
 .isStuck .image {
-    height: 80px;
-    width: 80px;
+    height: 5rem;
+    width: 5rem;
     border: none;
 }
 
 .isStuck .image:hover {
-    box-shadow: 0 0 0 2px var(--primary);
+    box-shadow: 0 0 0 0.125rem var(--primary);
 }
 
 .svg {
     height: 0;
     width: auto;
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-1.25rem);
     display: block;
     transition:
         height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),

@@ -1,9 +1,10 @@
 'use client'
 
+import { memo } from 'react'
 import { AnalogClock, KeyboardShortcuts, ThemeToggle } from '@/features/portfolio/ui'
 import styles from './Navbar.module.css'
 
-export function Navbar() {
+const Navbar = memo(function Navbar() {
     return (
         <div className={styles.outer}>
             <nav className={styles.navbar}>
@@ -15,4 +16,6 @@ export function Navbar() {
             </nav>
         </div>
     )
-}
+})
+
+export { Navbar }

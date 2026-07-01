@@ -1,6 +1,6 @@
 :focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+    outline: 0.125rem solid var(--primary);
+    outline-offset: 0.125rem;
 }
 
 button:focus:not(:focus-visible),

@@ -1,11 +1,10 @@
 import { memo } from 'react'
 import styles from './LastSection.module.css'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 
 function LastSection() {
     return (
-        <section id="last-page" className={styles.page}>
-            <h1 className={styles.heading}>That&apos;s All Folks</h1>
-
+        <SectionShell id="last-page" heading="That&apos;s All Folks" className={styles.page}>
             <div className={styles.descriptions}>
                 <p>
                     If you&apos;ve made it this far, congratulations—you&apos;ve survived the lore.
@@ -21,7 +20,7 @@ function LastSection() {
                         }}
                         alt=""
                         loading="lazy"
-                    />
+                     decoding="async" />
                     my inbox is open.
                 </p>
 
@@ -38,13 +37,13 @@ function LastSection() {
                         }}
                         alt=""
                         loading="lazy"
-                    />
+                     decoding="async" />
                     Others were promoted to features.
                 </p>
 
                 <p className={styles.tagline}>Until the next commit...</p>
             </div>
-        </section>
+        </SectionShell>
     )
 }
 

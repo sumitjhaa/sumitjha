@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useCallback, useRef, useEffect } from 'react'
-import styles from './CommitmentSection.module.css'
+import styles from './MonthlyHeatmap.module.css'
 import { MONTH_LABELS } from './constants'
 import type { HeatmapData, MonthData } from './types'
 
@@ -106,16 +106,6 @@ export function MonthlyHeatmap({ data }: { data: HeatmapData }) {
                         })}
                     </div>
                 ))}
-            </div>
-
-            <div className={styles.heatmapLegend}>
-                <span className={styles.heatmapLegendLabel}>Less</span>
-                <span className={`${styles.heatmapLegendCell}`} data-level={0} />
-                <span className={`${styles.heatmapLegendCell}`} data-level={1} />
-                <span className={`${styles.heatmapLegendCell}`} data-level={2} />
-                <span className={`${styles.heatmapLegendCell}`} data-level={3} />
-                <span className={`${styles.heatmapLegendCell}`} data-level={4} />
-                <span className={styles.heatmapLegendLabel}>More</span>
             </div>
 
             {tooltip && (

@@ -66,7 +66,7 @@ export default async function ProjectPage({ params }: Props) {
             <div className={styles.techList}>
                 {project.technologies.map((t) => (
                     <span key={t.name} className={styles.techItem}>
-                        <img src={t.icon} alt="" className={styles.techIcon} loading="lazy" />
+                        <img src={t.icon} alt={t.name} className={styles.techIcon} loading="lazy"  decoding="async" />
                         {t.name}
                     </span>
                 ))}

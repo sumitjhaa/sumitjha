@@ -3,6 +3,7 @@
 import { memo, useState, useCallback } from 'react'
 import type { Position } from '@/shared/types'
 import EduTooltip from './EduTooltip'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 import styles from './EducationSection.module.css'
 
 const educationData = [
@@ -67,9 +68,7 @@ function EducationSection() {
     const handleMouseLeave = useCallback(() => setTooltip(null), [])
 
     return (
-        <section id="education" className={styles.page}>
-            <h1 className={styles.heading}>Education</h1>
-
+        <SectionShell id="education" heading="Education">
             <div className={styles.rows}>
                 {educationData.map((entry) => (
                     <div key={entry.id}>
@@ -98,7 +97,7 @@ function EducationSection() {
             </div>
 
             <EduTooltip data={tooltip} pos={pos} />
-        </section>
+        </SectionShell>
     )
 }
 

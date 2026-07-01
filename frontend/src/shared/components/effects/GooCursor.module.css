@@ -1,0 +1,24 @@
+.goo {
+    display: none;
+}
+
+.cursor {
+    position: fixed;
+    top: -14px;
+    left: -14px;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    filter: url(#goo);
+    z-index: 9999;
+}
+
+.circle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--secondary);
+    transform-origin: center center;
+}

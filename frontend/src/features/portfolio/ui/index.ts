@@ -25,5 +25,4 @@ export { FadeInSection } from './layout/FadeInSection/FadeInSection'
 export { LoopedPaging } from './layout/LoopedPaging/LoopedPaging'
 
 // common
-export { default as ArrowIcon } from './common/ArrowIcon/ArrowIcon'
 export { SoundButton } from './common/SoundButton/SoundButton'

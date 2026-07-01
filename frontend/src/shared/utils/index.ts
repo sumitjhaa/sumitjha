@@ -1,4 +1,4 @@
-export { cn } from './format/cn'
-export { hexToRgba } from './format/hex'
-export { isBrowser, scrollToTop, scrollToElement } from './dom/scroll'
-export { playSound } from './audio'
+export { cn } from './cn'
+export { hexToRgba } from './color'
+export { isBrowser, scrollToTop, scrollToElement } from './dom'
+export { playSound, preloadSound } from './audio'

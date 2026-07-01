@@ -9,3 +9,10 @@ export function playSound(src: string) {
     audio.currentTime = 0
     audio.play().catch(() => {})
 }
+
+export function preloadSound(src: string) {
+    if (cache.has(src)) return
+    const audio = new Audio(src)
+    audio.preload = 'auto'
+    cache.set(src, audio)
+}

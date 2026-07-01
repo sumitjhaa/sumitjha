@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import styles from './CommitmentSection.module.css'
+import styles from './CommitmentCard.module.css'
 
 interface GitHubAvatarProps {
     src: string
@@ -32,6 +32,7 @@ export function GitHubAvatar({ src, fallback, username, fullName }: GitHubAvatar
                 alt=""
                 className={styles.avatarImg}
                 loading="lazy"
+                decoding="async"
                 onError={() => setFailed(true)}
             />
             <span className={styles.avatarFallback} aria-hidden="true">
