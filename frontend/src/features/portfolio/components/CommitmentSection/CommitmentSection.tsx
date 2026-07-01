@@ -1,5 +1,4 @@
 import styles from './CommitmentSection.module.css'
-import { ContributionGraph } from './ContributionGraph'
 import { CommitCardClient, type CommitData } from './CommitCardClient'
 
 interface CommitAuthor {
@@ -42,15 +41,8 @@ interface CommitDetail {
     deletions: number
 }
 
-interface ContributionData {
-    total: number
-    weeks: Array<{ days: Array<{ date: string; count: number; level: 0 | 1 | 2 | 3 | 4 }> }>
-}
-
 const GITHUB_USER = 'sumitjhaa'
 const REVALIDATE_SECONDS = 300
-// Public, no-auth contribution data source (community-maintained).
-const CONTRIB_API = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}`
 
 async function getLastCommit(): Promise<CommitDetail | null> {
     try {
@@ -110,47 +102,6 @@ async function getLastCommit(): Promise<CommitDetail | null> {
     }
 }
 
-async function getContributionGraph(): Promise<ContributionData | null> {
-    try {
-        const res = await fetch(CONTRIB_API, { next: { revalidate: REVALIDATE_SECONDS } })
-        if (!res.ok) return null
-        const json = (await res.json()) as {
-            contributions?: Array<{ date: string; count: number; level: number }>
-        }
-        const contributions = json.contributions
-        if (!Array.isArray(contributions) || !contributions.length) return null
-
-        const weeks: ContributionData['weeks'] = []
-        let currentWeek: ContributionData['weeks'][number]['days'] = []
-        for (const c of contributions) {
-            const dow = new Date(c.date).getDay()
-            if (dow === 0 && currentWeek.length > 0) {
-                weeks.push({ days: currentWeek })
-                currentWeek = []
-            }
-            currentWeek.push({
-                date: c.date,
-                count: c.count,
-                level: c.level as 0 | 1 | 2 | 3 | 4,
-            })
-        }
-        if (currentWeek.length > 0) weeks.push({ days: currentWeek })
-        if (weeks.length > 0 && weeks[0].days.length < 7) {
-            const firstDow = new Date(weeks[0].days[0].date).getDay()
-            const pad: ContributionData['weeks'][number]['days'] = Array.from(
-                { length: firstDow },
-                () => ({ date: '', count: 0, level: 0 as const }),
-            )
-            weeks[0] = { days: [...pad, ...weeks[0].days] }
-        }
-
-        const total = contributions.reduce((s, c) => s + c.count, 0)
-        return { total, weeks }
-    } catch {
-        return null
-    }
-}
-
 function formatRelative(dateString: string): string {
     const then = new Date(dateString).getTime()
     const now = Date.now()
@@ -186,7 +137,7 @@ function CommitCard({ commit }: { commit: CommitData }) {
 }
 
 export default async function CommitmentSection() {
-    const [commit, graph] = await Promise.all([getLastCommit(), getContributionGraph()])
+    const commit = await getLastCommit()
 
     return (
         <section id="commitment" className={styles.page}>
@@ -203,21 +154,6 @@ export default async function CommitmentSection() {
                             rel="noopener noreferrer"
                         >
                             See activity on GitHub →
-                        </a>
-                    </p>
-                )}
-
-                {graph ? (
-                    <ContributionGraph data={graph} />
-                ) : (
-                    <p className={styles.graphFallback}>
-                        Contribution graph unavailable right now.{' '}
-                        <a
-                            href={`https://github.com/${GITHUB_USER}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            View on GitHub →
                         </a>
                     </p>
                 )}
