@@ -1,5 +1,6 @@
 import styles from './CommitmentSection.module.css'
 import { CommitCardClient, type CommitData } from './CommitCardClient'
+import { MonthlyHeatmap } from './MonthlyHeatmap'
 
 interface CommitAuthor {
     name: string
@@ -43,6 +44,75 @@ interface CommitDetail {
 
 const GITHUB_USER = 'sumitjhaa'
 const REVALIDATE_SECONDS = 300
+const CONTRIB_API = `https://github-contributions-api.jogruber.de/v4/${GITHUB_USER}`
+
+interface MonthData {
+    year: number
+    month: number
+    count: number
+    level: 0 | 1 | 2 | 3 | 4
+}
+
+interface HeatmapData {
+    years: number[]
+    months: MonthData[]
+    maxCount: number
+    totalCommits: number
+}
+
+function computeLevel(count: number, max: number): 0 | 1 | 2 | 3 | 4 {
+    if (count === 0) return 0
+    if (max === 0) return 0
+    const ratio = count / max
+    if (ratio <= 0.25) return 1
+    if (ratio <= 0.5) return 2
+    if (ratio <= 0.75) return 3
+    return 4
+}
+
+async function getMonthlyCommits(): Promise<HeatmapData | null> {
+    try {
+        const res = await fetch(CONTRIB_API, { next: { revalidate: REVALIDATE_SECONDS } })
+        if (!res.ok) return null
+        const json = (await res.json()) as {
+            contributions?: Array<{ date: string; count: number }>
+        }
+        const contributions = json.contributions
+        if (!Array.isArray(contributions) || !contributions.length) return null
+
+        const monthlyMap = new Map<string, number>()
+        for (const c of contributions) {
+            const d = new Date(c.date)
+            const key = `${d.getFullYear()}-${d.getMonth()}`
+            monthlyMap.set(key, (monthlyMap.get(key) ?? 0) + c.count)
+        }
+
+        let maxCount = 0
+        let totalCommits = 0
+        const yearSet = new Set<number>()
+        const months: MonthData[] = []
+
+        for (const [key, count] of monthlyMap) {
+            const [yearStr, monthStr] = key.split('-')
+            const year = parseInt(yearStr, 10)
+            const month = parseInt(monthStr, 10)
+            yearSet.add(year)
+            totalCommits += count
+            if (count > maxCount) maxCount = count
+            months.push({ year, month, count, level: 0 })
+        }
+
+        for (const m of months) {
+            m.level = computeLevel(m.count, maxCount)
+        }
+
+        const years = Array.from(yearSet).sort((a, b) => a - b)
+
+        return { years, months, maxCount, totalCommits }
+    } catch {
+        return null
+    }
+}
 
 async function getLastCommit(): Promise<CommitDetail | null> {
     try {
@@ -137,7 +207,7 @@ function CommitCard({ commit }: { commit: CommitData }) {
 }
 
 export default async function CommitmentSection() {
-    const commit = await getLastCommit()
+    const [commit, heatmap] = await Promise.all([getLastCommit(), getMonthlyCommits()])
 
     return (
         <section id="commitment" className={styles.page}>
@@ -154,6 +224,21 @@ export default async function CommitmentSection() {
                             rel="noopener noreferrer"
                         >
                             See activity on GitHub →
+                        </a>
+                    </p>
+                )}
+
+                {heatmap ? (
+                    <MonthlyHeatmap data={heatmap} />
+                ) : (
+                    <p className={styles.heatmapFallback}>
+                        Contribution data unavailable right now.{' '}
+                        <a
+                            href={`https://github.com/${GITHUB_USER}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View on GitHub →
                         </a>
                     </p>
                 )}
