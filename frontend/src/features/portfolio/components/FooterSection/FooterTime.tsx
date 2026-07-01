@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { WeatherIcon } from '@/features/portfolio/components/WeatherIcon/WeatherIcon'
 
 const FORMATTER = new Intl.DateTimeFormat('en-US', {
     timeZone: 'Asia/Kolkata',
@@ -15,7 +16,7 @@ function getTime() {
 
 function FooterTime() {
     const [time, setTime] = useState(getTime)
-    const [temp, setTemp] = useState<number | null>(null)
+    const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null)
 
     useEffect(() => {
         const id = setInterval(() => setTime(getTime()), 30_000)
@@ -24,12 +25,27 @@ function FooterTime() {
 
     useEffect(() => {
         fetch('/api/weather')
-            .then((r) => r.json())
-            .then((d) => setTemp(d.temp))
-            .catch(() => setTemp(null))
+            .then((r) => (r.ok ? r.json() : null))
+            .then((d) => {
+                if (d && typeof d.temp === 'number' && typeof d.code === 'number') {
+                    setWeather(d)
+                }
+            })
+            .catch(() => {})
     }, [])
 
-    return <span>Madhubani, India &middot; {time}{temp != null ? ` \u00b7 ${temp}\u00b0F` : ''}</span>
+    return (
+        <span>
+            Madhubani, India &middot; {time}
+            {weather && (
+                <>
+                    {' \u00b7 '}
+                    <WeatherIcon code={weather.code} temp={weather.temp} size={24} />{' '}
+                    {weather.temp}&deg;F
+                </>
+            )}
+        </span>
+    )
 }
 
 export default FooterTime

@@ -2,22 +2,8 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react'
 import styles from './CommitmentSection.module.css'
-
-interface MonthData {
-    year: number
-    month: number
-    count: number
-    level: 0 | 1 | 2 | 3 | 4
-}
-
-interface HeatmapData {
-    years: number[]
-    months: MonthData[]
-    maxCount: number
-    totalCommits: number
-}
-
-const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+import { MONTH_LABELS } from './constants'
+import type { HeatmapData, MonthData } from './types'
 
 interface TooltipState {
     x: number
