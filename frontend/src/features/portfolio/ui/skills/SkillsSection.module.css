@@ -12,12 +12,6 @@
     margin: 0 0 var(--title-gap, var(--heading-margin));
 }
 
-@media (max-width: 640px) {
-    .title {
-        font-size: calc(var(--heading-size) * 0.75);
-    }
-}
-
 .subtitle {
     margin-bottom: 3rem;
 }

@@ -32,10 +32,25 @@
     --body-line-height: 1.5em;
     --body-color: var(--base-300);
     --section-width: min(45rem, 100%);
-    --section-padding: 0 1.25rem;
+    --section-padding: 0 1.75rem;
     --tl-left: 1.5625rem;
     --tl-width: 0.1562rem;
     --tl-opacity: 1;
+}
+
+@media (max-width: 640px) {
+    :root {
+        --heading-size: 2.5rem;
+        --body-size: 1.25em;
+        --section-padding: 0 1.5rem;
+    }
+}
+
+@media (max-width: 400px) {
+    :root {
+        --heading-size: 2.2rem;
+        --body-size: 1.2em;
+    }
 }
 
 [data-theme='light'] {

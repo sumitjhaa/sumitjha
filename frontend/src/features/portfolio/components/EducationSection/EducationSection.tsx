@@ -68,7 +68,7 @@ function EducationSection() {
     const handleMouseLeave = useCallback(() => setTooltip(null), [])
 
     return (
-        <SectionShell id="education" heading="Education">
+        <SectionShell id="education" heading="Education" className={styles.rows}>
             <div className={styles.rows}>
                 {educationData.map((entry) => (
                     <div key={entry.id}>

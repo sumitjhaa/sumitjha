@@ -1,5 +1,5 @@
 .main {
-    width: 45rem;
+    width: min(45rem, 100%);
     margin: 0 auto;
     padding: 3.75rem 1.25rem;
     line-height: 1.6em;
@@ -81,4 +81,24 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
+}
+
+@media (max-width: 640px) {
+    .imageWrapper {
+        height: 17rem;
+    }
+
+    .description {
+        font-size: 1.25rem;
+    }
+
+    .linkList {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 400px) {
+    .imageWrapper {
+        height: 14rem;
+    }
 }

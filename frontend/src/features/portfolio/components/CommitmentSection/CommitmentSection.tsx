@@ -13,7 +13,7 @@ export default async function CommitmentSection() {
     const [commit, heatmap] = await Promise.all([getLastCommit(), getMonthlyCommits()])
 
     return (
-        <SectionShell id="commitment" heading="Very Committed">
+        <SectionShell id="commitment" heading="Very Committed" className={styles.scrollArea}>
             <div className={styles.scrollArea}>
                 {heatmap ? (
                     <MonthlyHeatmap data={heatmap} />

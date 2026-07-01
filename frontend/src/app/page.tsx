@@ -20,6 +20,7 @@ import { PROJECTS } from '@/features/portfolio/data/projects'
 import { SkillsSection } from '@/features/portfolio/ui/skills'
 import { ProjectSection } from '@/features/portfolio/ui/projects'
 import { VisuallyHidden } from '@/shared/components/ui'
+import styles from './page.module.css'
 
 const ThankYouSection = dynamic(() => import('@/features/portfolio/components/ThankYouSection/ThankYouSection'))
 const ShoutoutsSection = dynamic(() => import('@/features/portfolio/components/ShoutoutsSection/ShoutoutsSection'))
@@ -29,7 +30,7 @@ const CommitmentSection = dynamic(() => import('@/features/portfolio/components/
 
 export default function Home() {
     return (
-        <main>
+        <main className={styles.main}>
             <ClickEffect />
             <VisuallyHidden>
                 <h1>Sumit Jha - Portfolio</h1>

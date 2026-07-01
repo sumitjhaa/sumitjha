@@ -33,21 +33,25 @@ function Experience({ projectFilter, id = 'experience', hideHeading, isLast, com
                         <Image
                             src={activeCompany.logo}
                             alt={`${companyName} Logo`}
-                            width={52}
-                            height={52}
+                            width={40}
+                            height={40}
                             className={styles.logo}
                         />
                     ) : (
                         <div className={styles.fallbackLogo}>{companyName.charAt(0)}</div>
                     )}
                     <LinkHighlight href={activeCompany.href} color="#a7c08044" className={styles.subheading}>{companyName}</LinkHighlight>
-                    <span className={styles.sep}>&middot;</span>    
+                </div>
+                
+                <div className={styles.role}>
                     <span className={styles.roleMonospace}>{activeCompany.role}</span>
                 </div>
 
                 <div className={styles.meta}>
-                    <Icon name="pin" size={18} />
-                    <span className={styles.location}>{activeCompany.location}</span>
+                    <span className={styles.location}>
+                        <Icon name="pin" size={16} />
+                        {activeCompany.location}
+                    </span>
                     <span className={styles.sep}>&middot;</span>
                     <span className={styles.period}>{activeCompany.period}</span>
                 </div>

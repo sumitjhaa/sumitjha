@@ -21,7 +21,7 @@ function AboutMe() {
                      decoding="async" />
                     Nepali by roots, I grew up in{' '}
                     <LinkHighlight
-                        href="https://www.mnnit.ac.in/index.php/department/engineering/csed"
+                        href="https://www.google.com/maps/place/Parej,+Jharkhand+825326,+India/@23.8139771,85.5339749,17z/data=!4m6!3m5!1s0x39f48946b744bf5b:0xd6367a5ef96cce54!8m2!3d23.8126648!4d85.5348288!16s%2Fg%2F1tdpdl_q?hl=en&entry=ttu&g_ep=EgoyMDI2MDYyOC4wIKXMDSoASAFQAw%3D%3D"
                         color="#610AF545"
                     >
                         Parej

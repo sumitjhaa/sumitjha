@@ -2,20 +2,21 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.4em;
+    gap: 0.3em;
     font-size: var(--body-size);
     font-weight: var(--body-weight);
     line-height: var(--body-line-height);
     color: var(--body-color);
+    padding-left: 4rem;
 }
 
 .line {
     position: absolute;
-    left: var(--tl-left);
+    left: 1.5rem;
     top: 1.25rem;
-    width: var(--tl-width);
+    width: 0.125rem;
     background-color: var(--primary);
-    opacity: var(--tl-opacity);
+    opacity: 0.8;
     pointer-events: none;
     z-index: -1;
 }
@@ -44,64 +45,84 @@
 
 .company {
     display: flex;
-    align-items: flex-end;
-    gap: 0.625rem;
+    align-items: center;
+    gap: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .logo {
     border-radius: 0.375rem;
     object-fit: contain;
+    flex-shrink: 0;
+    position: absolute;
+    left: -4.375rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .fallbackLogo {
-    width: 3.25rem;
-    height: 3.25rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 0.625rem;
     background: var(--primary);
     color: var(--base-900);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     flex-shrink: 0;
     line-height: 1;
     font-family: var(--font-mono);
+    position: absolute;
+    left: -4.375rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .subheading {
-    font-size: 3rem;
+    font-size: calc(var(--heading-size) * 0.75);
     -webkit-text-stroke-width: var(--heading-stroke-width);
     -webkit-text-stroke-color: currentColor;
     -webkit-text-fill-color: transparent;
     line-height: var(--heading-line-height);
     color: var(--base-100);
+    margin-left: 0.15rem;
+}
+
+.role {
+    margin-bottom: 0.4rem;
 }
 
 .roleMonospace {
     font-family: var(--font-mono);
     color: var(--base-200);
+    font-size: 1.1em;
 }
 
 .sep {
     opacity: 0.3;
+    margin: 0 0.25rem;
 }
 
 .meta {
-    position: relative;
-    padding-left: 1.5em;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     color: var(--base-200);
     flex-wrap: wrap;
-    font-size: 1rem;
-    margin-left: 3.5em;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
 }
 
 .location {
-    margin-right: 0.125rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 }
 
 .period {
@@ -111,17 +132,22 @@
 }
 
 .project {
-    margin-left: 2.5em;
+    margin-bottom: 0.75rem;
+}
+
+.project:last-child {
+    margin-bottom: 0;
 }
 
 .projectHeader {
     font-size: var(--body-size);
     line-height: var(--body-line-height);
     color: var(--body-color);
+    margin-bottom: 0.5rem;
 }
 
 .projectTitle {
-    font-size: 2.25rem;
+    font-size: calc(var(--heading-size) * 0.6);
     font-weight: 700;
     letter-spacing: 0.0625rem;
     -webkit-text-stroke-width: 0.075rem;
@@ -132,7 +158,8 @@
 }
 
 .projectDesc {
-    margin-bottom: 0.3em;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
 }
 
 .points {
@@ -140,21 +167,143 @@
     padding-left: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.35rem;
     color: var(--body-color);
-    margin-top: 0.5em;
+    margin-top: 0.75rem;
 }
 
 .points li {
     position: relative;
-    padding-left: 1.4em;
+    padding-left: 1.25rem;
+    line-height: 1.5;
 }
 
 .points li::before {
-    content: '-';
+    content: '•';
     position: absolute;
-    left: 0.625rem;
-    color: var(--body-color);
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 1.2em;
 }
 
+@media (max-width: 768px) {
+    .descriptions {
+        padding-left: 3rem;
+    }
 
+    .line {
+        left: 1rem;
+    }
+
+    .logo,
+    .fallbackLogo {
+        left: -3.625rem;
+    }
+
+    .company {
+        gap: 0.75rem;
+    }
+
+    .subheading {
+        font-size: calc(var(--heading-size) * 0.65);
+    }
+
+    .meta {
+        gap: 0.35rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .descriptions {
+        padding-left: 2.5rem;
+    }
+
+    .line {
+        left: 0.75rem;
+    }
+
+    .logo,
+    .fallbackLogo {
+        left: -3rem;
+    }
+
+    .fallbackLogo {
+        width: 2rem;
+        height: 2rem;
+        font-size: 1rem;
+    }
+
+    .subheading {
+        font-size: calc(var(--heading-size) * 0.6);
+        margin-left: 2.5rem;
+    }
+
+    .roleMonospace {
+        font-size: 1em;
+    }
+
+    .meta {
+        font-size: 0.85rem;
+        gap: 0.3rem;
+    }
+
+    .projectTitle {
+        font-size: calc(var(--heading-size) * 0.55);
+    }
+
+    .project {
+        margin-bottom: 1.25rem;
+    }
+
+    .points li {
+        padding-left: 1rem;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    .descriptions {
+        padding-left: 2rem;
+    }
+
+    .line {
+        left: 0.5rem;
+    }
+
+    .logo,
+    .fallbackLogo {
+        left: -2.75rem;
+    }
+
+    .fallbackLogo {
+        width: 1.75rem;
+        height: 1.75rem;
+        font-size: 0.9rem;
+    }
+
+    .company {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .subheading {
+        font-size: calc(var(--heading-size) * 0.55);
+        margin-left: 2rem;
+    }
+
+    .meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .projectTitle {
+        font-size: calc(var(--heading-size) * 0.5);
+    }
+
+    .points li {
+        font-size: 0.9em;
+    }
+}

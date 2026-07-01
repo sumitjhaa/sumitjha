@@ -1,15 +1,7 @@
 .hero {
     position: relative;
-    width: min(45rem, 100%);
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    padding: 0 1.25rem;
     justify-content: center;
     line-height: 1.6em;
-    min-height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     background: var(--background);
 }
 
@@ -18,7 +10,7 @@
 }
 
 .headingWrapper h1 {
-    font-size: 4.5rem;
+    font-size: calc(var(--heading-size) * 1.15);
     line-height: var(--heading-line-height);
     -webkit-text-stroke-width: var(--heading-stroke-width);
     -webkit-text-stroke-color: currentColor;
@@ -26,12 +18,6 @@
     width: max-content;
     /*margin: 1.25rem 0 var(--heading-margin);*/
     will-change: transform;
-}
-
-@media (max-width: 640px) {
-    .headingWrapper h1 {
-        font-size: calc(var(--heading-size) * 0.75);
-    }
 }
 
 .weatherLine {
@@ -47,7 +33,7 @@
 .header p {
     color: var(--base-300);
     line-height: 1.5em;
-    font-size: 1.6em;
+    font-size: var(--body-size);
 }
 
 .smallInlineImages {
@@ -98,4 +84,21 @@
 
 .ctaButton:hover {
     opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+    .ctaButton {
+        font-size: 1.2rem;
+        padding: 0.75rem 1.1rem;
+    }
+
+    .actionButtons {
+        margin: 1.4em 0 1.4em -0.5em;
+    }
+
+    .actionButtons img {
+        height: 2.2em;
+        padding: 0.4rem;
+        filter: grayscale(0%);
+    }
 }

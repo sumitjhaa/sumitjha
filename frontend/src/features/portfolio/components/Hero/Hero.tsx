@@ -6,6 +6,7 @@ import { Avatar, ScrollIndicator, Tooltip, SoundButton } from '@/features/portfo
 import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
 import { WeatherIcon } from '@/features/portfolio/components/WeatherIcon/WeatherIcon'
+import { SectionShell } from '@/shared/components/layout/SectionShell'
 import styles from './Hero.module.css'
 
 function WeatherLine() {
@@ -91,7 +92,7 @@ const Hero = memo(function Hero() {
     }, [hideTooltip])
 
     return (
-        <section id="hero" className={styles.hero} data-section="hero">
+        <SectionShell id="hero" as="section" className={styles.hero} data-section="hero">
             <Avatar isStuck={isStuck} />
 
             <header className={styles.header}>
@@ -161,7 +162,7 @@ const Hero = memo(function Hero() {
                     Let&apos;s talk!
                 </SoundButton>
             </div>
-        </section>
+        </SectionShell>
     )
 })
 

@@ -12,6 +12,7 @@
     position: absolute;
     align-items: center;
     flex-direction: column;
+    transform: translateX(-50%);
 }
 
 .indicator:hover {
@@ -25,9 +26,9 @@
 @keyframes bounce {
     0%,
     100% {
-        transform: translateY(0);
+        transform: translateX(-50%) translateY(0);
     }
     50% {
-        transform: translateY(0.625rem);
+        transform: translateX(-50%) translateY(0.625rem);
     }
 }

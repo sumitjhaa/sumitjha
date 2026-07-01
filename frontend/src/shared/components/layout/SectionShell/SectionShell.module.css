@@ -7,8 +7,14 @@
     min-height: 100dvh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    padding-inline: var(--section-padding);
+    padding: var(--section-padding);
     line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+    .shell {
+        width: 100%;
+    }
 }
 
 .heading {
@@ -20,12 +26,6 @@
     -webkit-text-fill-color: transparent;
     font-weight: var(--heading-weight);
     margin-block-end: var(--heading-margin);
-}
-
-@media (max-width: 640px) {
-    .heading {
-        font-size: calc(var(--heading-size) * 0.75);
-    }
 }
 
 .body {
