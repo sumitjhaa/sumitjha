@@ -203,7 +203,7 @@ function useCountUp(target: number, duration = 900, delay = 500): number {
     return value
 }
 
-export function CommitCardClient({ initial }: { initial: CommitData }) {
+export function CommitCardClient({ initial, totalCommits }: { initial: CommitData; totalCommits?: number }) {
     // Use cached data on first render if available, then sync to initial
     const [commit, setCommit] = useState<CommitData>(() => loadCachedCommit() ?? initial)
 
@@ -230,7 +230,7 @@ export function CommitCardClient({ initial }: { initial: CommitData }) {
     const commentCount = commit.commentCount
 
     // Truncate long commit titles so they don't break the layout
-    const MESSAGE_MAX_LEN = 120
+    const MESSAGE_MAX_LEN = 150
     const truncatedTitle =
         title.length > MESSAGE_MAX_LEN ? title.slice(0, MESSAGE_MAX_LEN).trimEnd() + '…' : title
 
@@ -279,6 +279,11 @@ export function CommitCardClient({ initial }: { initial: CommitData }) {
                                     </span>
                                 )}
                             </a>
+                        )}
+                        {totalCommits !== undefined && (
+                            <div className={styles.contributionCount}>
+                                <span className={styles.contributionCountNumber}>{totalCommits}</span>
+                            </div>
                         )}
                         {showCommitter && (
                             <div className={styles.committerRight}>

@@ -202,8 +202,8 @@ function formatAbsolute(dateString: string): string {
     })
 }
 
-function CommitCard({ commit }: { commit: CommitData }) {
-    return <CommitCardClient initial={commit} />
+function CommitCard({ commit, totalCommits }: { commit: CommitData; totalCommits?: number }) {
+    return <CommitCardClient initial={commit} totalCommits={totalCommits} />
 }
 
 export default async function CommitmentSection() {
@@ -214,7 +214,7 @@ export default async function CommitmentSection() {
             <h1 className={styles.heading}>Very Committed</h1>
             <div className={styles.scrollArea}>
             {commit ? (
-                <CommitCard commit={commit} />
+                <CommitCard commit={commit} totalCommits={heatmap?.totalCommits} />
             ) : (
                     <p className={styles.fallback}>
                         Couldn&apos;t fetch the latest commit right now.{' '}

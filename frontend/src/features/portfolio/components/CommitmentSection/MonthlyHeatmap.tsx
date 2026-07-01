@@ -73,13 +73,6 @@ export function MonthlyHeatmap({ data }: { data: HeatmapData }) {
 
     return (
         <div className={styles.heatmap} ref={containerRef}>
-            <div className={styles.heatmapHeader}>
-                <span className={styles.heatmapTotal}>
-                    <span className={styles.heatmapTotalNumber}>{data.totalCommits}</span>
-                    <span className={styles.heatmapTotalLabel}>total contributions</span>
-                </span>
-            </div>
-
             <div className={styles.heatmapMonthLabels}>
                 <span />
                 {MONTH_LABELS.map((label) => (
@@ -146,9 +139,6 @@ export function MonthlyHeatmap({ data }: { data: HeatmapData }) {
                 >
                     <span className={styles.heatmapTooltipCount}>
                         {tooltip.count}
-                    </span>
-                    <span className={styles.heatmapTooltipLabel}>
-                        {tooltip.count === 1 ? 'contribution' : 'contributions'}
                     </span>
                     <span className={styles.heatmapTooltipDate}>
                         {MONTH_LABELS[tooltip.month]} {tooltip.year}
