@@ -45,9 +45,16 @@
 
 .grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
     gap: 1.25rem 1.75rem;
     justify-content: center;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.grid::-webkit-scrollbar {
+    display: none;
 }
 
 .card {
@@ -83,14 +90,48 @@
     color: var(--base-100);
 }
 
+@media (max-width: 768px) {
+    .icon {
+        width: calc(var(--icon-size, 5.5rem) * 0.95);
+        height: calc(var(--icon-size, 5.5rem) * 0.95);
+    }
+
+    .grid {
+        justify-content: flex-start;
+        gap: 1.25rem 1.75rem;
+        padding: 0 1rem;
+    }
+
+    .name {
+        font-size: 0.7rem;
+    }
+}
+
 @media (max-width: 640px) {
     .icon {
-        width: calc(var(--icon-size, 5.5rem) * 0.73);
-        height: calc(var(--icon-size, 5.5rem) * 0.73);
+        width: calc(var(--icon-size, 5.5rem) * 0.9);
+        height: calc(var(--icon-size, 5.5rem) * 0.9);
+    }
+
+    .grid {
+        gap: 1rem 1.5rem;
+        padding: 0 0.75rem;
+    }
+
+    .name {
+        font-size: 0.65rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .icon {
+        width: calc(var(--icon-size, 5.5rem) * 0.85);
+        height: calc(var(--icon-size, 5.5rem) * 0.85);
     }
 
     .grid {
         gap: 0.875rem 1.25rem;
+        padding: 0 0.5rem;
     }
 
     .name {

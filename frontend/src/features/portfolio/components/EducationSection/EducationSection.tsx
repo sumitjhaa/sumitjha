@@ -19,7 +19,7 @@ const educationData = [
     {
         id: 'highschool',
         period: '2017 – 2019',
-        institute: 'DAV Kedia Vishwabharti School',
+        institute: 'DAV KVB School',
         logo: '/img/educationicons/DAV.png',
         location: 'Biratnagar, Morang, Nepal',
         degree: 'Senior Secondary (CBSE – PCM)',
@@ -28,7 +28,7 @@ const educationData = [
     {
         id: 'school',
         period: '2012 – 2017',
-        institute: 'DAV Kedia Vishwabharti School',
+        institute: 'DAV KVB School',
         logo: '/img/educationicons/DAV.png',
         location: 'Biratnagar, Morang, Nepal',
         degree: 'Secondary Education (CBSE Class X)',
@@ -53,13 +53,20 @@ const educationData = [
 ]
 
 function EducationSection() {
-    const [tooltip, setTooltip] = useState<{ logo: string; institute: string; location: string } | null>(null)
+    const [tooltip, setTooltip] = useState<{
+        logo: string
+        institute: string
+        location: string
+    } | null>(null)
     const [pos, setPos] = useState<Position>({ x: 0, y: 0 })
 
-    const handleMouseEnter = useCallback((entry: typeof educationData[number], e: React.MouseEvent) => {
-        setTooltip({ logo: entry.logo, institute: entry.institute, location: entry.location })
-        setPos({ x: e.clientX, y: e.clientY })
-    }, [])
+    const handleMouseEnter = useCallback(
+        (entry: (typeof educationData)[number], e: React.MouseEvent) => {
+            setTooltip({ logo: entry.logo, institute: entry.institute, location: entry.location })
+            setPos({ x: e.clientX, y: e.clientY })
+        },
+        [],
+    )
 
     const handleMouseMove = useCallback((e: React.MouseEvent) => {
         setPos({ x: e.clientX, y: e.clientY })
@@ -89,7 +96,6 @@ function EducationSection() {
                                         <span className={styles.score}>{entry.score}</span>
                                     )}
                                 </div>
-
                             </div>
                         </div>
                     </div>

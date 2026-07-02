@@ -69,14 +69,33 @@
     font-family: var(--font-mono);
 }
 
+@media (max-width: 768px) {
+    .institute {
+        font-size: 1.8em;
+    }
+
+    .period {
+        font-size: 0.8rem;
+    }
+
+    .score {
+        font-size: 0.8rem;
+    }
+
+    .row {
+        padding: 1.25em 0.75em;
+    }
+}
+
 @media (max-width: 640px) {
     .row {
         flex-direction: column;
         gap: 0.8em;
+        padding: 1.25em 0.75em;
     }
 
     .institute {
-        font-size: 1.6rem;
+        font-size: 1.7em;
     }
 
     .instituteRow {
@@ -88,18 +107,49 @@
         flex-direction: column;
         gap: 0.3em;
     }
+
+    .degree {
+        font-size: 1em;
+    }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+    .row {
+        padding: 1em 0.5em;
+    }
+
     .institute {
-        font-size: 1.8rem;
+        font-size: 1.5em;
+    }
+
+    .period {
+        font-size: 0.75rem;
     }
 
     .degree {
-        font-size: 1.05em;
+        font-size: 0.95em;
     }
 
+    .score {
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 400px) {
     .row {
-        padding: 1em 0.5em;
+        padding: 0.875em 0.375em;
+        gap: 0.6em;
+    }
+
+    .institute {
+        font-size: 1.35em;
+    }
+
+    .degree {
+        font-size: 0.9em;
+    }
+
+    .period {
+        font-size: 0.7rem;
     }
 }

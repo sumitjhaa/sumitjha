@@ -758,3 +758,97 @@
         font-size: 0.72em;
     }
 }
+
+@media (max-width: 480px) {
+    .card {
+        padding: 0.875rem 0.75rem;
+    }
+
+    .cardInner {
+        gap: 0.75rem;
+    }
+
+    .leftColumn {
+        min-width: unset;
+        position: static;
+    }
+
+    .avatarLinkRight {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .identityNameRight {
+        font-size: 0.75em;
+    }
+
+    .identityHandleRight {
+        font-size: 0.65em;
+    }
+
+    .contributionCountNumber {
+        font-size: 1.4em;
+    }
+
+    .contributionCountLabel {
+        font-size: 0.75em;
+    }
+
+    .messageText {
+        font-size: 1.2em;
+    }
+
+    .headerRow {
+        flex-wrap: wrap;
+        gap: 0.25em;
+    }
+
+    .branchRow {
+        gap: 0.5rem;
+    }
+
+    .branchSha {
+        font-size: 0.85em;
+    }
+
+    .branchStats {
+        gap: 0.375rem;
+    }
+
+    .branchStatDoto {
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 0.75rem 0.5rem;
+    }
+
+    .avatarLinkRight {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .avatarLinkRight::after {
+        width: 0.875rem;
+        height: 0.875rem;
+        bottom: 0.25rem;
+        right: 0.25rem;
+    }
+
+    .messageText {
+        font-size: 1em;
+    }
+
+    .contributionCountNumber {
+        font-size: 1.2em;
+    }
+
+    .fileItem {
+        grid-template-columns: 1.125rem 1fr auto;
+        gap: 0.375rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.68em;
+    }
+}
