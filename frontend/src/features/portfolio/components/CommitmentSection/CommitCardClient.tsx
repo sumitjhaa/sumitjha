@@ -115,16 +115,18 @@ export function CommitCardClient({
                 <main className={styles.rightColumn}>
                     {totalCommits !== undefined && (
                         <div className={styles.contributionCount}>
-                            <span className={styles.contributionCountNumber}>{totalCommits}</span>
                             <span className={styles.contributionCountLabel}>
-                                {' '}
                                 total contributions
+                            </span>
+                            <span className={styles.contributionCountNumber}>
+                                {totalCommits}
                             </span>
                         </div>
                     )}
                     <div className={styles.headerRow}>
-                        <div>last committed</div>
+                        <span className={styles.headerLabel}>last committed</span>
                         <time
+                            className={styles.time}
                             dateTime={initial.author.date}
                             title={formatAbsolute(initial.author.date)}
                         >

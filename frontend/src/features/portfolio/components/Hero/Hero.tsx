@@ -1,7 +1,7 @@
 'use client'
 
-import { memo, useCallback, useRef, useState, useEffect } from 'react'
-import { useAvatarStick, useTooltip } from '@/shared/hooks'
+import { memo, useCallback, useRef } from 'react'
+import { useAvatarStick, useTooltip, useWeather } from '@/shared/hooks'
 import { Avatar, ScrollIndicator, Tooltip, SoundButton } from '@/features/portfolio/ui'
 import { LinkHighlight } from '@/shared/components/ui'
 import { SITE_CONFIG, SOCIAL_LINKS } from '@/shared/config'
@@ -10,20 +10,7 @@ import { SectionShell } from '@/shared/components/layout/SectionShell'
 import styles from './Hero.module.css'
 
 function WeatherLine() {
-    const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null)
-
-    useEffect(() => {
-        fetch('/api/weather')
-            .then((r) => (r.ok ? r.json() : null))
-            .then((d) => {
-                if (d && typeof d.temp === 'number' && typeof d.code === 'number') {
-                    setWeather(d)
-                } else {
-                    setWeather(null)
-                }
-            })
-            .catch(() => setWeather(null))
-    }, [])
+    const weather = useWeather()
 
     return (
         <span className={styles.weatherLine}>
@@ -157,6 +144,8 @@ const Hero = memo(function Hero() {
                 <SoundButton
                     as="a"
                     href={`mailto:${SITE_CONFIG.email}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`${styles.ctaButton} sparkclick`}
                 >
                     Let&apos;s talk!

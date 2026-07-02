@@ -5,6 +5,10 @@ export { useClickEffect } from './events/useClickEffect'
 
 // state
 export { useLocalStorage } from './state/useLocalStorage'
+export { useWeather } from './state/useWeather'
+export type { WeatherData } from './state/useWeather'
+export { useGitHub } from './state/useGitHub'
+export { useIsClient } from './state/useIsClient'
 
 // scroll
 export { useScrollProgress } from './scroll/useScrollProgress'

@@ -1,7 +1,7 @@
 .sparkclick-effect {
     position: fixed;
     pointer-events: none;
-    z-index: 9999;
+    z-index: var(--z-tooltip);
 }
 
 .sparkclick-effect .spike {

@@ -48,15 +48,16 @@
     z-index: 999;
     background: color-mix(in srgb, var(--background) 85%, transparent);
     border: 0.0625rem solid color-mix(in srgb, var(--base-100) 10%, transparent);
-    border-radius: 0.75rem;
-    padding: 0.5rem;
-    width: 17.5rem;
+    border-radius: var(--radius-2xl);
+    padding: 0.75rem;
+    width: min(45rem, calc(100vw - 2.5rem));
     max-height: 85vh;
     overflow-y: auto;
     color: var(--base-100);
     opacity: 0;
-    transform: translateY(-0.5rem);
+    transform: translateY(-0.5rem) scale(0.97);
     pointer-events: none;
+    transform-origin: top right;
     transition:
         opacity 0.2s ease,
         transform 0.2s ease;
@@ -64,71 +65,71 @@
 
 .open {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     pointer-events: auto;
 }
 
-.grid {
+.searchWrap {
+    padding: 0 0.25rem 0.5rem;
+    border-bottom: 0.0625rem solid color-mix(in srgb, var(--base-100) 8%, transparent);
+    margin-bottom: 0.5rem;
+}
+
+.search {
+    width: 100%;
+    padding: 0.5rem 0.625rem;
+    border: none;
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--base-100) 8%, transparent);
+    color: var(--base-100);
+    font-family: inherit;
+    font-size: 0.8rem;
+    outline: none;
+    transition: background 0.15s;
+}
+
+.search:focus {
+    background: color-mix(in srgb, var(--base-100) 14%, transparent);
+}
+
+.search::placeholder {
+    opacity: 0.35;
+    text-transform: capitalize;
+}
+
+.groups {
     display: flex;
     flex-direction: column;
+    gap: 0.75rem;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.groupLabel {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.3;
+    padding: 0 0.25rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 0.25rem;
 }
 
-.row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.25rem;
-    position: relative;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.25rem;
-}
-
-.row::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0.25rem;
-    right: 0.25rem;
-    height: 0.0625rem;
-    background: repeating-linear-gradient(
-        to right,
-        color-mix(in srgb, var(--base-100) 12%, transparent) 0,
-        color-mix(in srgb, var(--base-100) 12%, transparent) 1rem,
-        transparent 1rem,
-        transparent 1.5rem
-    );
-}
-
-.row:last-child::after {
-    display: none;
-}
-
-.rowSingle {
-    display: grid;
-    grid-template-columns: 1fr;
-    position: relative;
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.25rem;
-}
-
-.rowSingle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0.25rem;
-    right: 0.25rem;
-    height: 0.0625rem;
-    background: repeating-linear-gradient(
-        to right,
-        color-mix(in srgb, var(--base-100) 12%, transparent) 0,
-        color-mix(in srgb, var(--base-100) 12%, transparent) 1rem,
-        transparent 1rem,
-        transparent 1.5rem
-    );
-}
-
-.rowSingle:last-child::after {
-    display: none;
+.noResults {
+    display: block;
+    padding: 1rem 0.5rem 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.4;
 }
 
 .item {
@@ -139,7 +140,7 @@
     width: 100%;
     padding: 0.5rem 0.375rem;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-lg);
     background: transparent;
     color: var(--base-100);
     cursor: pointer;
@@ -152,14 +153,18 @@
     background: color-mix(in srgb, var(--base-100) 8%, transparent);
 }
 
+.itemActive {
+    background: color-mix(in srgb, var(--primary) 15%, transparent);
+}
+
 .colors {
     display: flex;
     gap: 0.1875rem;
 }
 
 .dot {
-    width: 0.875rem;
-    height: 0.875rem;
+    width: 1.25rem;
+    height: 1.25rem;
     border-radius: 50%;
     border: 0.0625rem solid color-mix(in srgb, var(--base-100) 10%, transparent);
     flex-shrink: 0;

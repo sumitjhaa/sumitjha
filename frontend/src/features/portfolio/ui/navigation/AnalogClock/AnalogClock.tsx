@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { cn, playSound } from '@/shared/utils'
 import { useTheme } from '@/app/providers/ThemeProvider'
 import { usePanel } from '@/app/providers/PanelProvider'
+import { useIsClient } from '@/shared/hooks'
 import { PALETTE_COLORS } from '@/shared/config'
 import styles from './AnalogClock.module.css'
 
@@ -16,31 +17,43 @@ interface TimeData {
     date: string
 }
 
+const TIMEZONE = 'Asia/Kolkata'
+
 function getTime(): TimeData {
     const now = new Date()
-    const h24 = now.getHours()
-    const h = h24 % 12 || 12
-    const m = now.getMinutes()
-    const s = now.getSeconds()
+
+    const timeStr = now.toLocaleString('en-US', {
+        timeZone: TIMEZONE,
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    })
+    const [hStr, mStr, sStr] = timeStr.split(':')
+    const h24 = Number(hStr)
+    const m = Number(mStr)
+    const s = Number(sStr)
+
     return {
         hour: ((h24 % 12) + m / 60) * 30,
         minute: (m + s / 60) * 6,
         second: s * 6,
         ampm: h24 >= 12 ? 'PM' : 'AM',
-        timeDigits: `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`,
-        date: `${String(now.getMonth() + 1).padStart(2, '0')}/${String(now.getDate()).padStart(2, '0')}`,
+        timeDigits: now.toLocaleString('en-US', {
+            timeZone: TIMEZONE,
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false,
+        }),
+        date: now.toLocaleString('en-US', {
+            timeZone: TIMEZONE,
+            month: '2-digit',
+            day: '2-digit',
+        }),
     }
 }
 
-function ClockSVG({ size, className }: { size: number; className?: string }) {
-    const [t, setT] = useState<TimeData | null>(null)
-
-    useEffect(() => {
-        setT(getTime())
-        const id = setInterval(() => setT(getTime()), 1000)
-        return () => clearInterval(id)
-    }, [])
-
+function ClockSVG({ size, t, className }: { size: number; t: TimeData | null; className?: string }) {
     const r = 10
 
     return (
@@ -90,18 +103,21 @@ export function AnalogClock() {
     const open = isOpen('clock')
 
     const miniRef = useRef<HTMLSpanElement>(null)
-    const modalRef = useRef<HTMLDivElement>(null)
-    const flyRef = useRef<HTMLDivElement>(null)
+    const panelRef = useRef<HTMLDivElement>(null)
     const targetRef = useRef<HTMLDivElement>(null)
+    const flyRef = useRef<HTMLDivElement>(null)
 
-    const [flyStart, setFlyStart] = useState<{ x: number; y: number; size: number } | null>(null)
-    const [flyDone, setFlyDone] = useState(false)
+    const [flyState, setFlyState] = useState<{
+        x: number
+        y: number
+        size: number
+        targetX: number
+        targetY: number
+        targetSize: number
+    } | null>(null)
     const [reveal, setReveal] = useState(false)
 
-    const [isClient, setIsClient] = useState(false)
-
-    useEffect(() => setIsClient(true), [])
-
+    const isClient = useIsClient()
     const accent = PALETTE_COLORS[theme][3]
     const accentColor = isClient ? `color-mix(in srgb, ${accent} 45%, var(--base-100))` : undefined
 
@@ -113,75 +129,60 @@ export function AnalogClock() {
 
     useEffect(() => {
         if (!open) {
-            setFlyStart(null)
-            setFlyDone(false)
+            setFlyState(null)
             setReveal(false)
             return
         }
 
         const mini = miniRef.current
-        if (!mini) return
-        const r = mini.getBoundingClientRect()
-        setFlyStart({ x: r.left + r.width / 2, y: r.top + r.height / 2, size: r.width })
+        const panel = panelRef.current
+        const target = targetRef.current
+        if (!mini || !panel || !target) return
+
+        const mr = mini.getBoundingClientRect()
+        const tr = target.getBoundingClientRect()
+        const ts = 130
+
+        requestAnimationFrame(() => {
+            setFlyState({
+                x: mr.left + mr.width / 2,
+                y: mr.top + mr.height / 2,
+                size: mr.width,
+                targetX: tr.left + tr.width / 2,
+                targetY: tr.top + tr.height / 2,
+                targetSize: ts,
+            })
+        })
     }, [open])
 
     useEffect(() => {
-        if (!flyStart || flyDone) return
-
+        if (!flyState) return
         const el = flyRef.current
-        const panel = modalRef.current
-        if (!el || !panel) return
+        if (!el) return
 
-        let started = false
-        let flyTimer: ReturnType<typeof setTimeout> | undefined
-
-        const onEnd = () => {
-            if (started) return
-            started = true
-            panel.removeEventListener('transitionend', onEnd)
-
-            const target = targetRef.current
-            if (!target) return
-
-            const tr = target.getBoundingClientRect()
-            const tx = tr.left + tr.width / 2
-            const ty = tr.top + tr.height / 2
-            const ts = 130
-
+        requestAnimationFrame(() => {
             el.style.transition = 'none'
-            el.style.transform = `translate(${flyStart.x}px, ${flyStart.y}px) translate(-50%, -50%)`
-            el.style.width = `${flyStart.size}px`
-            el.style.height = `${flyStart.size}px`
+            el.style.transform = `translate(${flyState.x}px, ${flyState.y}px) translate(-50%, -50%)`
+            el.style.width = `${flyState.size}px`
+            el.style.height = `${flyState.size}px`
             el.style.opacity = '1'
 
             void el.offsetHeight
 
             el.style.transition =
-                'transform 0.2s ease-out, width 0.1s ease-out, height 0.1s ease-out'
-            el.style.transform = `translate(${tx}px, ${ty}px) translate(-50%, -50%)`
-            el.style.width = `${ts}px`
-            el.style.height = `${ts}px`
+                'transform 0.25s ease-out, width 0.12s ease-out, height 0.12s ease-out'
+            el.style.transform = `translate(${flyState.targetX}px, ${flyState.targetY}px) translate(-50%, -50%)`
+            el.style.width = `${flyState.targetSize}px`
+            el.style.height = `${flyState.targetSize}px`
+        })
 
-            flyTimer = setTimeout(() => {
-                setFlyStart(null)
-                setFlyDone(true)
-                setReveal(true)
-            }, 250)
-        }
+        const timer = setTimeout(() => {
+            setFlyState(null)
+            setReveal(true)
+        }, 300)
 
-        panel.addEventListener('transitionend', onEnd)
-
-        const fallbackTimer = setTimeout(() => {
-            panel.removeEventListener('transitionend', onEnd)
-            onEnd()
-        }, 350)
-
-        return () => {
-            clearTimeout(fallbackTimer)
-            clearTimeout(flyTimer)
-            panel.removeEventListener('transitionend', onEnd)
-        }
-    }, [flyStart, flyDone])
+        return () => clearTimeout(timer)
+    }, [flyState])
 
     useEffect(() => {
         if (!open) return
@@ -208,14 +209,14 @@ export function AnalogClock() {
                 >
                     <span className={styles.dateText}>{t?.date ?? '--/--'}</span>
                     <span className={cn(styles.miniClockWrap, open && styles.miniHidden)} ref={miniRef}>
-                        <ClockSVG size={40} />
+                        <ClockSVG size={40} t={t} />
                     </span>
                 </button>
 
                 {open && <div className={styles.backdrop} onClick={close} aria-hidden />}
 
                 <div
-                    ref={modalRef}
+                    ref={panelRef}
                     className={cn(styles.panel, open && styles.open)}
                     role="dialog"
                     aria-modal={open}
@@ -225,7 +226,7 @@ export function AnalogClock() {
                         ref={targetRef}
                         className={cn(styles.clockWrap, reveal && styles.clockVisible)}
                     >
-                        <ClockSVG size={130} />
+                        <ClockSVG size={130} t={t} />
                     </div>
                     <div className={cn(styles.body, reveal && styles.bodyVisible)}>
                         <span className={styles.timeDigits}>{t?.timeDigits ?? '--:--'}</span>
@@ -233,17 +234,12 @@ export function AnalogClock() {
                     </div>
                 </div>
 
-                {flyStart && (
+                {flyState && (
                     <div
                         ref={flyRef}
                         className={styles.flyClock}
-                        style={{
-                            transform: `translate(${flyStart.x}px, ${flyStart.y}px) translate(-50%, -50%)`,
-                            width: flyStart.size,
-                            height: flyStart.size,
-                        }}
                     >
-                        <ClockSVG size={flyStart.size} />
+                        <ClockSVG size={flyState.size} t={t} />
                     </div>
                 )}
             </div>

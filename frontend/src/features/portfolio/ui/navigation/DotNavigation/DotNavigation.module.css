@@ -28,7 +28,7 @@
     content: '';
     width: 2rem;
     height: 0.25rem;
-    border-radius: 0.1875rem;
+    border-radius: var(--radius-xxs);
     background: var(--base-100);
     opacity: 0.15;
     transition:

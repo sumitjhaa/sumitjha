@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    outline: none;
 }
 
 html,
@@ -30,7 +31,7 @@ a {
 
 ::-webkit-scrollbar-thumb {
     background: var(--primary);
-    border-radius: 0.3125rem;
+    border-radius: var(--radius-sm);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -45,5 +46,5 @@ a {
 code,
 pre,
 kbd {
-    font-family: 'CaskaydiaMono Nerd Font Mono', monospace;
+    font-family: var(--font-mono);
 }

@@ -26,7 +26,7 @@
     line-height: 1.6;
     padding: 0.875rem 1.125rem;
     border: 0.0625rem dashed color-mix(in srgb, var(--neutral) 60%, transparent);
-    border-radius: 0.625rem;
+    border-radius: var(--radius-xl);
     background: color-mix(in srgb, var(--background) 30%, transparent);
 }
 

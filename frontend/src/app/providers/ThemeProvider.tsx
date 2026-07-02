@@ -12,10 +12,15 @@ import {
 import { useLocalStorage, STORAGE_KEYS, THEMES } from '@/shared'
 import type { Theme } from '@/shared/types'
 
+export function isLightTheme(t: Theme): boolean {
+    return t.includes('light') || t.includes('latte') || t.includes('dawn')
+}
+
 interface ThemeContextValue {
     theme: Theme
     setTheme: (theme: Theme) => void
     toggleTheme: () => void
+    isLight: boolean
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined)
@@ -27,9 +32,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     const themeRef = useRef(theme)
 
     useEffect(() => {
+        if (!THEMES.includes(theme)) {
+            setThemeState(DEFAULT_THEME)
+            return
+        }
         document.documentElement.setAttribute('data-theme', theme)
         themeRef.current = theme
-    }, [theme])
+    }, [theme, setThemeState])
 
     const toggleTheme = useCallback(() => {
         const idx = THEMES.indexOf(themeRef.current)
@@ -38,7 +47,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }, [setThemeState])
 
     const value = useMemo(
-        () => ({ theme, setTheme: setThemeState, toggleTheme }),
+        () => ({
+            theme,
+            setTheme: setThemeState,
+            toggleTheme,
+            isLight: isLightTheme(theme),
+        }),
         [theme, setThemeState, toggleTheme],
     )
 

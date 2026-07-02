@@ -8,12 +8,12 @@
     position: fixed;
     left: var(--tt-x, 0);
     top: var(--tt-y, 0);
-    z-index: 9999;
+    z-index: var(--z-tooltip);
     pointer-events: none;
     max-width: 15rem;
     padding: var(--tt-padding);
     border: 0.0625rem solid color-mix(in srgb, var(--tt-color) 30%, transparent);
-    border-radius: 0.625rem;
+    border-radius: var(--radius-xl);
     background: color-mix(in srgb, var(--background) 80%, transparent);
     backdrop-filter: blur(5rem) saturate(200%);
     -webkit-backdrop-filter: blur(5rem) saturate(200%);
@@ -75,7 +75,7 @@
     align-items: center;
     justify-content: center;
     padding: 0 0.4375rem;
-    border-radius: 0.25rem;
+    border-radius: var(--radius-xs);
     background: color-mix(in srgb, var(--base-100) 10%, transparent);
     font-family: var(--font-mono);
     font-size: 0.7rem;

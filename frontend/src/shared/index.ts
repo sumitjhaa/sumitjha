@@ -13,6 +13,7 @@ export {
     useMediaQuery,
     useReducedMotion,
     useTooltip,
+    useIsClient,
 } from './hooks'
 
 // types
@@ -36,7 +37,7 @@ export { SectionShell } from './components/layout/SectionShell'
 export { createPolymorphic, findChild, findAllChildren, withoutChildren, cloneChild } from './components/utils'
 
 // config
-export { SITE_CONFIG, SOCIAL_LINKS, SECTIONS, SCROLL_DEBOUNCE_MS, SCROLL_THROTTLE_MS, THEMES, PALETTE_COLORS, THEME_PAIRS, getThemeRows, BASE_SHORTCUTS, VIM_SHORTCUTS } from './config'
+export { SITE_CONFIG, SOCIAL_LINKS, SECTIONS, SCROLL_DEBOUNCE_MS, SCROLL_THROTTLE_MS, THEMES, PALETTE_COLORS, BASE_SHORTCUTS } from './config'
 export type { ShortcutDef } from './config'
 
 // services

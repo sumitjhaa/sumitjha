@@ -9,7 +9,7 @@
     pointer-events: none;
     mix-blend-mode: difference;
     filter: url(#goo);
-    z-index: 9999;
+    z-index: var(--z-tooltip);
 }
 
 .circle {

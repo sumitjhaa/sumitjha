@@ -22,7 +22,7 @@
     max-height: 22.5rem;
     object-fit: cover;
     display: block;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-lg);
     will-change: transform;
 }
 
@@ -30,7 +30,7 @@
     position: relative;
     margin-bottom: 1.75rem;
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-lg);
     cursor: pointer;
 }
 
@@ -69,7 +69,7 @@
     position: absolute;
     top: 0.75rem;
     padding: 0.25rem 0.625rem;
-    border-radius: 0.25rem;
+    border-radius: var(--radius-xs);
     background: rgba(0, 0, 0, 0.65);
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -139,7 +139,7 @@
     font-size: 0.85rem;
     border-radius: 7mm;
     outline: 0.125rem solid var(--neutral);
-    transition: 0.2s;
+    transition: var(--transition-normal);
     position: relative;
     overflow: hidden;
 }
@@ -152,7 +152,7 @@
     background: rgba(0, 0, 0, 0.1);
     transform: skewX(30deg);
     left: -1.25rem;
-    transition: 0.25s;
+    transition: var(--transition-slow);
 }
 
 .linkBtn:active .linkTop::before {

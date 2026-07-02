@@ -3,10 +3,10 @@
     left: var(--tooltip-x);
     top: var(--tooltip-y);
     pointer-events: none;
-    z-index: 9999;
+    z-index: var(--z-tooltip);
     max-width: 16.875rem;
     padding: 0.625rem 1rem;
-    border-radius: 0.75rem;
+    border-radius: var(--radius-2xl);
     background: color-mix(in srgb, var(--tooltip-border) 20%, transparent);
     backdrop-filter: blur(0.75rem);
     -webkit-backdrop-filter: blur(0.75rem);

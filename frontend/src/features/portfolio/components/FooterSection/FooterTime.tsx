@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useWeather } from '@/shared/hooks'
 import { WeatherIcon } from '@/features/portfolio/components/WeatherIcon/WeatherIcon'
 
 const FORMATTER = new Intl.DateTimeFormat('en-US', {
@@ -10,28 +11,18 @@ const FORMATTER = new Intl.DateTimeFormat('en-US', {
     hour12: true,
 })
 
-function getTime() {
-    return FORMATTER.format(new Date())
-}
-
 function FooterTime() {
-    const [time, setTime] = useState(getTime)
-    const [weather, setWeather] = useState<{ temp: number; code: number } | null>(null)
+    const [time, setTime] = useState(() =>
+        FORMATTER.format(new Date()),
+    )
+    const weather = useWeather()
 
     useEffect(() => {
-        const id = setInterval(() => setTime(getTime()), 30_000)
+        function tick() {
+            setTime(FORMATTER.format(new Date()))
+        }
+        const id = setInterval(tick, 30_000)
         return () => clearInterval(id)
-    }, [])
-
-    useEffect(() => {
-        fetch('/api/weather')
-            .then((r) => (r.ok ? r.json() : null))
-            .then((d) => {
-                if (d && typeof d.temp === 'number' && typeof d.code === 'number') {
-                    setWeather(d)
-                }
-            })
-            .catch(() => {})
     }, [])
 
     return (

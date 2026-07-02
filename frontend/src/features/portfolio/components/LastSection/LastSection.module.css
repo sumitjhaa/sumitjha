@@ -10,7 +10,7 @@
 
 .descriptions p img {
     height: 1.5em;
-    border-radius: 0.3125rem;
+    border-radius: var(--radius-sm);
     vertical-align: middle;
     margin: 0 0.15em;
 }

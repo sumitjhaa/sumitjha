@@ -1,37 +1,57 @@
 'use client'
 
-import { useState, useEffect, memo, useCallback } from 'react'
+import { useState, useEffect, useMemo, memo, useCallback } from 'react'
 import { cn, playSound } from '@/shared/utils'
-import { useTheme } from '@/app/providers/ThemeProvider'
+import { useTheme, isLightTheme } from '@/app/providers/ThemeProvider'
 import { GlassButton } from '@/shared/components/ui'
 import { usePanel } from '@/app/providers/PanelProvider'
-import { getThemeRows, PALETTE_COLORS, THEMES } from '@/shared/config'
-import { ThemeRow } from './ThemeRow'
-import { ThemeSingleRow } from './ThemeSingleRow'
+import { useIsClient, PALETTE_COLORS, THEMES } from '@/shared'
+import { ThemeItem } from './ThemeItem'
 import type { Theme } from '@/shared/types'
 import styles from './ThemeToggle.module.css'
 
-const ROWS = getThemeRows(THEMES)
+interface Group {
+    label: string
+    themes: Theme[]
+}
+
+function buildGroups(): Group[] {
+    const light = THEMES.filter(isLightTheme)
+    const dark = THEMES.filter((t) => !isLightTheme(t))
+    return [
+        { label: 'light', themes: light },
+        { label: 'dark', themes: dark },
+    ]
+}
+
+const GROUPS = buildGroups()
 
 export const ThemeToggle = memo(function ThemeToggle() {
     const { theme, setTheme } = useTheme()
     const { isOpen, toggle, close } = usePanel()
     const open = isOpen('theme')
-    const [isClient, setIsClient] = useState(false)
+    const isClient = useIsClient()
+    const [query, setQuery] = useState('')
 
-    useEffect(() => setIsClient(true), [])
+    useEffect(() => { if (!open) setQuery('') }, [open])
+
+    const filteredGroups = useMemo(() => {
+        if (!query.trim()) return GROUPS
+        const q = query.toLowerCase()
+        return GROUPS.filter((g) =>
+            g.themes.some((t) => t.includes(q)),
+        ).map((g) => ({
+            ...g,
+            themes: g.themes.filter((t) => t.includes(q)),
+        }))
+    }, [query])
 
     const togglePanel = useCallback(() => {
         playSound('/sounds/laptop-touchpad.mp3')
         toggle('theme')
     }, [toggle])
 
-    const selectTheme = useCallback(
-        (t: Theme) => {
-            setTheme(t)
-        },
-        [setTheme],
-    )
+    const selectTheme = useCallback((t: Theme) => setTheme(t), [setTheme])
 
     const accent = PALETTE_COLORS[theme][3]
 
@@ -72,13 +92,31 @@ export const ThemeToggle = memo(function ThemeToggle() {
                     aria-modal={open}
                     aria-label="Theme selection"
                 >
-                    <div className={styles.grid}>
-                        {ROWS.map((row, ri) => {
-                            if (Array.isArray(row)) {
-                                return <ThemeRow key={ri} themes={row} onSelect={selectTheme} />
-                            }
-                            return <ThemeSingleRow key={ri} theme={row} onSelect={selectTheme} />
-                        })}
+                    <div className={styles.searchWrap}>
+                        <input
+                            className={styles.search}
+                            type="text"
+                            placeholder="Search themes..."
+                            value={query}
+                            onChange={(e) => setQuery(e.target.value)}
+                            aria-label="Search themes"
+                        />
+                    </div>
+                    <div className={styles.groups}>
+                        {filteredGroups.length > 0 ? (
+                            filteredGroups.map((g) => (
+                                <div key={g.label} className={styles.group}>
+                                    <span className={styles.groupLabel}>{g.label}</span>
+                                    <div className={styles.grid}>
+                                        {g.themes.map((t) => (
+                                            <ThemeItem key={t} theme={t} onSelect={selectTheme} />
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <span className={styles.noResults}>No themes found</span>
+                        )}
                     </div>
                 </div>
             </div>

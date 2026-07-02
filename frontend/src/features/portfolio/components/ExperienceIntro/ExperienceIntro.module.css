@@ -12,7 +12,7 @@
     font-family: var(--font-mono);
     font-size: 0.85em;
     padding: 0.0625rem 0.25rem;
-    border-radius: 0.1875rem;
+    border-radius: var(--radius-xxs);
     background: color-mix(in srgb, var(--base-100) 8%, transparent);
     color: var(--primary);
     vertical-align: middle;

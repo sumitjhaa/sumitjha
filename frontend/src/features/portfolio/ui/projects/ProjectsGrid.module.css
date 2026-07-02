@@ -30,7 +30,7 @@
     text-decoration: none;
     color: inherit;
     border: 0.0625rem solid var(--neutral);
-    border-radius: 0.5rem;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
