@@ -11,10 +11,11 @@ interface ThemeItemProps {
 }
 
 export const ThemeItem = memo(function ThemeItem({ theme, onSelect }: ThemeItemProps) {
+    const handleClick = () => onSelect(theme)
     return (
         <button
             className={styles.item}
-            onClick={() => onSelect(theme)}
+            onClick={handleClick}
             type="button"
             aria-label={`Switch to ${theme} theme`}
         >

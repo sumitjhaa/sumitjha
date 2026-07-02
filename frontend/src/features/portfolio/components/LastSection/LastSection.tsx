@@ -12,12 +12,7 @@ function LastSection() {
                     about tabs versus spaces,
                     <img
                         src="/img/inline-images/dwight-nodding.gif"
-                        style={{
-                            height: '1.5em',
-                            borderRadius: '5px',
-                            verticalAlign: 'middle',
-                            margin: '0 0.15em',
-                        }}
+                        className="inlineImage"
                         alt=""
                         loading="lazy"
                      decoding="async" />
@@ -29,12 +24,7 @@ function LastSection() {
                     bugs escaped into production.
                     <img
                         src="/img/inline-images/winter-is-coming.gif"
-                        style={{
-                            height: '1.5em',
-                            borderRadius: '5px',
-                            verticalAlign: 'middle',
-                            margin: '0 0.15em',
-                        }}
+                        className="inlineImage"
                         alt=""
                         loading="lazy"
                      decoding="async" />

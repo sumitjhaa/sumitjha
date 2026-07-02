@@ -29,19 +29,11 @@ export default class ErrorBoundary extends Component<Props, State> {
         if (this.state.hasError) {
             return (
                 this.props.fallback || (
-                    <div style={{ padding: '2em', textAlign: 'center', color: 'var(--base-300)' }}>
+                    <div className="errorBoundary">
                         <h2>Something went wrong</h2>
                         <button
                             onClick={() => this.setState({ hasError: false })}
-                            style={{
-                                marginTop: '1em',
-                                padding: '0.5em 1.5em',
-                                background: 'var(--secondary)',
-                                color: 'white',
-                                border: 'none',
-                                borderRadius: '7mm',
-                                cursor: 'pointer',
-                            }}
+                            className="errorBoundaryButton"
                         >
                             Try again
                         </button>

@@ -7,4 +7,30 @@
     min-height: 100dvh;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    content-visibility: auto;
+    contain-intrinsic-size: 100dvh;
+}
+
+.inlineImage {
+    height: 1.5em;
+    width: auto;
+    vertical-align: middle;
+    margin: 0 0.15em;
+    border-radius: var(--radius-sm);
+}
+
+.errorBoundary {
+    padding: 2em;
+    text-align: center;
+    color: var(--base-300);
+}
+
+.errorBoundaryButton {
+    margin-top: 1em;
+    padding: 0.5em 1.5em;
+    background: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 7mm;
+    cursor: pointer;
 }

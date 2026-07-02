@@ -101,20 +101,20 @@ const Hero = memo(function Hero() {
                     </LinkHighlight>
                     <img
                         src="/img/inline-images/mnnit.jpg"
-                        className={styles.smallInlineImages}
+                        className="inlineImage"
                         alt=""
                      decoding="async" />
                     focused on building reliable AI-driven products and machine learning systems -no
                     vibe coding
                     <img
                         src="/img/inline-images/vibe-coding.png"
-                        className={styles.smallInlineImages}
+                        className="inlineImage"
                         alt=""
                      decoding="async" />
                     just solid engineering.
                     <img
                         src="/img/inline-images/cat-flying-plane.jpeg"
-                        className={styles.smallInlineImages}
+                        className="inlineImage"
                         alt=""
                      decoding="async" />
                 </p>

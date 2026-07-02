@@ -10,12 +10,7 @@ function ExperienceIntro() {
                     Back then, I thought software development was mostly about writing code.{' '}
                     <img
                         src="/img/inline-images/in-bushes.gif"
-                        style={{
-                            height: '1.5em',
-                            borderRadius: '5px',
-                            verticalAlign: 'middle',
-                            margin: '0 0.15em',
-                        }}
+                        className="inlineImage"
                         alt=""
                         loading="lazy"
                      decoding="async" />{' '}
@@ -26,12 +21,7 @@ function ExperienceIntro() {
                     Every ticket looked simple until it spawned three more.{' '}
                     <img
                         src="/img/inline-images/no-michael-scott.gif"
-                        style={{
-                            height: '1.5em',
-                            borderRadius: '5px',
-                            verticalAlign: 'middle',
-                            margin: '0 0.15em',
-                        }}
+                        className="inlineImage"
                         alt=""
                         loading="lazy"
                      decoding="async" />{' '}
@@ -40,12 +30,7 @@ function ExperienceIntro() {
                     I came, I coded, and I accidentally deployed on a Friday.{' '}
                     <img
                         src="/img/inline-images/dog in burning room.gif"
-                        style={{
-                            height: '1.5em',
-                            borderRadius: '5px',
-                            verticalAlign: 'middle',
-                            margin: '0 0.15em',
-                        }}
+                        className="inlineImage"
                         alt=""
                         loading="lazy"
                      decoding="async" />{' '}
@@ -55,12 +40,7 @@ function ExperienceIntro() {
                 <p>
                     <img
                         src="/img/inline-images/Monkey covering eyes.gif"
-                        style={{
-                            height: '1.5em',
-                            borderRadius: '5px',
-                            verticalAlign: 'middle',
-                            margin: '0 0.15em',
-                        }}
+                        className="inlineImage"
                         alt=""
                         loading="lazy"
                      decoding="async" />

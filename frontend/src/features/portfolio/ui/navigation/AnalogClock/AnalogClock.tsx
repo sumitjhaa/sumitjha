@@ -39,12 +39,7 @@ function getTime(): TimeData {
         minute: (m + s / 60) * 6,
         second: s * 6,
         ampm: h24 >= 12 ? 'PM' : 'AM',
-        timeDigits: now.toLocaleString('en-US', {
-            timeZone: TIMEZONE,
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: false,
-        }),
+        timeDigits: `${String(h24 % 12 || 12).padStart(2, '0')}:${mStr}`,
         date: now.toLocaleString('en-US', {
             timeZone: TIMEZONE,
             month: '2-digit',
@@ -67,7 +62,7 @@ function ClockSVG({ size, t, className }: { size: number; t: TimeData | null; cl
                 strokeWidth="0.85"
                 strokeLinecap="round"
                 className={styles.hourHand}
-                style={{ transform: t ? `rotate(${t.hour}deg)` : undefined }}
+                style={{ transformOrigin: '10px 10px', transform: t ? `rotate(${t.hour}deg)` : undefined }}
             />
             <line
                 x1={r}
@@ -78,7 +73,7 @@ function ClockSVG({ size, t, className }: { size: number; t: TimeData | null; cl
                 strokeWidth="0.55"
                 strokeLinecap="round"
                 className={styles.minuteHand}
-                style={{ transform: t ? `rotate(${t.minute}deg)` : undefined }}
+                style={{ transformOrigin: '10px 10px', transform: t ? `rotate(${t.minute}deg)` : undefined }}
             />
             <line
                 x1={r}
@@ -89,7 +84,7 @@ function ClockSVG({ size, t, className }: { size: number; t: TimeData | null; cl
                 strokeWidth="0.3"
                 strokeLinecap="round"
                 className={styles.secondHand}
-                style={{ transform: t ? `rotate(${t.second}deg)` : undefined }}
+                style={{ transformOrigin: '10px 10px', transform: t ? `rotate(${t.second}deg)` : undefined }}
             />
             <circle cx={r} cy={r} r="0.45" fill="#e11d48" />
         </svg>
@@ -122,17 +117,12 @@ export function AnalogClock() {
     const accentColor = isClient ? `color-mix(in srgb, ${accent} 45%, var(--base-100))` : undefined
 
     useEffect(() => {
-        setT(getTime())
         const id = setInterval(() => setT(getTime()), 1000)
         return () => clearInterval(id)
     }, [])
 
     useEffect(() => {
-        if (!open) {
-            setFlyState(null)
-            setReveal(false)
-            return
-        }
+        if (!open) return
 
         const mini = miniRef.current
         const panel = panelRef.current
@@ -153,6 +143,13 @@ export function AnalogClock() {
                 targetSize: ts,
             })
         })
+    }, [open])
+
+    useEffect(() => {
+        return () => {
+            setFlyState(null)
+            setReveal(false)
+        }
     }, [open])
 
     useEffect(() => {

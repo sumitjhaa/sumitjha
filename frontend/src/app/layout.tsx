@@ -43,7 +43,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html lang="en" suppressHydrationWarning>
             <head>
-                <link rel="preload" href="/fonts/Raveo.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/Raveo.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/dotfont.otf" as="font" type="font/otf" crossOrigin="anonymous" />
+                <link rel="preload" href="/fonts/CaskaydiaMonoNerdFontMono-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
             </head>
             <body>
                 <GooCursor />

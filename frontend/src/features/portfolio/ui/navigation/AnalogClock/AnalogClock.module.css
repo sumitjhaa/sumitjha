@@ -44,7 +44,7 @@
 .hourHand,
 .minuteHand,
 .secondHand {
-    transform-origin: 0.625rem 0.625rem;
+    transform-origin: 10px 10px;
 }
 
 .hourHand {

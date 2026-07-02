@@ -84,7 +84,7 @@ export const ThemeToggle = memo(function ThemeToggle() {
                     </svg>
                 </GlassButton>
 
-                {open && <div className={styles.backdrop} onClick={() => close()} aria-hidden />}
+                {open && <div className={styles.backdrop} onClick={close} aria-hidden />}
 
                 <div
                     className={cn(styles.panel, open && styles.open)}

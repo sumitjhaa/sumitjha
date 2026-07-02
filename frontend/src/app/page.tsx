@@ -1,11 +1,7 @@
+import { Suspense } from 'react'
 import dynamic from 'next/dynamic'
 import { ClickEffect } from '@/shared/components/effects/ClickEffect'
 import { Hero } from '@/features/portfolio/components/Hero'
-import { AboutMe } from '@/features/portfolio/components/AboutMe'
-import { ProjectsIntro } from '@/features/portfolio/components/ProjectsIntro'
-import { ExperienceIntro } from '@/features/portfolio/components/ExperienceIntro'
-import { Experience } from '@/features/portfolio/components/Experience'
-import { LastSection } from '@/features/portfolio/components/LastSection'
 import { SectionShell } from '@/shared/components/layout/SectionShell'
 import {
     ProgressBar,
@@ -19,14 +15,28 @@ import { SKILL_CATEGORIES } from '@/features/portfolio/data/skills'
 import { PROJECTS } from '@/features/portfolio/data/projects'
 import { SkillsSection } from '@/features/portfolio/ui/skills'
 import { ProjectSection } from '@/features/portfolio/ui/projects'
-import { VisuallyHidden } from '@/shared/components/ui'
+import { VisuallyHidden, Skeleton } from '@/shared/components/ui'
+import ErrorBoundary from '@/features/portfolio/ui/feedback/ErrorBoundary/ErrorBoundary'
 import styles from './page.module.css'
 
+const AboutMe = dynamic(() => import('@/features/portfolio/components/AboutMe/AboutMe'))
+const ProjectsIntro = dynamic(() => import('@/features/portfolio/components/ProjectsIntro/ProjectsIntro'))
+const ExperienceIntro = dynamic(() => import('@/features/portfolio/components/ExperienceIntro/ExperienceIntro'))
+const Experience = dynamic(() => import('@/features/portfolio/components/Experience/Experience'))
+const LastSection = dynamic(() => import('@/features/portfolio/components/LastSection/LastSection'))
 const ThankYouSection = dynamic(() => import('@/features/portfolio/components/ThankYouSection/ThankYouSection'))
 const ShoutoutsSection = dynamic(() => import('@/features/portfolio/components/ShoutoutsSection/ShoutoutsSection'))
 const FooterSection = dynamic(() => import('@/features/portfolio/components/FooterSection/FooterSection'))
 const EducationSection = dynamic(() => import('@/features/portfolio/components/EducationSection/EducationSection'))
 const CommitmentSection = dynamic(() => import('@/features/portfolio/components/CommitmentSection/CommitmentSection'))
+
+function SectionFallback() {
+    return (
+        <SectionShell id="">
+            <Skeleton width="100%" height="40vh" />
+        </SectionShell>
+    )
+}
 
 export default function Home() {
     return (
@@ -38,7 +48,11 @@ export default function Home() {
 
             <Navbar />
             <Hero />
-            <AboutMe />
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <AboutMe />
+                </Suspense>
+            </ErrorBoundary>
 
             <SectionShell id="section-3">
                 <SkillsSection
@@ -51,12 +65,7 @@ export default function Home() {
                                 abides only on caffeine.
                                 <img
                                     src="/img/inline-images/sweaty-speedrunner-epic-gamer.gif"
-                                    style={{
-                                        height: '1.5em',
-                                        borderRadius: '5px',
-                                        verticalAlign: 'middle',
-                                        margin: '0 0.15em',
-                                    }}
+                                    className="inlineImage"
                                     alt=""
                                     loading="lazy"
                                  decoding="async" />
@@ -64,12 +73,7 @@ export default function Home() {
                                 they&apos;re still around haunting my terminal.
                                 <img
                                     src="/img/inline-images/Shrug emoji.gif"
-                                    style={{
-                                        height: '1.5em',
-                                        borderRadius: '5px',
-                                        verticalAlign: 'middle',
-                                        margin: '0 0.15em',
-                                    }}
+                                    className="inlineImage"
                                     alt=""
                                     loading="lazy"
                                  decoding="async" />
@@ -80,12 +84,7 @@ export default function Home() {
                                 join fails.
                                 <img
                                     src="/img/inline-images/Side-eye chloe.gif"
-                                    style={{
-                                        height: '1.5em',
-                                        borderRadius: '5px',
-                                        verticalAlign: 'middle',
-                                        margin: '0 0.15em',
-                                    }}
+                                    className="inlineImage"
                                     alt=""
                                     loading="lazy"
                                  decoding="async" />
@@ -93,12 +92,7 @@ export default function Home() {
                                 pound of soul. Production goes live and I stare into the flames.
                                 <img
                                     src="/img/inline-images/Disaster girl.gif"
-                                    style={{
-                                        height: '1.5em',
-                                        borderRadius: '5px',
-                                        verticalAlign: 'middle',
-                                        margin: '0 0.15em',
-                                    }}
+                                    className="inlineImage"
                                     alt=""
                                     loading="lazy"
                                  decoding="async" />
@@ -109,9 +103,21 @@ export default function Home() {
                     }
                 />
             </SectionShell>
-            <ExperienceIntro />
-            <Experience projectFilter={['Taxspanner']} />
-            <Experience projectFilter={['Propel']} id="experience-propel" hideHeading isLast />
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <ExperienceIntro />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <Experience projectFilter={['Taxspanner']} />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <Experience projectFilter={['Propel']} id="experience-propel" hideHeading isLast />
+                </Suspense>
+            </ErrorBoundary>
             <SectionShell id="section-4">
                 <SkillsSection
                     categories={SKILL_CATEGORIES}
@@ -121,7 +127,11 @@ export default function Home() {
                     titleGap="1.8em"
                 />
             </SectionShell>
-            <ProjectsIntro />
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <ProjectsIntro />
+                </Suspense>
+            </ErrorBoundary>
             {PROJECTS.toReversed()
                 .filter((p) => p.slug !== 'ziggle')
                 .map((project) => (
@@ -132,12 +142,36 @@ export default function Home() {
                     </SectionShell>
                 ))}
 
-            <CommitmentSection />
-            <EducationSection />
-            <ShoutoutsSection />
-            <LastSection />
-            <ThankYouSection />
-            <FooterSection />
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <CommitmentSection />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <EducationSection />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <ShoutoutsSection />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <LastSection />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <ThankYouSection />
+                </Suspense>
+            </ErrorBoundary>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionFallback />}>
+                    <FooterSection />
+                </Suspense>
+            </ErrorBoundary>
             <LoopedPaging />
             <ProgressBar />
             <ScrollToTop />
