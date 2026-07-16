@@ -110,18 +110,13 @@ export default function Home() {
             </ErrorBoundary>
             <ErrorBoundary>
                 <Suspense fallback={<SectionFallback />}>
-                    <Experience projectFilter={['Taxspanner']} />
-                </Suspense>
-            </ErrorBoundary>
-            <ErrorBoundary>
-                <Suspense fallback={<SectionFallback />}>
-                    <Experience projectFilter={['Propel']} id="experience-propel" hideHeading isLast />
+                    <Experience />
                 </Suspense>
             </ErrorBoundary>
             <SectionShell id="section-4">
                 <SkillsSection
                     categories={SKILL_CATEGORIES}
-                    iconSize={88}
+                    iconSize={64}
                     hideSubtitle
                     title="Runtime Armoury"
                     titleGap="1.8em"
@@ -132,15 +127,13 @@ export default function Home() {
                     <ProjectsIntro />
                 </Suspense>
             </ErrorBoundary>
-            {PROJECTS.toReversed()
-                .filter((p) => p.slug !== 'ziggle')
-                .map((project) => (
-                    <SectionShell key={project.slug} id={`project-${project.slug}`}>
-                        <FadeInSection>
-                            <ProjectSection project={project} />
-                        </FadeInSection>
-                    </SectionShell>
-                ))}
+            {PROJECTS.toReversed().map((project) => (
+                <SectionShell key={project.slug} id={`project-${project.slug}`}>
+                    <FadeInSection>
+                        <ProjectSection project={project} />
+                    </FadeInSection>
+                </SectionShell>
+            ))}
 
             <ErrorBoundary>
                 <Suspense fallback={<SectionFallback />}>

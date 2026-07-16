@@ -10,11 +10,11 @@
 }
 
 .headingWrapper h1 {
-    font-size: calc(var(--heading-size) * 1.15);
+    font-size: var(--heading-size);
     line-height: var(--heading-line-height);
     -webkit-text-stroke-width: var(--heading-stroke-width);
-    -webkit-text-stroke-color: currentColor;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: var(--heading-stroke-color);
+    -webkit-text-fill-color: var(--heading-stroke-fill);
     width: max-content;
     /*margin: 1.25rem 0 var(--heading-margin);*/
     will-change: transform;
@@ -23,7 +23,7 @@
 .weatherLine {
     font-family: var(--font-doto);
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1em;
     color: var(--body-color);
     display: block;
     margin: 0.2em 0 0.4em;
@@ -53,7 +53,7 @@
 
 .actionButtons img {
     padding: 0.625rem;
-    height: 3em;
+    height: 2.7em;
     filter: grayscale(100%);
     transition: filter var(--transition-slow) ease;
 }

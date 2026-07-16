@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { PROJECTS, getProjectColor } from '@/features/portfolio/data/projects'
 import { LinkHighlight } from '@/shared/components/ui/LinkHighlight/LinkHighlight'
+import { SoundButton } from '@/features/portfolio/ui/common/SoundButton/SoundButton'
 import styles from './ProjectPage.module.css'
 
 interface Props {
@@ -74,15 +75,16 @@ export default async function ProjectPage({ params }: Props) {
 
             <div className={styles.linkList}>
                 {project.links.map((link) => (
-                    <a
+                    <SoundButton
                         key={link.label}
+                        as="a"
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.linkButton}
                     >
                         {link.label}
-                    </a>
+                    </SoundButton>
                 ))}
             </div>
         </main>

@@ -44,7 +44,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
         icon: '/img/icons/discord.svg',
     },
     {
-        href: 'https://drive.google.com/file/d/1TWoRZir6om70McFNW5C3zZO2J8rPR2n5/view',
+        href: '/pdf/sumitjha-resume.pdf',
         username: 'Sumit Jha',
         platform: 'Resume',
         color: '#4682B4',

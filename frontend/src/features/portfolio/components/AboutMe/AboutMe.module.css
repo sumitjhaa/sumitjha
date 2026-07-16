@@ -13,7 +13,7 @@
 }
 
 .descriptions p img {
-    height: 1.5em;
+    height: 1.75em;
     border-radius: var(--radius-sm);
     vertical-align: middle;
     margin: 0 0.15em;

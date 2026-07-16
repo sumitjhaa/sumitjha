@@ -34,7 +34,7 @@
 
 .institute {
     font-family: var(--font-doto);
-    font-size: 2em;
+    font-size: 1.3em;
     letter-spacing: 0.05em;
     font-weight: 600;
     color: var(--base-100);
@@ -49,7 +49,7 @@
 }
 
 .degree {
-    font-size: 1.1em;
+    font-size: var(--body-size);
     color: var(--body-color);
 }
 
@@ -71,7 +71,7 @@
 
 @media (max-width: 768px) {
     .institute {
-        font-size: 1.8em;
+        font-size: 1.2em;
     }
 
     .period {
@@ -95,7 +95,7 @@
     }
 
     .institute {
-        font-size: 1.7em;
+        font-size: 1.15em;
     }
 
     .instituteRow {
@@ -119,7 +119,7 @@
     }
 
     .institute {
-        font-size: 1.5em;
+        font-size: 1.1em;
     }
 
     .period {
@@ -142,7 +142,7 @@
     }
 
     .institute {
-        font-size: 1.35em;
+        font-size: 1.05em;
     }
 
     .degree {

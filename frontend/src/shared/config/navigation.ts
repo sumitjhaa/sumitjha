@@ -6,13 +6,12 @@ const STATIC_SECTIONS: SectionConfig[] = [
     { id: 'about', label: 'About', level: 0 },
     { id: 'section-3', label: 'Expertise', level: 0 },
     { id: 'experience-intro', label: 'The Logs', level: 0 },
-    { id: 'experience', label: 'Taxspanner', level: 1 },
-    { id: 'experience-propel', label: 'Propel', level: 1 },
+    { id: 'experience', label: 'Experience', level: 0 },
     { id: 'section-4', label: 'Toolchain', level: 0 },
     { id: 'projects-intro', label: 'Projects', level: 0 },
 ]
 
-const PROJECT_SECTIONS: SectionConfig[] = PROJECTS.toReversed().filter((p) => p.slug !== 'ziggle').map((p) => ({
+const PROJECT_SECTIONS: SectionConfig[] = PROJECTS.toReversed().map((p) => ({
     id: `project-${p.slug}`,
     label: p.title,
     level: 1 as const,
