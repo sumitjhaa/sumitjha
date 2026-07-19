@@ -53,6 +53,7 @@ export function CommitCardClient({
     const { title, body } = splitMessage(initial.message)
     const truncatedTitle = truncateMessage(title)
     const shortSha = initial.sha.slice(0, 7)
+    const displayName = initial.authorUser?.name || initial.author.name
     const showCommitter =
         initial.committer.email !== initial.author.email ||
         initial.committer.name !== initial.author.name
@@ -71,18 +72,18 @@ export function CommitCardClient({
                                 className={styles.avatarLinkRight}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label={`${initial.author.name} on GitHub`}
+                                aria-label={`${displayName} on GitHub`}
                             >
                                 <GitHubAvatar
                                     src={initial.authorUser.avatar_url}
                                     fallback={initial.authorUser.login}
                                     username={initial.authorUser.login}
-                                    fullName={initial.author.name}
+                                    fullName={displayName}
                                 />
                             </a>
                         )}
                         <div className={styles.identityTextRight}>
-                            <div className={styles.identityNameRight}>{initial.author.name}</div>
+                            <div className={styles.identityNameRight}>{displayName}</div>
                             {initial.authorUser && (
                                 <a
                                     href={initial.authorUser.html_url}

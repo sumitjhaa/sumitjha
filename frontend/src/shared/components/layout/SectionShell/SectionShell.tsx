@@ -12,6 +12,7 @@ interface SectionShellProps {
     actions?: ReactNode
     footer?: ReactNode
     headingAs?: 'h1' | 'h2' | 'h3'
+    style?: React.CSSProperties
 }
 
 export const SectionShell = memo(function SectionShell({
@@ -24,9 +25,10 @@ export const SectionShell = memo(function SectionShell({
     actions,
     footer,
     headingAs: HeadingTag = 'h1',
+    style,
 }: SectionShellProps) {
     return (
-        <Tag id={id} className={cn(styles.shell, className)}>
+        <Tag id={id} className={cn(styles.shell, className)} style={style}>
             {header}
             {heading && <HeadingTag className={styles.heading}>{heading}</HeadingTag>}
             {children && <div className={styles.body}>{children}</div>}

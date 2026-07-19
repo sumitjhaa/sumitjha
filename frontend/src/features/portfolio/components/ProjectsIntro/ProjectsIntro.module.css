@@ -7,3 +7,14 @@
     line-height: var(--body-line-height);
     color: var(--body-color);
 }
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*opacity: 0.1;*/
+    height: 30%;
+    width: auto;
+    pointer-events: none;
+    transform: scaleX(-1);
+}

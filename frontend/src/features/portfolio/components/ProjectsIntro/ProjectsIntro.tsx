@@ -35,6 +35,7 @@ function ProjectsIntro() {
                     The runtime took that personally. May the source be with me.
                 </p>
                 <p>Some shipped. Some learned. None were built by vibe coding.</p>
+                <img src="/img/backgrounds/swing.gif" alt="" className={styles.background} loading="lazy" decoding="async" />
             </div>
         </SectionShell>
     )

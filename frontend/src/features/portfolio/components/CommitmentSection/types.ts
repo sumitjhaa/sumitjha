@@ -10,6 +10,7 @@ export interface GitHubUser {
     avatar_url: string
     type: string
     site_admin: boolean
+    name?: string | null
 }
 
 export interface Parent {

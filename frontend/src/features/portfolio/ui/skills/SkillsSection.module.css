@@ -2,6 +2,16 @@
     position: relative;
 }
 
+.background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 5em;
+    width: auto;
+    pointer-events: none;
+    /*opacity: 0.1;*/
+}
+
 .title {
     font-size: var(--heading-size);
     line-height: var(--heading-line-height);

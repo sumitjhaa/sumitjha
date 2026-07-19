@@ -47,6 +47,7 @@ function ExperienceIntro() {
                     Turns out &ldquo;it works on my machine&rdquo; isn&apos;t an acceptable
                     deployment strategy.
                 </p>
+                <img src="/img/backgrounds/logs.gif" alt="" className={styles.background} loading="lazy" decoding="async" />
             </div>
         </SectionShell>
     )

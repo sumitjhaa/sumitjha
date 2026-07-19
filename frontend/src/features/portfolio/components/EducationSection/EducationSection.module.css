@@ -3,6 +3,17 @@
     flex-direction: column;
 }
 
+.background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    opacity: 0.06;
+    height: 30%;
+    width: auto;
+    pointer-events: none;
+    transform: scaleX(-1);
+}
+
 .row {
     display: flex;
     gap: 1.5em;

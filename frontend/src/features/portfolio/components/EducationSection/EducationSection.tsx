@@ -31,6 +31,7 @@ function EducationSection() {
 
     return (
         <SectionShell id="education" heading="Education" className={styles.rows}>
+            <img src="/img/backgrounds/cherry.gif" alt="" className={styles.background} loading="lazy" decoding="async" />
             <div className={styles.rows}>
                 {educationData.map((entry) => (
                     <div

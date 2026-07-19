@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import styles from './LastSection.module.css'
+import CozyBackground from './CozyBackground'
 import { SectionShell } from '@/shared/components/layout/SectionShell'
 
 function LastSection() {
@@ -32,6 +33,7 @@ function LastSection() {
                 </p>
 
                 <p className={styles.tagline}>Until the next commit...</p>
+                <CozyBackground className={styles.background} />
             </div>
         </SectionShell>
     )

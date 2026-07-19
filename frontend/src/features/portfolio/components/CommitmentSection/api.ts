@@ -86,23 +86,28 @@ export async function getLastCommit(): Promise<CommitData | null> {
         if (!commits.length) return null
         const commit = commits[0]
 
-        const detailRes = await fetch(
-            `https://api.github.com/repos/${repo.full_name}/commits/${commit.sha}`,
-            { next: { revalidate: REVALIDATE_SECONDS } },
-        )
+        const [detailRes, userRes] = await Promise.all([
+            fetch(`https://api.github.com/repos/${repo.full_name}/commits/${commit.sha}`, {
+                next: { revalidate: REVALIDATE_SECONDS },
+            }),
+            fetch(`https://api.github.com/users/${GITHUB_USER}`, {
+                next: { revalidate: REVALIDATE_SECONDS },
+            }),
+        ])
         const detail = detailRes.ok
             ? ((await detailRes.json()) as {
                   verification?: Verification
                   stats?: { additions?: number; deletions?: number }
               })
             : null
+        const profile = userRes.ok ? ((await userRes.json()) as GitHubUser) : null
 
         return {
             sha: commit.sha,
             message: commit.commit.message,
             author: commit.commit.author,
             committer: commit.commit.committer,
-            authorUser: commit.author,
+            authorUser: profile ?? commit.author,
             committerUser: commit.committer,
             commentCount: commit.commit.comment_count,
             verification: detail?.verification ?? null,
